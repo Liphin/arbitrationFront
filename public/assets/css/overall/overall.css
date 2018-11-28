@@ -194,5 +194,13 @@ iframe, embed{
 }
 
 
+.arbiEditLeft div{
+    height: 70px;
+    border:1px solid lightgray;
+    border-width: 0 0 1px 0;
+    width: inherit;
+}
+
+
 
 

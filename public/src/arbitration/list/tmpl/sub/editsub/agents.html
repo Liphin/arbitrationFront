@@ -1,0 +1,153 @@
+<!--代理人-->
+<div ng-repeat="value in arbilist.arbiApplyData['agents'] track by $index">
+
+    <!--代理人分类-->
+    <div>
+        <span>代理人分类：</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="value['agentType']" name="agentType" value="律师代理" checked> 律师代理
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="value['agentType']" name="agentType" value="公民代理"> 公民代理
+        </label>
+    </div>
+
+    <!--代理人名称-->
+    <div>
+        <span>代理人名称</span>
+        <input type="text" ng-model="value['name']">
+    </div>
+
+    <!--代理人性别-->
+    <div>
+        <span>代理人性别：</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="value['sex']" name="agentSex" value="男"> 男
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="value['sex']" name="agentSex" value="女"> 女
+        </label>
+    </div>
+
+    <!--证件类型-->
+    <div>
+        <span>证件类型</span>
+        <input type="text" ng-model="value['identityType']">
+        <select>
+            <option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['identityType']" value="{{value}}">{{value}}</option>
+        </select>
+    </div>
+
+    <!--证件号码-->
+    <div>
+        <span>证件号码</span>
+        <input type="text" ng-model="value['identityNo']">
+    </div>
+
+    <!--联系号码-->
+    <div>
+        <span>联系号码</span>
+        <input type="text" ng-model="value['mobiles']">
+    </div>
+
+    <!--当事人类型-->
+    <div>
+        <span>当事人类型：</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="value['litigantType']" name="litigantType" value="申请人" checked> 申请人
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="value['litigantType']" name="litigantType" value="被申请人"> 被申请人
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="value['litigantType']" name="litigantType" value="第三人"> 第三人
+        </label>
+    </div>
+
+    <!--委托人名称-->
+    <div>
+        <span>委托人名称</span>
+        <input type="text" ng-model="value['principals']">
+    </div>
+
+
+    <!--代理权限-->
+    <div>
+        <span>代理权限：</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="value['power']" name="agentPower" value="一般代理" checked> 一般代理
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="value['power']" name="agentPower" value="特殊权限"> 特殊权限
+        </label>
+    </div>
+    <!--如为特殊权限，则此项必填-->
+    <div>
+        <span>特殊权限：</span>
+        <label class="checkbox-inline">
+            <input type="checkbox" value="代为提起仲裁请求"> 代为提起仲裁请求
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" value="代为参加庭审、进行质证、辩论"> 代为参加庭审、进行质证、辩论
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" value="代为和解、调解"> 代为和解、调解
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" value="代为主张、变更、放弃仲裁请求"> 代为主张、变更、放弃仲裁请求
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" value="代为签收法律文书"> 代为签收法律文书
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" value="代为申请执行"> 代为申请执行
+        </label>
+    </div>
+
+
+    <!--公司名称-->
+    <div>
+        <span>公司名称</span>
+        <input type="text" ng-model="value['company']">
+    </div>
+
+    <!--联系邮箱-->
+    <div>
+        <span>联系邮箱</span>
+        <input type="text" ng-model="value['email']">
+        <span>（如有多个请用英文逗号分隔）</span>
+    </div>
+
+    <!--联系地址-->
+    <div>
+        <span>联系地址</span>
+        <input type="text" ng-model="value['address']">
+        <span>（如有多个请用英文逗号分隔）</span>
+    </div>
+
+    <!--材料名称-->
+    <div>
+        <span>材料名称</span>
+        <input type="text" ng-model="value['materialCode']">
+    </div>
+
+    <!--附件上传-->
+    <div>
+        <div>
+            <span>附件上传 +</span>
+        </div>
+
+        <!--循环读取上传附件的数据-->
+        <div ng-repeat="fileValue in value['files'] track by $index">
+            <span>点击上传附件</span>
+            <input type="file" />
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+

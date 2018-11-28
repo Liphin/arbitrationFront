@@ -6,5 +6,6 @@ var overallModule = angular.module('Angular',
         'ngRoute',
         'ngCookies',
         'Angular.login',
-        'Angular.relist'
+        'Angular.arbilist',
+        'Angular.arbiedit'
     ]);

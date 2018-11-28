@@ -3,9 +3,9 @@
  */
 var settingData = {
     basePath: "/root/report/front", //基础路径
-    domainName: "http://report.liphin.com", //域名设置
+    domainName: "http://arbitration.liphin.com", //域名设置
     isProd: false, //是否为生产环境
-    frontPort: 3032, //前端port
+    frontPort: 3033, //前端port
     backPort: 8082 //后台port
 };
 //其他配置

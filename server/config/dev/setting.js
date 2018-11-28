@@ -2,10 +2,10 @@
  * Created by Administrator on 2018/11/3.
  */
 var settingData = {
-    basePath: "G:/SoftwareOutSourcing/report_prod/front/reportFront", //基础路径
-    domainName: "http://report.test.liphin.com", //域名设置
+    basePath: "G:/SoftwareOutSourcing/arbitration/front", //基础路径
+    domainName: "http://arbitration.liphin.com", //域名设置
     isProd: false, //是否为生产环境
-    frontPort: 3032, //前端port
+    frontPort: 3033, //前端port
     backPort: 8082 //后台port
 };
 //其他配置

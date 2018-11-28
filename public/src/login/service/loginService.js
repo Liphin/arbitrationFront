@@ -3,7 +3,7 @@
  */
 var loginModule = angular.module('Angular.login');
 
-loginModule.factory('LoginSer', function ($http, $location,$cookies, LoginDataSer, OverallSer, OverallGeneralSer, OverallDataSer) {
+loginModule.factory('LoginSer', function ($http, $location, $cookies, LoginDataSer, OverallSer, OverallGeneralSer, OverallDataSer) {
 
     /**
      * 管理员登录验证前操作
@@ -34,25 +34,29 @@ loginModule.factory('LoginSer', function ($http, $location,$cookies, LoginDataSe
     var managerLoginOpt = function () {
         var account = LoginDataSer.loginInfo['account'];
         var password = LoginDataSer.loginInfo['password'];
-        console.log('md5 encode', md5(password));
 
         //账号密码登录验证请求
-        var fd = new FormData();
-        fd.append("account", account);
-        fd.append("password", md5(password));
-        var url = OverallDataSer.urlData['backEndHttp']['managerLogin'];
-        $http.post(url, fd, {
-            transformRequest: angular.identity,
-            headers: {'Content-Type': undefined},
-        }).success(function (response) {
-            //根据回传信息进行相应逻辑处理
-            managerLoginOptHandler(response);
+        var data = {
+            'account': account,
+            'password': md5(password)
+        };
+        var url = OverallDataSer.urlData['frontEndHttp']['managerLogin'];
+        OverallGeneralSer.httpPostData2(data, url, function (backData) {
+            //返回值进行判断
+            if (backData == false) {
+                //如果返回false则提示账号或密码错误
+                alert("很抱歉，账号或密码错误，请重新输入。")
 
-        }).error(function (error) {
-            //提示系统出错
-            alert("很抱歉，系统发生错误，请稍后重试.");
-            //OverallGeneralSer.alertHttpRequestError("managerLoginOpt", 500, "system error");
-        })
+            } else {
+                //设置cookie信息和全部变量信息
+                OverallDataSer.overallData['loginStatus'] = true;
+                $cookies.put('loginStatus', 'success', {'expires': OverallGeneralSer.getNewCookiesExpireDate()});
+
+                //跳转到arbitration的url的path
+                $location.path(OverallDataSer.redirect['arbiList']);
+            }
+        });
+
     };
 
 
@@ -62,9 +66,8 @@ loginModule.factory('LoginSer', function ($http, $location,$cookies, LoginDataSe
      */
     var managerLoginOptHandler = function (response) {
         if (response['status_code'] == 200) {
-
             //设置cookie信息和全部变量信息
-            OverallDataSer.overallData['loginStatus']=true;
+            OverallDataSer.overallData['loginStatus'] = true;
             $cookies.put('loginStatus', 'success', {'expires': OverallGeneralSer.getNewCookiesExpireDate()});
 
             //返回状态为200则登录成功，
@@ -88,7 +91,6 @@ loginModule.factory('LoginSer', function ($http, $location,$cookies, LoginDataSe
             }
         }
     };
-
 
 
     return {

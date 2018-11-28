@@ -7,8 +7,8 @@ loginModule.factory('LoginDataSer', function (OverallDataSer) {
 
     //登录信息
     var loginInfo = {
-        'account': '',
-        'password': '',
+        'account': 'administrator',
+        'password': 'gzpyls@123',
     };
 
     return {

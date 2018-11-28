@@ -169,10 +169,96 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
         });
     };
 
+
+    /**
+     * 发送post请求数据，发送非formData数据
+     * @param data
+     * @param url
+     * @param callback
+     * @param finallyCallback
+     */
+    var httpPostData2 = function (data, url, callback, finallyCallback) {
+        $http({
+            method: 'POST',
+            url: url,
+            data: ($.param(data)),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            //data: data,
+            //headers: {'Content-Type': 'application/json'}
+        }).success(function (response) {
+            callback(response);
+
+        }).error(function (err) {
+            OverallGeneralSer.alertHttpRequestError("请求出错: ", 600, err);
+
+        }).finally(function () {
+            finallyCallback();
+        });
+    };
+
+
+    /**
+     * 上传资源文件信息
+     * 用于提交文件操作，并开放callback函数接口
+     */
+    var uploadResource = function (obj,callback) {
+        var fd = new FormData();
+        //动态装载数据
+        for (var i in obj) {
+            fd.append(i, obj[i]);
+        }
+        //提交表单数据
+        var url = OverallDataSer.urlData['frontEndHttp']['uploadResource'];
+        $http.post(url, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined},
+        }).success(function (response) {
+            callback(response['data']);
+
+        }).error(function (err) {
+            OverallGeneralSer.alertHttpRequestError("uploadResource", 600, err);
+        })
+    };
+
+
+    /**
+     * 上传文件到易简网
+     * @param obj
+     * @param callback
+     */
+    var uploadFileToYJW = function (obj, callback) {
+        var url = 'https://14.23.88.138:7777/api/1.0/file';
+        var headers = {
+            'Content-Type': undefined,
+            "Accept": "application/json",
+            'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c'
+        };
+        var fd = new FormData();
+        //动态装载数据
+        for (var i in obj) {
+            fd.append(i, obj[i]);
+        }
+        $http.post(url, fd, {
+            transformRequest: angular.identity,
+            headers: headers,
+            rejectUnauthorized: false
+
+        }).success(function (response) {
+            callback(response);
+
+        }).error(function (err) {
+            alert(OverallDataSer.overallData['requestDataErrorMsg'] + ",");
+
+        });
+    };
+
+
+
     /**
      * 组装生成新闻时间
-     * @param createTime
      * @returns {string}
+     * @param dateTime
+     * @param optType
      */
     var generateSearchTime = function (dateTime, optType) {
         if (optType == 1) {
@@ -202,6 +288,9 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
         httpGetFiles: httpGetFiles,
         httpPostData: httpPostData,
         getTimeStamp: getTimeStamp,
+        httpPostData2: httpPostData2,
+        uploadFileToYJW:uploadFileToYJW,
+        uploadResource: uploadResource,
         sqlInjectFilter: sqlInjectFilter,
         checkDataNotEmpty: checkDataNotEmpty,
         getNewCookiesExpireDate: getNewCookiesExpireDate,

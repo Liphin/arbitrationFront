@@ -5,6 +5,15 @@
 function ServerSer() {
 
     /**
+     * 返回时间戳值
+     * @returns {number}
+     */
+    this.getTimeStamp = function () {
+        return new Date().getTime();
+    };
+
+
+    /**
      * 设置异源访问策略
      * @param req
      * @param res

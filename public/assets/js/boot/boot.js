@@ -60,14 +60,20 @@ head.load(
     'src/login/directive/loginUrlDirective.js',
 
 
-    /*report 内容模块*/
-    'src/report/list/module.js',
-    'src/report/list/service.js',
-    'src/report/list/data.js',
-    'src/report/list/sub/common/reportGeneral.js',
-    'src/report/list/sub/reportList/reportListService.js',
-    'src/report/list/sub/viewReport/viewReportService.js',
-    'src/report/list/directive.js',
-    'src/report/list/controller.js'
+    /*arbitration 内容模块*/
+    //list模块
+    'src/arbitration/list/module.js',
+    'src/arbitration/list/directive/directive.js',
+    'src/arbitration/list/directive/directiveUrl.js',
+    'src/arbitration/list/service/dataService.js',
+    'src/arbitration/list/service/service.js',
+    'src/arbitration/list/controller.js',
+
+    //edit模块
+    'src/arbitration/edit/module.js',
+    'src/arbitration/edit/directive/directive.js',
+    'src/arbitration/edit/service/dataService.js',
+    'src/arbitration/edit/service/service.js',
+    'src/arbitration/edit/controller.js'
 
 );

@@ -1,0 +1,88 @@
+<div>
+    <!--事实与理由-->
+    <div>
+        <span>事实与理由</span>
+        <input type="text" ng-model="arbilist.arbiApplyData['claim']['reason']"/>
+    </div>
+
+    <!--&lt;!&ndash;附件上传&ndash;&gt;-->
+    <!--<div>-->
+        <!--<div ng-click="arbilist.addFile('claim')">-->
+            <!--<span>附件上传 +</span>-->
+        <!--</div>-->
+
+        <!--&lt;!&ndash;循环读取上传附件的数据&ndash;&gt;-->
+        <!--<div ng-repeat="value in arbilist.arbiApplyData['claim']['files'] track by $index">-->
+            <!--<span>点击上传附件</span>-->
+            <!--<input type="file" />-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--请求项-->
+    <div>
+        <!--请求项添加-->
+        <div>
+            <span>请求项</span>
+            <span>+ 添加请求项</span>
+        </div>
+
+        <!--请求项内容-->
+        <div ng-repeat="value in arbilist.arbiApplyData['claim']['claimItems'] track by $index">
+            <!--请求内容-->
+            <div>
+                <span>请求内容</span>
+                <input ng-model="value['claimContent']">
+            </div>
+
+            <!--请求类型-->
+            <div>
+                <span>请求类型</span>
+                <select class="form-control" ng-model="value['claimType']">
+                    <option value="确认之诉">确认之诉</option>
+                    <option value="给付之诉">给付之诉</option>
+                    <option value="形成之诉">形成之诉</option>
+                </select>
+            </div>
+
+            <!--请求标的-->
+            <div>
+                <span>请求标的</span>
+                <input type="number" ng-model="value['disputeFee']">
+            </div>
+
+            <!--当事人名称-->
+            <div>
+                <span>当事人名称</span>
+                <input type="text" ng-model="value['litigants']"/>
+            </div>
+
+            <!--仲裁请求描述-->
+            <div>
+                <span>仲裁请求描述</span>
+                <input type="text" ng-model="value['materialCode']"/>
+            </div>
+
+            <!--附加数据-->
+            <div>
+                <!--附加数据值-->
+                <div ng-click="arbilist.addFile('claim')">
+                    <span>附加数据</span>
+                    <span>附加数据添加+</span>
+                </div>
+
+                <!--附加数据填写-->
+                <div ng-repeat="(extKey, extValue) in value['extData']">
+                    <select class="form-control" ng-model="extKey">
+                        <option ng-repeat="claimExtValOption in arbilist.extDataHelper['claimItems'] track by $index" value="{{claimExtValOption['name']}}">{{claimExtValOption['name']}}</option>
+                    </select>
+                    <!--TODO placeholder的值根据claimExtValOption变化而变化-->
+                    <input type="text" ng-model="extValue" />
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

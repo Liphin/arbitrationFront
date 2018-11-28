@@ -12,10 +12,20 @@ overallModule.config(function ($routeProvider, $httpProvider, $sceDelegateProvid
             controller: 'LoginCtrl',
             controllerAs: 'login'
         })
-        .when('/report/list', {
-            templateUrl: 'src/report/list/index.html',
-            controller: 'ReportListCtrl',
-            controllerAs: 'relist',
+        .when('/arbitration/list', {
+            templateUrl: 'src/arbitration/list/tmpl/index.html',
+            controller: 'ArbiListCtrl',
+            controllerAs: 'arbilist',
+            // resolve: {
+            //     check: function (OverallSer) {
+            //         return OverallSer.processLogonStatus(20, '/login/home');
+            //     }
+            // }
+        })
+        .when('/arbitration/edit', {
+            templateUrl: 'src/arbitration/edit/tmpl/index.html',
+            controller: 'ArbiEditCtrl',
+            controllerAs: 'arbiedit',
             // resolve: {
             //     check: function (OverallSer) {
             //         return OverallSer.processLogonStatus(20, '/login/home');

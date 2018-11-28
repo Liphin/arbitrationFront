@@ -1,0 +1,147 @@
+<!--当事人-->
+<div ng-repeat="value in arbilist.arbiApplyData['litigants'] track by $index">
+    <!--当事人分类-->
+    <div>
+        <span>当事人分类：</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="value['litigantType']" name="litigantType" value="option1" checked> 申请人
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="value['litigantType']" name="litigantType" value="option2"> 被申请人
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="value['litigantType']" name="litigantType" value="option2"> 第三方
+        </label>
+    </div>
+
+    <!--操作者名称-->
+    <div>
+        <span>当事人性质：</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="value['nature']" name="litigantNature" value="自然人" checked> 自然人
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="value['nature']" name="litigantNature" value="企业"> 企业
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="value['nature']" name="litigantNature" value="个体户"> 个体户
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="value['nature']" name="litigantNature" value="其他组织"> 其他组织
+        </label>
+    </div>
+
+    <!--当事人名称-->
+    <div>
+        <span>当事人名称</span>
+        <input type="text" ng-model="value['name']">
+        <span>（当事人性质为企业、个体户和其他组织时，请填写机构名称）</span>
+    </div>
+
+    <!--联系号码-->
+    <div>
+        <span>联系号码</span>
+        <input type="text" ng-model="value['mobiles']">
+        <span>（如有多个请用英文逗号分隔）</span>
+    </div>
+
+    <!--联系人名称-->
+    <div>
+        <span>联系人名称</span>
+        <input type="text" ng-model="value['contacts']">
+        <span>（如有多个请用英文逗号分隔）</span>
+    </div>
+
+    <!--当事人性别-->
+    <div>
+        <span>联系人性别：</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="value['sex']" name="litigantSex" value="男"> 男
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="value['sex']" name="litigantSex" value="女"> 女
+        </label>
+        <span>（个体户请填写负责人的性别）</span>
+    </div>
+
+    <!--法定代表人（企业、个体户必填）-->
+    <div>
+        <span>法定代表人</span>
+        <input type="text" ng-model="value['legalRepresent']">
+    </div>
+
+    <!--法定代表人职务-->
+    <div>
+        <span>法定代表人职务（企业必填）</span>
+        <input type="text" ng-model="value['post']">
+        <select>
+            <option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['post']" value="{{value}}">{{value}}</option>
+        </select>
+    </div>
+
+    <!--证件类型（自然人、个体户必填）-->
+    <div>
+        <span>证件类型（自然人、个体户必填）</span>
+        <input type="text" ng-model="value['idCardType']">
+        <select>
+            <option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['idCardType']" value="{{value}}">{{value}}</option>
+        </select>
+    </div>
+
+    <!--证件号码（自然人、个体户必填）-->
+    <div>
+        <span>证件号码</span>
+        <input type="text" ng-model="value['idCardNo']">
+    </div>
+
+
+    <!--证照类型（企业、个体户、其他组织必填）-->
+    <div>
+        <span>证照类型</span>
+        <input type="text" ng-model="value['identityType']">
+        <select>
+            <option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['identityType']" value="{{value}}">{{value}}</option>
+        </select>
+    </div>
+    <!--营业执照号码（企业、个体户、其他组织必填）-->
+    <div>
+        <span>营业执照号码</span>
+        <input type="text" ng-model="value['identityNo']">
+    </div>
+
+
+    <!--联系邮箱。如有多个请用英文逗号分隔。-->
+    <div>
+        <span>联系邮箱</span>
+        <input type="text" ng-model="value['emails']">
+        <span>（如有多个请用英文逗号分隔）</span>
+    </div>
+
+    <!--联系地址（如有多个请用英文逗号分隔）-->
+    <div>
+        <span>联系地址</span>
+        <input type="text" ng-model="value['addresses']">
+        <span>（如有多个请用英文逗号分隔）</span>
+    </div>
+
+    <!--材料名称-->
+    <div>
+        <span>材料名称</span>
+        <input type="text" ng-model="value['materialCode']">
+    </div>
+
+
+    <!--附件上传-->
+    <div>
+        <div ng-click="arbilist.addFile('litigants', $index)">
+            <span>附件上传 +</span>
+        </div>
+
+        <!--循环读取上传附件的数据-->
+        <div ng-repeat="fileValue in value['files'] track by $index">
+            <span>点击上传附件</span>
+            <input file-proxy type="file" />
+        </div>
+    </div>
+
+</div>
