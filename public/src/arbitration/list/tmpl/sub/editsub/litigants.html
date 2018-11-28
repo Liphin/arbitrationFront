@@ -140,7 +140,7 @@
         <!--循环读取上传附件的数据-->
         <div ng-repeat="fileValue in value['files'] track by $index">
             <span>点击上传附件</span>
-            <input file-proxy type="file" />
+            <input file-proxy type="file" parent-parent-index="null" parent-index="{{$parent.$index}}" file-index="{{$index}}" edit-type="litigants"/>
         </div>
     </div>
 

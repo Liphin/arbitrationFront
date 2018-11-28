@@ -70,46 +70,47 @@ var storage = multer.diskStorage({
 });
 var upload = multer({storage: storage});
 app.post('/uploadResource', upload.single('file'), function (req, res) {
-
-    var reader = new FileReader();
-    reader.readAsDataURL(req.file);
-    reader.onload = function () {
-
-        //上传到易简网平台
-        var urlPost = 'https://14.23.88.138:7777/api/1.0/file';
-
-        var headers = {
-            "Accept": "application/json",
-            'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c'
-        };
-        var formData = {
-            'operaterType': encodeURIComponent('申请人'),
-            'operater': encodeURIComponent('管理员'),
-            'fileName': encodeURIComponent(req.body['fileName']),
-            'fileBody': reader.result
-        };
-        console.log('come1', formData);
-        console.log('come 2 -------------------------------------------------------------')
-        request.post({
-            url: urlPost,
-            formData: formData,
-            headers: headers,
-            rejectUnauthorized: false
-        }, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                console.log('upload file to YiJian success', body);
-                res.send(body);
-
-            } else {
-                console.log('error', error, response, body);
-                res.send(false);
-            }
-        });
+    //上传到易简网平台
+    var urlPost = 'https://14.23.88.138:7777/api/1.0/file';
+    //设置头部
+    var headers = {
+        "Accept": "application/json",
+        'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c'
     };
-    reader.onerror = function (error) {
-        console.log('error', error);
-        res.send(false);
+    //表单数据设置
+    var formData = {
+        'operaterType': encodeURIComponent('申请人'),
+        'operater': encodeURIComponent('管理员'),
+        'fileName': encodeURIComponent(req.body['fileName']),
+        'fileBody': req.file.toString('base64')
     };
+    //上传数据到易简网
+    request.post({
+        url: urlPost,
+        formData: formData,
+        headers: headers,
+        rejectUnauthorized: false
+    }, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            //重命名文件名
+            var tempFileUrl = serverSerData.resourcePath + '/' + req.body['tempFileName'];
+            var newFileUrl = serverSerData.resourcePath + '/' + body['fileKey'] + '.' + body['type'];
+            fs.rename(tempFileUrl, newFileUrl, function (err) {
+                if (err) {
+                    //重命名文件出错
+                    console.log('rename failure');
+                    res.send(false);
+
+                }else{
+                    res.send(body)
+                }
+            });
+        } else {
+            //发送数据到易简网出错
+            console.log('post data to YiJian error');
+            res.send(false);
+        }
+    });
 });
 
 

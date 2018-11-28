@@ -142,7 +142,7 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
             OverallDataSer.overallData['loadingData'] = true;
         }
 
-
+        //初始化表单数据
         var fd = new FormData();
         //动态装载数据
         for (var i in obj) {
