@@ -213,7 +213,7 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined},
         }).success(function (response) {
-            callback(response['data']);
+            callback(response);
 
         }).error(function (err) {
             OverallGeneralSer.alertHttpRequestError("uploadResource", 600, err);

@@ -2,7 +2,7 @@
  * Created by Administrator on 2018/11/3.
  */
 var settingData = {
-    basePath: "/root/report/front", //基础路径
+    basePath: "/root/arbitration/front", //基础路径
     domainName: "http://arbitration.liphin.com", //域名设置
     isProd: false, //是否为生产环境
     frontPort: 3033, //前端port

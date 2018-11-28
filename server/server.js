@@ -88,6 +88,8 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
             'fileName': encodeURIComponent(req.body['fileName']),
             'fileBody': reader.result
         };
+        console.log('come1', formData);
+        console.log('come 2 -------------------------------------------------------------')
         request.post({
             url: urlPost,
             formData: formData,
@@ -96,13 +98,17 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
         }, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log('upload file to YiJian success', body);
+                res.send(body);
+
             } else {
                 console.log('error', error, response, body);
+                res.send(false);
             }
         });
     };
     reader.onerror = function (error) {
         console.log('error', error);
+        res.send(false);
     };
 });
 
@@ -180,21 +186,6 @@ const options = {
 //资源文件获取
 app.use("/resource", express.static(serverSerData.resourcePath));
 app.use("/", express.static(serverSerData.projectPath + "/public"));
-
-
-//----------------------------- 开启http和https服务 ----------------------------------------
-var privateKey = fs.readFileSync(serverSerData.targetSetting.serverConfig.key);
-var certificate = fs.readFileSync(serverSerData.targetSetting.serverConfig.cert);
-var credentials = {key: privateKey, cert: certificate};
-
-//如果部署到生产环境则用https协议打开端口，否则直接使用http协议端口
-if (global.env == 'prod') {
-    https.createServer(credentials, app).listen(PORT); //开启http设置s配置
-} else {
-    app.listen(PORT);
-}
-//http.createServer(app).listen(PORT); //开启http设置配置
-//app.listen(PORT);
-
+app.listen(PORT);
 console.log("Server is running at port: " + PORT + " , and at environment: " + global.env);
 
