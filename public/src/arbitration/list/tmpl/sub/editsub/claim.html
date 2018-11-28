@@ -4,24 +4,10 @@
         <span>事实与理由</span>
         <input type="text" ng-model="arbilist.arbiApplyData['claim']['reason']"/>
     </div>
-
-    <!--&lt;!&ndash;附件上传&ndash;&gt;-->
-    <!--<div>-->
-        <!--<div ng-click="arbilist.addFile('claim')">-->
-            <!--<span>附件上传 +</span>-->
-        <!--</div>-->
-
-        <!--&lt;!&ndash;循环读取上传附件的数据&ndash;&gt;-->
-        <!--<div ng-repeat="value in arbilist.arbiApplyData['claim']['files'] track by $index">-->
-            <!--<span>点击上传附件</span>-->
-            <!--<input type="file" />-->
-        <!--</div>-->
-    <!--</div>-->
-
     <!--请求项-->
     <div>
         <!--请求项添加-->
-        <div>
+        <div ng-click="arbilist.addClaimItems()">
             <span>请求项</span>
             <span>+ 添加请求项</span>
         </div>
@@ -65,7 +51,7 @@
             <!--附加数据-->
             <div>
                 <!--附加数据值-->
-                <div ng-click="arbilist.addFile('claim')">
+                <div ng-click="arbilist.addAddictionData('claim', $index)">
                     <span>附加数据</span>
                     <span>附加数据添加+</span>
                 </div>
@@ -73,10 +59,10 @@
                 <!--附加数据填写-->
                 <div ng-repeat="(extKey, extValue) in value['extData']">
                     <select class="form-control" ng-model="extKey">
-                        <option ng-repeat="claimExtValOption in arbilist.extDataHelper['claimItems'] track by $index" value="{{claimExtValOption['name']}}">{{claimExtValOption['name']}}</option>
+                        <option ng-repeat="(claimExtOptionKey, claimExtOptionVal) in arbilist.extDataHelper['claimItems'] track by $index" value="{{claimExtOptionKey}}">{{claimExtOptionVal['name']}}</option>
                     </select>
                     <!--TODO placeholder的值根据claimExtValOption变化而变化-->
-                    <input type="text" ng-model="extValue" />
+                    <input type="text" ng-model="extValue" placeholder="{{arbilist.extDataHelper['claimItems'][extKey]['placeholder']}}" />
                 </div>
 
             </div>

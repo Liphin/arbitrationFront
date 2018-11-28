@@ -70,6 +70,33 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
     };
 
 
+    /**
+     * 添加附加数据信息
+     */
+    arbilist.addAddictionData = function (type, index1, index2) {
+        switch (type) {
+            case 'claim': {
+                ArbiListDataSer.arbiApplyData['claim']['claimItems'][index1]['extData']['claimMoney']='';
+                break;
+            }
+            case 'evidences': {
+                ArbiListDataSer.arbiApplyData['evidences'][index1]['evidenceItems'][index2]['extData']['loanContractNumber']='';
+            }
+        }
+    };
+
+
+    /**
+     * 添加claimItems数据
+     */
+    arbilist.addClaimItems = function () {
+        ArbiListDataSer.arbiApplyData['claim']['claimItems'].push(ArbiListDataSer.arbiApplyDataSupply['claimItems']);
+    };
+
+
+
+
+
     //测试选择项
     ArbiListDataSer.arbiApplyData['litigants'].push(ArbiListDataSer.arbiApplyDataSupply['litigants']);
     ArbiListDataSer.arbiApplyData['agents'].push(ArbiListDataSer.arbiApplyDataSupply['agents']);

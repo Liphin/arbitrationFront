@@ -9,8 +9,8 @@ app.factory('ArbiListDataSer', function () {
         //选项true or false设置
         'options': {
             'general': false,
-            'claim': false,
-            'litigants': true,
+            'claim': true,
+            'litigants': false,
             'agents': false,
             'evidences': false
         },
@@ -90,6 +90,7 @@ app.factory('ArbiListDataSer', function () {
         }
     };
 
+    //仲裁应用数据
     var arbiApplyData = {
         'overall': {
             'operaterType': '', //操作者类型， 申请人、第三方
