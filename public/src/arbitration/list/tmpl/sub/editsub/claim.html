@@ -2,7 +2,7 @@
     <!--事实与理由-->
     <div>
         <span>事实与理由</span>
-        <input type="text" ng-model="arbilist.arbiApplyData['claim']['reason']"/>
+        <input type="text" ng-model="arbilist.arbiApplyData['claim']['reason']" maxlength="2000" placeholder="请输入事实与理由（最长2000个字）"/>
     </div>
     <!--请求项-->
     <div>
@@ -17,7 +17,7 @@
             <!--请求内容-->
             <div>
                 <span>请求内容</span>
-                <input ng-model="value['claimContent']">
+                <input ng-model="value['claimContent']" maxlength="2000" placeholder="请输入请求内容（最长2000个字）">
             </div>
 
             <!--请求类型-->
@@ -33,18 +33,18 @@
             <!--请求标的-->
             <div>
                 <span>请求标的</span>
-                <input type="number" ng-model="value['disputeFee']">
+                <input type="number" ng-model="value['disputeFee']" step="0.01" max="10000000000000.00" min="0.00">
             </div>
 
             <!--当事人名称-->
             <div>
                 <span>当事人名称</span>
-                <input type="text" ng-model="value['litigants']"/>
+                <input type="text" ng-model="value['litigants']" maxlength="100"/>
             </div>
 
             <!--仲裁请求描述-->
             <div>
-                <span>仲裁请求描述</span>
+                <span>仲裁请求名称</span>
                 <input type="text" ng-model="value['materialCode']"/>
             </div>
 

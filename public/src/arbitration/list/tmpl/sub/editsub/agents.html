@@ -5,7 +5,7 @@
     <div>
         <span>代理人分类：</span>
         <label class="radio-inline">
-            <input type="radio" ng-model="value['agentType']" name="agentType" value="律师代理" checked> 律师代理
+            <input type="radio" ng-model="value['agentType']" name="agentType" value="律师代理"> 律师代理
         </label>
         <label class="radio-inline">
             <input type="radio" ng-model="value['agentType']" name="agentType" value="公民代理"> 公民代理
@@ -15,7 +15,7 @@
     <!--代理人名称-->
     <div>
         <span>代理人名称</span>
-        <input type="text" ng-model="value['name']">
+        <input type="text" ng-model="value['name']" maxlength="25" placeholder="请输入代理人名称（不大于25个字）">
     </div>
 
     <!--代理人性别-->
@@ -41,20 +41,20 @@
     <!--证件号码-->
     <div>
         <span>证件号码</span>
-        <input type="text" ng-model="value['identityNo']">
+        <input type="text" ng-model="value['identityNo']" maxlength="50" placeholder="请输入证件号码（不大于50个字）">
     </div>
 
     <!--联系号码-->
     <div>
         <span>联系号码</span>
-        <input type="text" ng-model="value['mobiles']">
+        <input type="text" ng-model="value['mobiles']" maxlength="250" placeholder="请输入联系号码（不大于250个字）">
     </div>
 
     <!--当事人类型-->
     <div>
         <span>当事人类型：</span>
         <label class="radio-inline">
-            <input type="radio" ng-model="value['litigantType']" name="litigantType" value="申请人" checked> 申请人
+            <input type="radio" ng-model="value['litigantType']" name="litigantType" value="申请人"> 申请人
         </label>
         <label class="radio-inline">
             <input type="radio" ng-model="value['litigantType']" name="litigantType" value="被申请人"> 被申请人
@@ -68,6 +68,7 @@
     <div>
         <span>委托人名称</span>
         <input type="text" ng-model="value['principals']">
+        <span>（如果多个请用逗号分隔）</span>
     </div>
 
 
@@ -75,32 +76,17 @@
     <div>
         <span>代理权限：</span>
         <label class="radio-inline">
-            <input type="radio" ng-model="value['power']" name="agentPower" value="一般代理" checked> 一般代理
+            <input type="radio" ng-model="value['power']" name="agentPower" value="一般代理"> 一般代理
         </label>
         <label class="radio-inline">
             <input type="radio" ng-model="value['power']" name="agentPower" value="特殊权限"> 特殊权限
         </label>
     </div>
     <!--如为特殊权限，则此项必填-->
-    <div>
+    <div ng-if="value['power']=='特殊代理'">
         <span>特殊权限：</span>
-        <label class="checkbox-inline">
-            <input type="checkbox" value="代为提起仲裁请求"> 代为提起仲裁请求
-        </label>
-        <label class="checkbox-inline">
-            <input type="checkbox" value="代为参加庭审、进行质证、辩论"> 代为参加庭审、进行质证、辩论
-        </label>
-        <label class="checkbox-inline">
-            <input type="checkbox" value="代为和解、调解"> 代为和解、调解
-        </label>
-        <label class="checkbox-inline">
-            <input type="checkbox" value="代为主张、变更、放弃仲裁请求"> 代为主张、变更、放弃仲裁请求
-        </label>
-        <label class="checkbox-inline">
-            <input type="checkbox" value="代为签收法律文书"> 代为签收法律文书
-        </label>
-        <label class="checkbox-inline">
-            <input type="checkbox" value="代为申请执行"> 代为申请执行
+        <label class="checkbox-inline" ng-repeat="powerDepict in value['powerDetailArray']">
+            <input type="checkbox" ng-model="{{powerDepict['status']}}"> {{powerDepict['name']}}
         </label>
     </div>
 
@@ -108,20 +94,20 @@
     <!--公司名称-->
     <div>
         <span>公司名称</span>
-        <input type="text" ng-model="value['company']">
+        <input type="text" ng-model="value['company']" maxlength="50" placeholder="请输入公司名称（不大于50个字）">
     </div>
 
     <!--联系邮箱-->
     <div>
         <span>联系邮箱</span>
-        <input type="text" ng-model="value['email']">
+        <input type="text" ng-model="value['email']"  maxlength="250" placeholder="请输入联系邮箱（不大于250个字）">
         <span>（如有多个请用英文逗号分隔）</span>
     </div>
 
     <!--联系地址-->
     <div>
         <span>联系地址</span>
-        <input type="text" ng-model="value['address']">
+        <input type="text" ng-model="value['address']" maxlength="250" placeholder="请输入联系地址（不大于250个字）">
         <span>（如有多个请用英文逗号分隔）</span>
     </div>
 

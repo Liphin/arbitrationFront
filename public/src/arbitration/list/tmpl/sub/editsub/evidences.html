@@ -5,7 +5,7 @@
     <div>
         <span>证据提供者类型：</span>
         <label class="radio-inline">
-            <input type="radio" ng-model="value['providerType']" name="providerType" value="申请方" checked> 申请方
+            <input type="radio" ng-model="value['providerType']" name="providerType" value="申请方"> 申请方
         </label>
         <label class="radio-inline">
             <input type="radio" ng-model="value['providerType']" name="providerType" value="被申请方"> 被申请方
@@ -21,7 +21,7 @@
     <!--代理人名称-->
     <div>
         <span>证据提供者名称</span>
-        <input type="text" ng-model="value['provider']">
+        <input type="text" ng-model="value['provider']" maxlength="500" placeholder="请输入证据提供者名称（不大于500个字）">
         <span>（如有多个请用英文逗号分隔）</span>
     </div>
 
@@ -40,13 +40,13 @@
             <!--证据名称-->
             <div>
                 <span>证据名称</span>
-                <input type="text" ng-model="itemValue['name']">
+                <input type="text" ng-model="itemValue['name']" maxlength="50" placeholder="请输入证据名称（不大于50个字）">
             </div>
 
             <!--证明内容-->
             <div>
                 <span>证明内容</span>
-                <input type="text" ng-model="itemValue['content']">
+                <input type="text" ng-model="itemValue['content']" maxlength="2000" placeholder="请输入证明内容（不大于2000个字）">
             </div>
 
             <!--是否有原件-->
