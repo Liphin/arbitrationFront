@@ -24,10 +24,10 @@ app.factory('ArbiListDataSer', function () {
 
         //诉讼事件声明
         'claimItems': {
-            'claimContent': '',//请求内容
+            'claimContent': '证据请求内容',//请求内容
             'claimType': '确认之诉',//请求类型：确认之诉，给付之诉，形成之诉
             'disputeFee': 0, //请求标的
-            'litigants': '',//当事人名称
+            'litigants': '当事人名称',//当事人名称
             'materialCode': '新增仲裁请求',//仲裁请求描述
             'extData': {}//附加数据
         },
@@ -84,7 +84,7 @@ app.factory('ArbiListDataSer', function () {
         //证据对象
         'evidences': {
             'providerType': '申请方',//证据提供者类型：申请方、被申请方、第三方、其他
-            'provider': '',//证据提供者。如有多个请用英文逗号分隔
+            'provider': '证据提供者名称1,证据提供者名称2',//证据提供者。如有多个请用英文逗号分隔
             'evidenceItems': []//证据项JSON数组。数组中为证据项JSON对象，具体内容请参看下表
         },
 
@@ -103,11 +103,11 @@ app.factory('ArbiListDataSer', function () {
     var arbiApplyData = {
         'overall': {
             'operaterType': '申请人', //操作者类型， 申请人、第三方
-            'operater': '', //操作者名称
-            'productCode': '' //简述
+            'operater': '操作者名称', //操作者名称
+            'productCode': '操作描述1' //简述
         },
         'claim': {
-            'reason': '',//原因
+            'reason': '输入事实与理由',//原因
             'files': [],//附件数组信息
             'claimItems': [] //请求项内容
         },

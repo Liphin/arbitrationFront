@@ -99,14 +99,14 @@
     <!--联系邮箱-->
     <div>
         <span>联系邮箱</span>
-        <input type="text" ng-model="value['email']"  maxlength="250" placeholder="请输入联系邮箱（不大于250个字）">
+        <input type="text" ng-model="value['emails']"  maxlength="250" placeholder="请输入联系邮箱（不大于250个字）">
         <span>（如有多个请用英文逗号分隔）</span>
     </div>
 
     <!--联系地址-->
     <div>
         <span>联系地址</span>
-        <input type="text" ng-model="value['address']" maxlength="250" placeholder="请输入联系地址（不大于250个字）">
+        <input type="text" ng-model="value['addresses']" maxlength="250" placeholder="请输入联系地址（不大于250个字）">
         <span>（如有多个请用英文逗号分隔）</span>
     </div>
 
@@ -118,14 +118,14 @@
 
     <!--附件上传-->
     <div>
-        <div>
+        <div ng-click="arbilist.addFile('agents', $index)">
             <span>附件上传 +</span>
         </div>
 
         <!--循环读取上传附件的数据-->
         <div ng-repeat="fileValue in value['files'] track by $index">
             <span>点击上传附件</span>
-            <input type="file" />
+            <input file-proxy type="file" parent-parent-index="null" parent-index="{{$parent.$index}}" file-index="{{$index}}" edit-type="agents" />
         </div>
     </div>
 

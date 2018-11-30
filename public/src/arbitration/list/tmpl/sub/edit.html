@@ -1,41 +1,49 @@
 <div style="display: flex;align-items: center;justify-content: center;position:fixed; top: 0; left: 0; bottom: 0; right: 0;background: rgba(0,0,0,0.47)">
 
-    <div style="display: flex; flex-direction: column">
+
         <!--编辑面板框上方-->
-        <div style="flex: 1;padding: 20px;;background: white; display: flex;flex-direction: row;border-radius: 20px; width: 80%; height: 90%; max-width: 1300px; max-height: 1000px">
-            <!--左侧列表展示-->
-            <div class="arbiEditLeft" style="width: 200px; display: flex; flex-direction: column">
-                <div ng-click="arbilist.chooseArbiFillOption('general')">基本资料</div>
-                <div ng-click="arbilist.chooseArbiFillOption('claim')">请求信息</div>
-                <div ng-click="arbilist.chooseArbiFillOption('litigants')">当事人</div>
-                <div ng-click="arbilist.chooseArbiFillOption('agents')">代理人</div>
-                <div ng-click="arbilist.chooseArbiFillOption('evidences')">证据</div>
+        <div style="padding: 20px;;background: white; display: flex;flex-direction: column;border-radius: 20px; width: 80%; height: 90%; max-width: 1300px; max-height: 1000px">
+            <!--设置基本资料-->
+            <div style="display: flex; flex-direction: row;flex: 1;align-items: stretch;">
+                <!--左侧列表展示-->
+                <div class="arbiEditLeft" style="width: 200px; display: flex; flex-direction: column">
+                    <div ng-click="arbilist.chooseArbiFillOption('general')">基本资料</div>
+                    <div ng-click="arbilist.chooseArbiFillOption('claim')">请求信息</div>
+                    <div ng-click="arbilist.chooseArbiFillOption('litigants')">当事人</div>
+                    <div ng-click="arbilist.chooseArbiFillOption('agents')">代理人</div>
+                    <div ng-click="arbilist.chooseArbiFillOption('evidences')">证据</div>
+                </div>
+
+                <!--右侧数据展示-->
+                <div style="flex: 1;background: lightgoldenrodyellow">
+                    <!--基本数据-->
+                    <edit-general ng-if="arbilist.arbiApplyDataSupply['options']['general']"></edit-general>
+
+                    <!--声明数据-->
+                    <edit-claim ng-if="arbilist.arbiApplyDataSupply['options']['claim']"></edit-claim>
+
+                    <!--申请人资料-->
+                    <edit-litigants ng-if="arbilist.arbiApplyDataSupply['options']['litigants']"></edit-litigants>
+
+                    <!--代理人资料-->
+                    <edit-agents ng-if="arbilist.arbiApplyDataSupply['options']['agents']"></edit-agents>
+
+                    <!--证据资料-->
+                    <edit-evidence ng-if="arbilist.arbiApplyDataSupply['options']['evidences']"></edit-evidence>
+                </div>
             </div>
 
-            <!--右侧数据展示-->
-            <div style="flex: 1;background: lightgoldenrodyellow">
-                <!--基本数据-->
-                <edit-general ng-if="arbilist.arbiApplyDataSupply['options']['general']"></edit-general>
 
-                <!--声明数据-->
-                <edit-claim ng-if="arbilist.arbiApplyDataSupply['options']['claim']"></edit-claim>
-
-                <!--申请人资料-->
-                <edit-litigants ng-if="arbilist.arbiApplyDataSupply['options']['litigants']"></edit-litigants>
-
-                <!--代理人资料-->
-                <edit-agents ng-if="arbilist.arbiApplyDataSupply['options']['agents']"></edit-agents>
-
-                <!--证据资料-->
-                <edit-evidence ng-if="arbilist.arbiApplyDataSupply['options']['evidences']"></edit-evidence>
+            <!--保存和提交按钮-->
+            <div style="width: 100%; height: 50px;">
+                <button class="btn btn-info">保存</button>
+                <button class="btn btn-info" ng-click="arbilist.submitNewArbiData()">提交</button>
             </div>
         </div>
-
-        <!--保存和提交按钮-->
-        <div style="width: 100%; height: 50px;">
-            <button class="btn btn-info">保存</button>
-            <button class="btn btn-info" ng-click="arbilist.submitNewArbiData()">提交</button>
-        </div>
-    </div>
 
 </div>
+
+
+
+
+
