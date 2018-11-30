@@ -56,6 +56,40 @@ app.post('/managerLogin', function (req, res) {
 
 
 /**
+ * 提交新的诉讼数据
+ */
+app.post('/submitNewArbiData', function (req, res) {
+
+    console.log('get request body', req.body);
+    //上传到易简网平台
+    var urlPost = 'https://14.23.88.138:7777/api/arb/1.0/arbcase';
+    //设置头部
+    var headers = {
+        "Accept": "application/json",
+        'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c'
+    };
+    //上传数据到易简网
+    request.post({
+        url: urlPost,
+        formData: req.body,
+        headers: headers,
+        rejectUnauthorized: false
+    }, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log('upload new arbi data to server', body);
+           res.send(body);
+
+        } else {
+            //发送数据到易简网出错
+            console.log('post data to YiJian error');
+            res.send(false);
+        }
+    });
+});
+
+
+
+/**
  * 用户上传资源文件数据
  */
 var storage = multer.diskStorage({

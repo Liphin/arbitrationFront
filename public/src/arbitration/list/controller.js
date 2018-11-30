@@ -76,11 +76,11 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
     arbilist.addAddictionData = function (type, index1, index2) {
         switch (type) {
             case 'claim': {
-                ArbiListDataSer.arbiApplyData['claim']['claimItems'][index1]['extData']['claimMoney']='';
+                ArbiListDataSer.arbiApplyData['claim']['claimItems'][index1]['extData']['claimMoney'] = '';
                 break;
             }
             case 'evidences': {
-                ArbiListDataSer.arbiApplyData['evidences'][index1]['evidenceItems'][index2]['extData']['loanContractNumber']='';
+                ArbiListDataSer.arbiApplyData['evidences'][index1]['evidenceItems'][index2]['extData']['loanContractNumber'] = '';
             }
         }
     };
@@ -101,6 +101,42 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
         ArbiListDataSer.arbiApplyData['evidences'][index]['evidenceItems'].push(ArbiListDataSer.arbiApplyDataSupply['evidenceItems']);
     };
 
+
+    /**
+     * 提交新的诉讼数据到服务器
+     */
+    arbilist.submitNewArbiData = function () {
+        //对数据进行预处理操作
+        for (var i in ArbiListDataSer.arbiApplyDataSupply['agents']) {
+            var ref = ArbiListDataSer.arbiApplyDataSupply['agents']['powerDetail'];
+            for (var j in ArbiListDataSer.arbiApplyDataSupply['agents'][i]['powerDetailArray']) {
+                //循环添加选择的特殊权限
+                if (ArbiListDataSer.arbiApplyDataSupply['agents'][i]['powerDetailArray'][j]['status']) {
+                    ref += ArbiListDataSer.arbiApplyDataSupply['agents'][i]['powerDetailArray'][j]['name'];
+                }
+                //用英文逗号','隔开
+                if (j < ArbiListDataSer.arbiApplyDataSupply['agents'][i]['powerDetailArray'].length - 1) {
+                    ref += ',';
+                }
+            }
+        }
+
+        var formData = {
+            caseFlowType: "qidaifuturetech-p2p-1",
+            commissionCode: "gzac",
+            claim: ArbiListDataSer.arbiApplyDataSupply['claim'],
+            litigants: ArbiListDataSer.arbiApplyDataSupply['litigants'],
+            agents: ArbiListDataSer.arbiApplyDataSupply['agents'],
+            evidences: ArbiListDataSer.arbiApplyDataSupply['evidences']
+        };
+        //提交诉讼信息到server
+        var url = OverallDataSer.urlData['frontEndHttp']['submitNewArbiData'];
+        OverallGeneralSer.httpPostData2(formData, url, function (responseData) {
+            console.log(responseData);
+
+        }, function () {
+        });
+    };
 
 
     //测试选择项

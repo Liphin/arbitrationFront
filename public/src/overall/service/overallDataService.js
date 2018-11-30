@@ -24,6 +24,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
             'getSqlKeyWord': baseUrlData['frontEndHttp'] + 'helper/sqlKeyWord.txt',
             'managerLogin': baseUrlData['frontEndHttp'] + 'managerLogin',
             'uploadResource': baseUrlData['frontEndHttp'] + 'uploadResource',
+            'submitNewArbiData': baseUrlData['frontEndHttp'] + 'submitNewArbiData',
         }
     };
 
