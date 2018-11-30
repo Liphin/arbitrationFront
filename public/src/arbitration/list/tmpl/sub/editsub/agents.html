@@ -32,9 +32,8 @@
     <!--证件类型-->
     <div>
         <span>证件类型</span>
-        <input type="text" ng-model="value['identityType']">
-        <select>
-            <option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['identityType']" value="{{value}}">{{value}}</option>
+        <select ng-model="value['identityType']">
+            <option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['post']" value="{{value}}">{{value}}</option>
         </select>
     </div>
 
@@ -83,10 +82,10 @@
         </label>
     </div>
     <!--如为特殊权限，则此项必填-->
-    <div ng-if="value['power']=='特殊代理'">
+    <div ng-if="value['power']=='特殊权限'">
         <span>特殊权限：</span>
-        <label class="checkbox-inline" ng-repeat="powerDepict in value['powerDetailArray']">
-            <input type="checkbox" ng-model="{{powerDepict['status']}}"> {{powerDepict['name']}}
+        <label class="checkbox-inline" ng-repeat="(powerDepictKey, powerDepictValue) in value['powerDetailArray'] track by $index">
+            <input type="checkbox" ng-model="powerDepictValue['status']"> {{powerDepictValue['name']}}
         </label>
     </div>
 

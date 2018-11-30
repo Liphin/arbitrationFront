@@ -63,9 +63,8 @@
     <!--法定代表人职务-->
     <div ng-if="value['nature']=='企业'">
         <span>法定代表人职务</span>
-        <input type="text" ng-model="value['post']">
-        <select>
-            <option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['post']" value="{{value}}">{{value}}</option>
+        <select ng-model="value['post']">
+            <option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['identityType']" value="{{value}}">{{value}}</option>
         </select>
     </div>
 
@@ -86,9 +85,8 @@
         <!--证件类型-->
         <div>
             <span>证件类型</span>
-            <input type="text" ng-model="value['idCardType']">
-            <select>
-                <option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['idCardType']" value="{{value}}">{{value}}</option>
+            <select ng-model="value['idCardType']">
+                <option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['post']" value="{{value}}">{{value}}</option>
             </select>
         </div>
 
@@ -105,16 +103,15 @@
         <!--证照类型（企业、个体户、其他组织必填）-->
         <div>
             <span>证照类型</span>
-            <input type="text" ng-model="value['identityType']">
-            <select>
-                <option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['identityType']" value="{{value}}">{{value}}</option>
+            <select ng-model="value['identityType']">
+                <option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['idCardType']" value="{{value}}">{{value}}</option>
             </select>
         </div>
 
         <!--营业执照号码（企业、个体户、其他组织必填）-->
         <div>
-            <span>营业执照号码</span>
-            <input type="text" ng-model="value['identityNo']" maxlength="100" placeholder="请输入营业执照号码（不大于50个字符）">
+            <span>证照号码</span>
+            <input type="text" ng-model="value['identityNo']" maxlength="100" placeholder="请输入证照号码（不大于50个字符）">
         </div>
     </div>
 
@@ -136,7 +133,7 @@
     <!--材料名称-->
     <div>
         <span>材料名称</span>
-        <input type="text" ng-model="value['materialCode']">
+        <input type="text" ng-model="value['materialCode']" placeholder="请填写该当事人材料名称">
     </div>
 
 

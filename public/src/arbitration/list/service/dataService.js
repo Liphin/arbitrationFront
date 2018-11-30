@@ -17,11 +17,10 @@ app.factory('ArbiListDataSer', function () {
 
         //通过5.7查询全局字段信息
         'overallVariable': {
-            'post': [],
-            'idCardType': [],
-            'identityType': [],
+            'post': ["军官证", "实习律师证", "律师执业证", "户口薄", "护照", "身份证", "驾照"],
+            'idCardType': ["多证合一营业执照", "税务登记证", "组织机构代码证", "营业执照"],
+            'identityType': ["主任", "总经理", "董事长", "行长"],
         },
-
 
         //诉讼事件声明
         'claimItems': {
@@ -43,10 +42,10 @@ app.factory('ArbiListDataSer', function () {
             'contacts': '',//联系人名称。如有多个请用英文逗号分隔。
             'sex': '男',//性别：男、女（自然人必填、个体户请填写负责人的性别）。
             'legalRepresent': '',//法定代表人（企业、个体户必填）。
-            'post': '',//法定代表人职务（企业必填）。通过5.7查询全局字段信息接口获取职务。
-            'idCardType': '',//证件类型（自然人、个体户必填）。通过5.7查询全局字段信息接口获取证件类型。
+            'post': '总经理',//法定代表人职务（企业必填）。通过5.7查询全局字段信息接口获取职务。
+            'idCardType': '身份证',//证件类型（自然人、个体户必填）。通过5.7查询全局字段信息接口获取证件类型。
             'idCardNo': '',//证件号码（自然人、个体户必填）。
-            'identityType': '',//证照类型（企业、个体户、其他组织必填）。通过5.7查询全局字段信息接口获取证照类型。
+            'identityType': '多证合一营业执照',//证照类型（企业、个体户、其他组织必填）。通过5.7查询全局字段信息接口获取证照类型。
             'identityNo': '',//营业执照号码（企业、个体户、其他组织必填）。
             'emails': '',//联系邮箱。如有多个请用英文逗号分隔。
             'addresses': '',//联系地址。如有多个请用英文逗号分隔。
@@ -59,7 +58,7 @@ app.factory('ArbiListDataSer', function () {
             'agentType': '律师代理',//代理人分类：律师代理、公民代理。
             'name': '',//代理人名称。
             'sex': '男',//性别：男、女。
-            'identityType': '',//证件类型。通过5.7查询全局字段信息接口获取证件类型。
+            'identityType': '身份证',//证件类型。通过5.7查询全局字段信息接口获取证件类型。
             'identityNo': '',//证件号码。
             'mobiles': '',//联系号码。如有多个请用英文逗号分隔。
             'litigantType': '申请人',//当事人类型：申请人、被申请人、第三人
@@ -72,7 +71,7 @@ app.factory('ArbiListDataSer', function () {
             'materialCode': '',//材料名称，用于类型化案件。
             'files': [],//附件，以JSON数组表示。
 
-            'powerDetailArray':[
+            'powerDetailArray': [
                 {'name': '代为提起仲裁请求', 'status': false},
                 {'name': '代为参加庭审、进行质证、辩论', 'status': false},
                 {'name': '代为和解、调解', 'status': false},

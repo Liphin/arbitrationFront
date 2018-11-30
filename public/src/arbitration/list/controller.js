@@ -94,6 +94,12 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
     };
 
 
+    /**
+     * 添加evidenceItems数据
+     */
+    arbilist.addEvidenceItems = function (index) {
+        ArbiListDataSer.arbiApplyData['evidences'][index]['evidenceItems'].push(ArbiListDataSer.arbiApplyDataSupply['evidenceItems']);
+    };
 
 
 

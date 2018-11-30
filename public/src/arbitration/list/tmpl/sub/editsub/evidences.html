@@ -29,7 +29,7 @@
     <!--证据条目-->
     <div>
         <!--请求项添加-->
-        <div>
+        <div ng-click="arbilist.addEvidenceItems($index)">
             <span>请求项</span>
             <span>+ 添加请求项</span>
         </div>
@@ -40,8 +40,14 @@
             <!--证据名称-->
             <div>
                 <span>证据名称</span>
-                <input type="text" ng-model="itemValue['name']" maxlength="50" placeholder="请输入证据名称（不大于50个字）">
+                <input type="text" ng-model="itemValue['materialCode']" maxlength="50" placeholder="请输入证据材料名称（不大于50个字）">
             </div>
+            <!--材料名称-->
+            <div>
+                <span>材料名称</span>
+                <input type="text" ng-model="itemValue['materialCode']">
+            </div>
+
 
             <!--证明内容-->
             <div>
@@ -60,21 +66,15 @@
                 </label>
             </div>
 
-            <!--材料名称-->
-            <div>
-                <span>材料名称</span>
-                <input type="text" ng-model="itemValue['materialCode']">
-            </div>
-
 
             <!--附件上传-->
             <div>
-                <div>
+                <div ng-click="arbilist.addFile('evidences', $parent.$index, $index)">
                     <span>附件上传 +</span>
                 </div>
 
                 <!--循环读取上传附件的数据-->
-                <div ng-repeat="fileValue in value['files'] track by $index">
+                <div ng-repeat="fileValue in itemValue['files'] track by $index">
                     <span>点击上传附件</span>
                     <input type="file" />
                 </div>
@@ -83,13 +83,16 @@
 
             <!--附加数据-->
             <div>
-                <span>附加数据</span>
+                <div ng-click="arbilist.addAddictionData('evidences', $parent.$index, $index)">
+                    <span>附加数据</span>
+                </div>
+
                 <div ng-repeat="(extKey, extValue) in itemValue['extData']">
                     <select class="form-control" ng-model="extKey">
-                        <option ng-repeat="eviExtValOption in arbilist.extDataHelper['evidences'] track by $index" value="{{eviExtValOption['name']}}">{{eviExtValOption['name']}}</option>
+                        <option ng-repeat="(eviExtValOptionKey, eviExtValOptionValue) in arbilist.extDataHelper['evidences'] track by $index" value="{{eviExtValOptionKey}}">{{eviExtValOptionValue['name']}}</option>
                     </select>
                     <!--TODO placeholder的值根据eviExtValOption变化而变化-->
-                    <input type="text" ng-model="extValue" />
+                    <input type="text" ng-model="extValue" placeholder="{{arbilist.extDataHelper['evidences'][extKey]['placeholder']}}"/>
                 </div>
             </div>
 
