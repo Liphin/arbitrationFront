@@ -138,7 +138,7 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
 
         //拷贝一个表单数组并对其进行encode操作
         var formDataCopy = angular.copy(formData);
-        //encodeEachParam(formDataCopy);
+        encodeEachParam(formDataCopy);
 
         //循环遍历一级每个元素进行调整
         // for (var i in formDataCopy) {

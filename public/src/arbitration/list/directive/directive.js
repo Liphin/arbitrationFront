@@ -44,6 +44,7 @@ app.directive('fileProxy', ['OverallGeneralSer', 'OverallDataSer', 'ArbiListData
                         };
                         //上传到阿里云服务器server
                         OverallGeneralSer.uploadResource(formData, function (responseData) {
+                            console.log('response', responseData);
                             //上传数据失败
                             if (responseData == false) {
                                 alert("很抱歉，系统错误，请稍后重试");

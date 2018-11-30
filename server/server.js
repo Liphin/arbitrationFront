@@ -69,8 +69,8 @@ app.post('/submitNewArbiData', function (req, res) {
         'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c'
     };
 
-    console.log('request body', req.body);
-    console.log('encoded request body', encodeURIComponent(req.body));
+    // console.log('request body', req.body);
+    // console.log('encoded request body', encodeURIComponent(req.body));
 
     //上传数据到易简网
     request.post({

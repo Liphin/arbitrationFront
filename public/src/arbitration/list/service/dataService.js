@@ -174,8 +174,8 @@ app.factory('ArbiListDataSer', function () {
                 "materialCode": "出借人",
                 'files': [
                     {
-                        "fileName":"身份证正反面"/*文件类型范围:pdf/png/jpg*/,
-                        "fileKey":"324441212"/*fileKey*/
+                        "fileName":"身份证正反面.pdf"/*文件类型范围:pdf/png/jpg*/,
+                        "fileKey":"ff801ab637267fb1f6ab961a3ff166d3}"/*fileKey*/
                     }
                 ]//附件，以JSON数组表示
             },
@@ -197,8 +197,8 @@ app.factory('ArbiListDataSer', function () {
                 "litigantType": "被申请人",/*当事人类型*/
                 "files": [
                     {
-                        "fileName":"身份证正反面"/*文件类型范围:pdf/png/jpg*/,
-                        "fileKey":"332344243"/*fileKey*/
+                        "fileName":"身份证正反面.pdf"/*文件类型范围:pdf/png/jpg*/,
+                        "fileKey":"ff801ab637267fb1f6ab961a3ff166d3}"/*fileKey*/
                     }
                 ]
             }
@@ -221,16 +221,16 @@ app.factory('ArbiListDataSer', function () {
                 "powerDetail": "代为提起仲裁请求;代为参加庭审、进行质证、辩论;代为和解、调解;代为主张、变更、放弃仲裁请求;代为签收法律文书;代为申请执行等"/*代理权限明细|非必填*/,
                 "files": [
                     {
-                        "fileName":"律师执业证"/*文件类型范围:pdf/jpg/png*/,
-                        "fileKey":"3222312"/*fileKey*/
+                        "fileName":"律师执业证.pdf"/*文件类型范围:pdf/jpg/png*/,
+                        "fileKey":"ff801ab637267fb1f6ab961a3ff166d3}"/*fileKey*/
                     },
                     {
-                        "fileName":"授权委托书"/*文件类型范围:pdf/jpg/png*/,
-                        "fileKey":"23123232"/*fileKey*/
+                        "fileName":"授权委托书.pdf"/*文件类型范围:pdf/jpg/png*/,
+                        "fileKey":"ff801ab637267fb1f6ab961a3ff166d3}"/*fileKey*/
                     },
                     {
-                        "fileName":"所函"/*文件类型范围:jpg/pdf/png*/,
-                        "fileKey":"13232131321"/*fileKey*/
+                        "fileName":"所函.pdf"/*文件类型范围:jpg/pdf/png*/,
+                        "fileKey":"ff801ab637267fb1f6ab961a3ff166d3}"/*fileKey*/
                     }
                 ],
                 'powerDetailArray': [
@@ -272,7 +272,7 @@ app.factory('ArbiListDataSer', function () {
                         "files": [
                             {
                                 "fileName": "《补充合同》.pdf"/*文件类型范围:pdf*/,
-                                "fileKey": "342335325"/*fileKey*/
+                                "fileKey": "ff801ab637267fb1f6ab961a3ff166d3}"/*fileKey*/
                             }
                         ]
                     },
@@ -288,7 +288,7 @@ app.factory('ArbiListDataSer', function () {
                         "files": [
                             {
                                 "fileName":"《转账明细表》.pdf"/*文件类型范围:pdf*/,
-                                "fileKey":""/*fileKey*/
+                                "fileKey":"ff801ab637267fb1f6ab961a3ff166d3}"/*fileKey*/
                             }
                         ]
                     },
@@ -306,7 +306,7 @@ app.factory('ArbiListDataSer', function () {
                         "files": [
                             {
                                 "fileName": "《证明》.pdf"/*文件类型范围:pdf*/,
-                                "fileKey": "34234234232"/*fileKey*/
+                                "fileKey": "ff801ab637267fb1f6ab961a3ff166d3}"/*fileKey*/
                             }
                         ]
                     },
@@ -322,7 +322,7 @@ app.factory('ArbiListDataSer', function () {
                         "files": [
                             {
                                 "fileName": "《收款确认书》.pdf"/*文件类型范围:pdf*/,
-                                "fileKey": "3234234324"/*fileKey*/
+                                "fileKey": "ff801ab637267fb1f6ab961a3ff166d3}"/*fileKey*/
                             }
                         ]
                     },
@@ -338,7 +338,7 @@ app.factory('ArbiListDataSer', function () {
                         "files": [
                             {
                                 "fileName": "《不动产登记证明》《不动产权证书》.pdf"/*文件类型范围:pdf*/,
-                                "fileKey": "343243423424"/*fileKey*/
+                                "fileKey": "ff801ab637267fb1f6ab961a3ff166d3}"/*fileKey*/
                             }
                         ]
                     },
