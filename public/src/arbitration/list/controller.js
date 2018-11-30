@@ -23,17 +23,6 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
     arbilist.arbiApplyDataSupply = ArbiListDataSer.arbiApplyDataSupply;
 
 
-    var dala = $.param({
-        'a': '是的',
-        'b': {
-            'c': [
-                {'da': '真的么', 'yes': 'good'},
-            ],
-            'yesdfdfd': 'great',
-        }
-    });
-
-
     /**
      * 选择填写仲裁资料填写的选项
      */
@@ -126,7 +115,7 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
                 }
                 //用英文逗号','隔开
                 if (j < ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray'].length - 1) {
-                    ref += ',';
+                    ref += ';';
                 }
             }
             delete ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray'];
@@ -198,8 +187,8 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
 
 
     //测试选择项
-    ArbiListDataSer.arbiApplyData['litigants'].push(ArbiListDataSer.arbiApplyDataSupply['litigants']);
-    ArbiListDataSer.arbiApplyData['agents'].push(ArbiListDataSer.arbiApplyDataSupply['agents']);
-    ArbiListDataSer.arbiApplyData['evidences'].push(ArbiListDataSer.arbiApplyDataSupply['evidences']);
+    // ArbiListDataSer.arbiApplyData['litigants'].push(ArbiListDataSer.arbiApplyDataSupply['litigants']);
+    // ArbiListDataSer.arbiApplyData['agents'].push(ArbiListDataSer.arbiApplyDataSupply['agents']);
+    // ArbiListDataSer.arbiApplyData['evidences'].push(ArbiListDataSer.arbiApplyDataSupply['evidences']);
 
 });
