@@ -134,12 +134,17 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
 
         //表单数据
         var formData = {
-            caseFlowType: "qidaifuturetech-p2p-1",
-            commissionCode: "gzac",
-            claim: ArbiListDataSer.arbiApplyData['claim'],
-            litigants: ArbiListDataSer.arbiApplyData['litigants'],
-            agents: ArbiListDataSer.arbiApplyData['agents'],
-            evidences: ArbiListDataSer.arbiApplyData['evidences']
+            operaterType: ArbiListDataSer.arbiApplyData['overall']['operaterType'],
+            operater: ArbiListDataSer.arbiApplyData['overall']['operater'],
+            arbcaseInfo: {
+                caseFlowType: "qidaifuturetech-p2p-1",
+                commissionCode: "gzac",
+                claim: ArbiListDataSer.arbiApplyData['claim'],
+                litigants: ArbiListDataSer.arbiApplyData['litigants'],
+                agents: ArbiListDataSer.arbiApplyData['agents'],
+                evidences: ArbiListDataSer.arbiApplyData['evidences']
+            },
+            productCode: ArbiListDataSer.arbiApplyData['overall']['productCode']
         };
 
         //拷贝一个表单数组并对其进行encode操作
@@ -156,8 +161,8 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
 
         //提交诉讼信息到server
         var url = OverallDataSer.urlData['frontEndHttp']['submitNewArbiData'];
-        OverallGeneralSer.httpPostData2(formData, url, function (responseData) {
-            console.log('responseData',responseData);
+        OverallGeneralSer.httpPostData2(formDataCopy, url, function (responseData) {
+            console.log('responseData', responseData);
 
 
         }, function () {
