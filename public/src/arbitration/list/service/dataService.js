@@ -172,7 +172,12 @@ app.factory('ArbiListDataSer', function () {
                 'emails': 'berrsonbar@qq.com',//联系邮箱。如有多个请用英文逗号分隔。
                 'addresses': '广东省阳江市***路,广东省**市答案了路',//联系地址。如有多个请用英文逗号分隔。
                 "materialCode": "出借人",
-                'files': []//附件，以JSON数组表示
+                'files': [
+                    {
+                        "fileName":"身份证正反面"/*文件类型范围:pdf/png/jpg*/,
+                        "fileKey":"324441212"/*fileKey*/
+                    }
+                ]//附件，以JSON数组表示
             },
             {
                 'nature': '自然人',//当事人性质：自然人、企业、个体户、其他组织。
@@ -190,7 +195,12 @@ app.factory('ArbiListDataSer', function () {
                 'addresses': '广东省阳江市***路,广东省**市答案了路',//联系地址。如有多个请用英文逗号分隔。
                 "materialCode": "借款人",
                 "litigantType": "被申请人",/*当事人类型*/
-                "files": []
+                "files": [
+                    {
+                        "fileName":"身份证正反面"/*文件类型范围:pdf/png/jpg*/,
+                        "fileKey":"332344243"/*fileKey*/
+                    }
+                ]
             }
         ],
         'agents': [
@@ -209,7 +219,20 @@ app.factory('ArbiListDataSer', function () {
                 'addresses': '广东省阳江市***路,广东省**市答案了路',//联系地址。如有多个请用英文逗号分隔。
                 "materialCode": "申请人代理人",
                 "powerDetail": "代为提起仲裁请求;代为参加庭审、进行质证、辩论;代为和解、调解;代为主张、变更、放弃仲裁请求;代为签收法律文书;代为申请执行等"/*代理权限明细|非必填*/,
-                "files": [],
+                "files": [
+                    {
+                        "fileName":"律师执业证"/*文件类型范围:pdf/jpg/png*/,
+                        "fileKey":"3222312"/*fileKey*/
+                    },
+                    {
+                        "fileName":"授权委托书"/*文件类型范围:pdf/jpg/png*/,
+                        "fileKey":"23123232"/*fileKey*/
+                    },
+                    {
+                        "fileName":"所函"/*文件类型范围:jpg/pdf/png*/,
+                        "fileKey":"13232131321"/*fileKey*/
+                    }
+                ],
                 'powerDetailArray': [
                     {'name': '代为提起仲裁请求', 'status': false},
                     {'name': '代为参加庭审、进行质证、辩论', 'status': false},
@@ -262,7 +285,12 @@ app.factory('ArbiListDataSer', function () {
                             "beneficiaryAccountName": "吕武金"/*收款账号户名|示例:吕武金*/,
                             "beneficiaryAccountNumber": "3432432545465563635"/*收款账号|示例:6212262102020378453*/,
                         },
-                        "files": []
+                        "files": [
+                            {
+                                "fileName":"《转账明细表》.pdf"/*文件类型范围:pdf*/,
+                                "fileKey":""/*fileKey*/
+                            }
+                        ]
                     },
                     {
                         "materialCode": "《证明》",
