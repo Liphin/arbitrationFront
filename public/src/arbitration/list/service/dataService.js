@@ -140,7 +140,7 @@ app.factory('ArbiListDataSer', function () {
                     'claimType': '给付之诉',//请求类型：确认之诉，给付之诉，形成之诉
                     "payItem": "0"/*无标的请求项*/,
                     'disputeFee': "231", //请求标的
-                    'litigants': '打蜡2',//当事人名称
+                    'litigants': '打蜡1',//当事人名称
                     "extData": {
                         "propertyAddress": "是打发大水发大水费大幅度发"/*抵押房产地址*/
                     }
@@ -148,10 +148,10 @@ app.factory('ArbiListDataSer', function () {
                 {
                     "materialCode": "第（四）项仲裁请求",
                     'claimContent': '证据请求内容',//请求内容
-                    'claimType': '给付之诉',//请求类型：确认之诉，给付之诉，形成之诉
+                    "claimType":"仲裁费"/*请求类型*/,
                     "payItem": "0"/*无标的请求项*/,
                     'disputeFee': "234", //请求标的
-                    'litigants': '打蜡2',//当事人名称
+                    'litigants': '打蜡1',//当事人名称
                 }
             ] //请求项内容
         },
@@ -271,11 +271,9 @@ app.factory('ArbiListDataSer', function () {
                     },
                     {
                         "materialCode": "《补充合同》",
-                        "name": ""/*名称*/,
-                        "content": ""/*内容*/,
-                        "hasOriginal": ""/*是否有原件*/,
-                        "source": ""/*来源|非必填*/,
-                        "sourceId": ""/*来源id|非必填*/,
+                        'name': '测试证据名称',//证据名称
+                        'content': '这里是测试证据名称，这里是测试证据名称',//证明内容。
+                        'hasOriginal': true,//是否有原件：true，false
                         "extData": {
                             "supplementalAgreementSignDate":"23123214214"/*补充合同签订日期*/,
                             "thirdParty":"东莞团贷网互联网科技服务有限公司"/*委托第三方|示例:东莞团贷网互联网科技服务有限公司*/,
