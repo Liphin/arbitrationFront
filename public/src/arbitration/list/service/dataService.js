@@ -114,9 +114,9 @@ app.factory('ArbiListDataSer', function () {
                     "materialCode": "第（一）项仲裁请求",
                     "payItem": "0"/*无标的请求项*/,
                     'claimContent': '证据请求内容',//请求内容
-                    'claimType': '确认之诉',//请求类型：确认之诉，给付之诉，形成之诉
-                    'disputeFee': "", //请求标的
-                    'litigants': '当事人名称',//当事人名称
+                    'claimType': '给付之诉',//请求类型：确认之诉，给付之诉，形成之诉
+                    'disputeFee': "312", //请求标的
+                    'litigants': '打蜡1',//当事人名称
                     "extData": {
                         "claimMoney": "234324"/*请求本金*/,
                         "interestAndPenaltyClaimRate": "3d4%"/*利息及违约金的请求利率|示例:24%*/,
@@ -127,31 +127,31 @@ app.factory('ArbiListDataSer', function () {
                     "materialCode": "第（二）项仲裁请求",
                     "payItem": "0"/*无标的请求项*/,
                     'claimContent': '证据请求内容',//请求内容
-                    'claimType': '确认之诉',//请求类型：确认之诉，给付之诉，形成之诉
-                    'disputeFee': "", //请求标的
-                    'litigants': '当事人名称',//当事人名称
+                    'claimType': '给付之诉',//请求类型：确认之诉，给付之诉，形成之诉
+                    'disputeFee': "232132", //请求标的
+                    'litigants': '打蜡1',//当事人名称
                     "extData": {
                         "lawyerFee": "121元"/*律师费*/
                     }
                 },
                 {
                     "materialCode": "第（三）项仲裁请求",
-                    "payItem": "0"/*无标的请求项*/,
                     'claimContent': '证据请求内容',//请求内容
-                    'claimType': '确认之诉',//请求类型：确认之诉，给付之诉，形成之诉
-                    'disputeFee': "", //请求标的
-                    'litigants': '当事人名称',//当事人名称
+                    'claimType': '给付之诉',//请求类型：确认之诉，给付之诉，形成之诉
+                    "payItem": "0"/*无标的请求项*/,
+                    'disputeFee': "231", //请求标的
+                    'litigants': '打蜡2',//当事人名称
                     "extData": {
                         "propertyAddress": "是打发大水发大水费大幅度发"/*抵押房产地址*/
                     }
                 },
                 {
                     "materialCode": "第（四）项仲裁请求",
-                    "payItem": "0"/*无标的请求项*/,
                     'claimContent': '证据请求内容',//请求内容
-                    'claimType': '确认之诉',//请求类型：确认之诉，给付之诉，形成之诉
-                    'disputeFee': "", //请求标的
-                    'litigants': '当事人名称',//当事人名称
+                    'claimType': '给付之诉',//请求类型：确认之诉，给付之诉，形成之诉
+                    "payItem": "0"/*无标的请求项*/,
+                    'disputeFee': "234", //请求标的
+                    'litigants': '打蜡2',//当事人名称
                 }
             ] //请求项内容
         },
@@ -159,7 +159,7 @@ app.factory('ArbiListDataSer', function () {
             {
                 'litigantType': '申请人',//当事人分类。申请人、被申请人、第三人
                 'nature': '自然人',//当事人性质：自然人、企业、个体户、其他组织。
-                'name': '打蜡', //当事人性质为自然人时，请填写当事人姓名；当事人性质为企业、个体户和其他组织时，请填写机构名称。
+                'name': '打蜡1', //当事人性质为自然人时，请填写当事人姓名；当事人性质为企业、个体户和其他组织时，请填写机构名称。
                 'mobiles': '18316433415', //联系号码。如有多个请用英文逗号分隔
                 'contacts': '张三,李四',//联系人名称。如有多个请用英文逗号分隔。
                 'sex': '男',//性别：男、女（自然人必填、个体户请填写负责人的性别）。
@@ -181,7 +181,7 @@ app.factory('ArbiListDataSer', function () {
             },
             {
                 'nature': '自然人',//当事人性质：自然人、企业、个体户、其他组织。
-                'name': '打蜡', //当事人性质为自然人时，请填写当事人姓名；当事人性质为企业、个体户和其他组织时，请填写机构名称。
+                'name': '打蜡2', //当事人性质为自然人时，请填写当事人姓名；当事人性质为企业、个体户和其他组织时，请填写机构名称。
                 'mobiles': '18316433415', //联系号码。如有多个请用英文逗号分隔
                 'contacts': '张三,李四',//联系人名称。如有多个请用英文逗号分隔。
                 'sex': '男',//性别：男、女（自然人必填、个体户请填写负责人的性别）。
@@ -254,8 +254,19 @@ app.factory('ArbiListDataSer', function () {
                         'content': '这里是测试证据名称，这里是测试证据名称',//证明内容。
                         'hasOriginal': true,//是否有原件：true，false
                         "extData": {
-                            "loanContractNumber": "3432423sdsaddsfsaf"/*合同编号*/,
-                            "loanContractSignDate": "2019-10-23"/*合同签订时间*/,
+                            "loanContractNumber":"rerrrwrwr4242"/*合同编号*/,
+                            "loanContractSignDate":"22221424"/*合同签订时间*/,
+                            "borrowerServedMobile":"343434424"/*借款人送达手机*/,
+                            "borrowerServedMail":"34242@3434434"/*借款人送达邮箱*/,
+                            "conventionalPrincipal":"160000.00"/*合同约定借款本金|示例:160000.00*/,
+                            "loanTerm":"2017年11月15日至2018年11月14日"/*借款期限|示例:2017年11月15日至2018年11月14日*/,
+                            "conventionalInterestYearRate":"11%"/*借款年利率|示例:11%*/,
+                            "repaymentMethod":"ewqewewe"/*还款方式|示例:先息后本，等额本息*/,
+                            "PenaltyDayRate":"3‰"/*违约金日利率|示例:3‰*/,
+                            "borrowerName":"吕武金"/*借款人姓名|示例:吕武金*/,
+                            "mortgagerName":"吕武金"/*抵押人姓名*/,
+                            "propertyAddress":"吕武金吕武金吕武金吕武金吕武金"/*抵押房产地址*/,
+                            "realEstateRegistrationCertificateNumber":"桂（2017）南宁市不动产证明第0208814号"/*不动产登记证明号码|示例:桂（2017）南宁市不动产证明第0208814号*/
                         }
                     },
                     {
@@ -266,8 +277,11 @@ app.factory('ArbiListDataSer', function () {
                         "source": ""/*来源|非必填*/,
                         "sourceId": ""/*来源id|非必填*/,
                         "extData": {
-                            "supplementalAgreementSignDate": "2019-02-01"/*补充合同签订日期*/,
-                            "thirdParty": "第三方拉阿拉啦"/*委托第三方|示例:东莞团贷网互联网科技服务有限公司*/,
+                            "supplementalAgreementSignDate":"23123214214"/*补充合同签订日期*/,
+                            "thirdParty":"东莞团贷网互联网科技服务有限公司"/*委托第三方|示例:东莞团贷网互联网科技服务有限公司*/,
+                            "beneficiaryAccountName":"吕武金吕武金"/*收款账号户名|示例:吕武金*/,
+                            "beneficiaryAccountNumber":"6212262102020378453"/*收款账号|示例:6212262102020378453*/,
+                            "bankOfdeposit":"中国工商银行"/*开户行|示例:中国工商银行*/
                         },
                         "files": [
                             {
@@ -282,8 +296,11 @@ app.factory('ArbiListDataSer', function () {
                         'content': '这里是测试证据名称，这里是测试证据名称',//证明内容。
                         'hasOriginal': true,//是否有原件：true，false
                         "extData": {
-                            "beneficiaryAccountName": "吕武金"/*收款账号户名|示例:吕武金*/,
-                            "beneficiaryAccountNumber": "3432432545465563635"/*收款账号|示例:6212262102020378453*/,
+                            "beneficiaryAccountName":"吕武金吕武金"/*收款账号户名|示例:吕武金*/,
+                            "beneficiaryAccountNumber":"6212262102020378453"/*收款账号|示例:6212262102020378453*/,
+                            "transactionDate":"2017年11月15日"/*转账日期|示例:2017年11月15日*/,
+                            "transactionMoney":"151300.00"/*转账金额|示例:151300.00*/,
+                            "bankOfdeposit":"ffsfsfs"/*开户行*/
                         },
                         "files": [
                             {
@@ -298,10 +315,12 @@ app.factory('ArbiListDataSer', function () {
                         'content': '这里是测试证据名称，这里是测试证据名称',//证明内容。
                         'hasOriginal': true,//是否有原件：true，false
                         "extData": {
-                            "paymentAccountName": "法法师法防守打法"/*付款账号户名|示例:东莞团贷网互联网科技服务有限公司*/,
-                            "transactionDate": "3224243242"/*转账日期*/,
-                            "beneficiaryAccountName": "发斯蒂芬三方"/*收款账号户名*/,
-                            "beneficiaryAccountNumber": "4343322"/*收款账号|示例:6212262102020378453*/,
+                            "paymentAccountName":"东莞团贷网互联网科技服务有限公司"/*付款账号户名|示例:东莞团贷网互联网科技服务有限公司*/,
+                            "transactionDate":"3132132321312"/*转账日期*/,
+                            "beneficiaryAccountName":"wwwewwrr"/*收款账号户名*/,
+                            "beneficiaryAccountNumber":"6212262102020378453"/*收款账号|示例:6212262102020378453*/,
+                            "transactionMoney":"151300.00"/*转账金额|示例:151300.00*/,
+                            "IDCardNumber":"34244344324324324443"/*身份证号*/
                         },
                         "files": [
                             {
@@ -316,8 +335,13 @@ app.factory('ArbiListDataSer', function () {
                         'content': '这里是测试证据名称，这里是测试证据名称',//证明内容。
                         'hasOriginal': true,//是否有原件：true，false
                         "extData": {
-                            "borrowerName": "张三"/*借款人姓名*/,
-                            "lenderName": "李四"/*出借人姓名*/
+                            "borrowerName":"sfdffdf"/*借款人姓名*/,
+                            "lenderName":"fsdfsdfs"/*出借人姓名*/,
+                            "transactionDate":"232312"/*转账日期*/,
+                            "transactionMoney":"151300.00"/*转账金额|示例:151300.00*/,
+                            "cashPayDate":"44442343"/*现金支付日期*/,
+                            "cashAmount":"8700.00"/*现金金额|示例:8700.00*/,
+                            "confirmationSignDate":"2017年11月15日"/*确认书签订日期|示例:2017年11月15日*/
                         },
                         "files": [
                             {
@@ -332,8 +356,13 @@ app.factory('ArbiListDataSer', function () {
                         'content': '这里是测试证据名称，这里是测试证据名称',//证明内容。
                         'hasOriginal': true,//是否有原件：true，false
                         "extData": {
-                            "mortgageRegistrationDate": "2017年11月20日"/*抵押登记日期|示例:2017年11月20日*/,
-                            "propertyAddress": "打法撒旦法失搜的防守反击的孙菲菲了"/*抵押房产地址|描述:至少明确到市|示例:南宁市兴宁区秀厢大道103号澳华花园57号楼2单元101*/,
+                            "mortgageRegistrationDate":"2017年11月20日"/*抵押登记日期|示例:2017年11月20日*/,
+                            "propertyAddress":"至少明确到市|示例:南宁市兴宁区秀厢大道103号澳华花园57号楼2单元101"/*抵押房产地址|描述:至少明确到市|示例:南宁市兴宁区秀厢大道103号澳华花园57号楼2单元101*/,
+                            "realEstateRegistrationCertificateNumber":"桂（2017）南宁市不动产权第0208814号"/*不动产登记证明号码|示例:桂（2017）南宁市不动产权第0208814号*/,
+                            "mortgagee":"郑联盛"/*抵押权人|描述:权利人（申请人）|示例:郑联盛*/,
+                            "amountOfSecuredCaims":"160000.00"/*担保债权数额|示例:160000.00*/,
+                            "mortgageTerm":"2017年11月15日至2018年11月14日"/*债权起止时间|示例:2017年11月15日至2018年11月14日*/,
+                            "mortgagerName":"吕武金"/*抵押人姓名|示例:吕武金*/
                         },
                         "files": [
                             {
