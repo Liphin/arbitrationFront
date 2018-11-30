@@ -165,23 +165,30 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
     var encodeEachParam = function (target) {
         //遍历target中每个数据
         for (var i in target) {
-            switch (Object.prototype.toString.call(target[i])) {
-                /*String类型数据*/
-                case '[object String]': {
-                    target[i] = encodeURIComponent(target[i]);
-                    break;
-                }
-                /*Array类型*/
-                case '[object Array]': {
-                    encodeEachParam(target[i])
-                    break;
-                }
-                /*Object类型*/
-                case '[object Object]': {
-                    encodeEachParam(target[i])
-                    break;
-                }
+            //如果该数据为对象或数组则回调处理，否则encodeURI处理
+            if(target[i] instanceof Object || target[i] instanceof Array){
+                encodeEachParam(target[i]);
+
+            }else{
+                target[i] = encodeURIComponent(target[i]);
             }
+            // switch (Object.prototype.toString.call(target[i])) {
+            //     /*String类型数据*/
+            //     case '[object String]': {
+            //         target[i] = encodeURIComponent(target[i]);
+            //         break;
+            //     }
+            //     /*Array类型*/
+            //     case '[object Array]': {
+            //         encodeEachParam(target[i])
+            //         break;
+            //     }
+            //     /*Object类型*/
+            //     case '[object Object]': {
+            //         encodeEachParam(target[i])
+            //         break;
+            //     }
+            // }
         }
     };
 

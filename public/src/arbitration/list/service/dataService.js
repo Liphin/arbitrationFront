@@ -118,9 +118,9 @@ app.factory('ArbiListDataSer', function () {
                     'disputeFee': "", //请求标的
                     'litigants': '当事人名称',//当事人名称
                     "extData": {
-                        "claimMoney": ""/*请求本金*/,
-                        "interestAndPenaltyClaimRate": ""/*利息及违约金的请求利率|示例:24%*/,
-                        "startDate": ""/*起算日期*/
+                        "claimMoney": "234324"/*请求本金*/,
+                        "interestAndPenaltyClaimRate": "3d4%"/*利息及违约金的请求利率|示例:24%*/,
+                        "startDate": "2012-32-23"/*起算日期*/
                     }
                 },
                 {
@@ -131,7 +131,7 @@ app.factory('ArbiListDataSer', function () {
                     'disputeFee': "", //请求标的
                     'litigants': '当事人名称',//当事人名称
                     "extData": {
-                        "lawyerFee": ""/*律师费*/
+                        "lawyerFee": "121元"/*律师费*/
                     }
                 },
                 {
@@ -142,7 +142,7 @@ app.factory('ArbiListDataSer', function () {
                     'disputeFee': "", //请求标的
                     'litigants': '当事人名称',//当事人名称
                     "extData": {
-                        "propertyAddress": ""/*抵押房产地址*/
+                        "propertyAddress": "是打发大水发大水费大幅度发"/*抵押房产地址*/
                     }
                 },
                 {
