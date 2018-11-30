@@ -16,7 +16,7 @@ var bodyParser = require('body-parser');
 var device = require('express-device');
 var ServerSer = require('./serverSer');
 var MiniSer = require('./mini/MiniSer');
-var mongoDBSer = require('./mongo/MongoSer');
+//var mongoDBSer = require('./mongo/MongoSer');
 var serverSerData = require('./serverSerData');
 
 
@@ -44,14 +44,15 @@ app.use(bodyParser.urlencoded({limit: serverSerData.httpDataLimit, extended: tru
  * 管理员登录设置
  */
 app.post('/managerLogin', function (req, res) {
-    mongoDBSer.findDocuments("manager", req.body, function (resData) {
-        //若该账号密码正确则返回查找数据库后第一个数值，否则返回false
-        if (resData.length > 0) {
-            res.send(resData[0]);
-        } else {
-            res.send(false);
-        }
-    });
+    res.send(true);
+    // mongoDBSer.findDocuments("manager", req.body, function (resData) {
+    //     //若该账号密码正确则返回查找数据库后第一个数值，否则返回false
+    //     if (resData.length > 0) {
+    //         res.send(resData[0]);
+    //     } else {
+    //         res.send(false);
+    //     }
+    // });
 });
 
 
@@ -60,7 +61,6 @@ app.post('/managerLogin', function (req, res) {
  */
 app.post('/submitNewArbiData', function (req, res) {
 
-    console.log('get request body', req.body);
     //上传到易简网平台
     var urlPost = 'https://14.23.88.138:7777/api/arb/1.0/arbcase';
     //设置头部
@@ -68,16 +68,21 @@ app.post('/submitNewArbiData', function (req, res) {
         "Accept": "application/json",
         'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c'
     };
+
+    console.log('request body', req.body);
+    console.log('encoded request body', encodeURIComponent(req.body));
+
     //上传数据到易简网
     request.post({
         url: urlPost,
         formData: req.body,
         headers: headers,
         rejectUnauthorized: false
+
     }, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             console.log('upload new arbi data to server', body);
-           res.send(body);
+            res.send(body);
 
         } else {
             //发送数据到易简网出错
@@ -86,7 +91,6 @@ app.post('/submitNewArbiData', function (req, res) {
         }
     });
 });
-
 
 
 /**
@@ -135,7 +139,7 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
                     console.log('rename failure');
                     res.send(false);
 
-                }else{
+                } else {
                     res.send(body)
                 }
             });
@@ -179,21 +183,21 @@ app.get('/getMiniUserOpenId', function (req, res) {
 //     });
 // });
 
-
-var url = 'https://14.23.88.138:7777/api/test/1.0/helloApi?name=TestHelloApi';
-const options = {
-    url: url,
-    method: 'GET',
-    headers: {
-        'Accept': 'application/json',
-        'headers': {
-            Authorization: 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c',
-        }
-    },
-    rejectUnauthorized: false,
-    insecure: true
-
-};
+//
+// var url = 'https://14.23.88.138:7777/api/test/1.0/helloApi?name=TestHelloApi';
+// const options = {
+//     url: url,
+//     method: 'GET',
+//     headers: {
+//         'Accept': 'application/json',
+//         'headers': {
+//             Authorization: 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c',
+//         }
+//     },
+//     rejectUnauthorized: false,
+//     insecure: true
+//
+// };
 // request(options, function (err, res, body) {
 //     if (!err) {
 //         console.log(body);

@@ -23,6 +23,17 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
     arbilist.arbiApplyDataSupply = ArbiListDataSer.arbiApplyDataSupply;
 
 
+    var dala = $.param({
+        'a': '是的',
+        'b': {
+            'c': [
+                {'da': '真的么', 'yes': 'good'},
+            ],
+            'yesdfdfd': 'great',
+        }
+    });
+
+
     /**
      * 选择填写仲裁资料填写的选项
      */
@@ -38,7 +49,6 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
 
     /**
      * 添加附件信息
-     * @see
      */
     arbilist.addFile = function (type, index, index2) {
         switch (type) {
@@ -107,35 +117,78 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
      */
     arbilist.submitNewArbiData = function () {
         //对数据进行预处理操作
-        for (var i in ArbiListDataSer.arbiApplyDataSupply['agents']) {
-            var ref = ArbiListDataSer.arbiApplyDataSupply['agents']['powerDetail'];
-            for (var j in ArbiListDataSer.arbiApplyDataSupply['agents'][i]['powerDetailArray']) {
+        for (var i in ArbiListDataSer.arbiApplyData['agents']) {
+            var ref = ArbiListDataSer.arbiApplyData['agents']['powerDetail'];
+            for (var j in ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray']) {
                 //循环添加选择的特殊权限
-                if (ArbiListDataSer.arbiApplyDataSupply['agents'][i]['powerDetailArray'][j]['status']) {
-                    ref += ArbiListDataSer.arbiApplyDataSupply['agents'][i]['powerDetailArray'][j]['name'];
+                if (ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray'][j]['status']) {
+                    ref += ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray'][j]['name'];
                 }
                 //用英文逗号','隔开
-                if (j < ArbiListDataSer.arbiApplyDataSupply['agents'][i]['powerDetailArray'].length - 1) {
+                if (j < ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray'].length - 1) {
                     ref += ',';
                 }
             }
+            delete ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray'];
         }
 
+        //表单数据
         var formData = {
             caseFlowType: "qidaifuturetech-p2p-1",
             commissionCode: "gzac",
-            claim: ArbiListDataSer.arbiApplyDataSupply['claim'],
-            litigants: ArbiListDataSer.arbiApplyDataSupply['litigants'],
-            agents: ArbiListDataSer.arbiApplyDataSupply['agents'],
-            evidences: ArbiListDataSer.arbiApplyDataSupply['evidences']
+            claim: ArbiListDataSer.arbiApplyData['claim'],
+            litigants: ArbiListDataSer.arbiApplyData['litigants'],
+            agents: ArbiListDataSer.arbiApplyData['agents'],
+            evidences: ArbiListDataSer.arbiApplyData['evidences']
         };
+
+        //拷贝一个表单数组并对其进行encode操作
+        var formDataCopy = angular.copy(formData);
+        encodeEachParam(formDataCopy);
+
+        //循环遍历一级每个元素进行调整
+        for (var i in formDataCopy) {
+            formDataCopy[i] = JSON.stringify(formDataCopy[i]);
+        }
+
+        //console.log(formData);
+        console.log(formDataCopy);
+
         //提交诉讼信息到server
         var url = OverallDataSer.urlData['frontEndHttp']['submitNewArbiData'];
         OverallGeneralSer.httpPostData2(formData, url, function (responseData) {
-            console.log(responseData);
+            console.log('responseData',responseData);
+
 
         }, function () {
         });
+    };
+
+
+    /**
+     * urlEncode每个param数据节点
+     */
+    var encodeEachParam = function (target) {
+        //遍历target中每个数据
+        for (var i in target) {
+            switch (Object.prototype.toString.call(target[i])) {
+                /*String类型数据*/
+                case '[object String]': {
+                    target[i] = encodeURIComponent(target[i]);
+                    break;
+                }
+                /*Array类型*/
+                case '[object Array]': {
+                    encodeEachParam(target[i])
+                    break;
+                }
+                /*Object类型*/
+                case '[object Object]': {
+                    encodeEachParam(target[i])
+                    break;
+                }
+            }
+        }
     };
 
 
