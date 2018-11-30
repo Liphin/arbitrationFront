@@ -104,7 +104,7 @@ app.factory('ArbiListDataSer', function () {
         'overall': {
             'operaterType': '申请人', //操作者类型， 申请人、第三方
             'operater': '操作者名称', //操作者名称
-            'productCode': '操作描述1' //简述
+            'productCode': 'qidaifuturetech-p2p-1' //固定productCode
         },
         'claim': {
             'reason': '输入事实与理由',//原因
