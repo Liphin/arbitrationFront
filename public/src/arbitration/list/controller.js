@@ -152,10 +152,10 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
         encodeEachParam(formDataCopy);
 
         //循环遍历一级每个元素进行调整
-        for (var i in formDataCopy) {
-            formDataCopy[i] = JSON.stringify(formDataCopy[i]);
-        }
-
+        // for (var i in formDataCopy) {
+        //     formDataCopy[i] = JSON.stringify(formDataCopy[i]);
+        // }
+        formDataCopy['arbcaseInfo']=JSON.stringify(formDataCopy['arbcaseInfo']);
         //console.log(formData);
         console.log(formDataCopy);
 
