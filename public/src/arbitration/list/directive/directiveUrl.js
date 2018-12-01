@@ -53,15 +53,6 @@ app.directive('editEvidence', ['$document', function ($document) {
     };
 }]);
 /**
- * 编辑页面中基础数据填写
- */
-app.directive('editGeneral', ['$document', function ($document) {
-    return {
-        restrict: 'E',
-        templateUrl: 'src/arbitration/list/tmpl/sub/editsub/general.html'
-    };
-}]);
-/**
  * 编辑页面中当事人数据填写
  */
 app.directive('editLitigants', ['$document', function ($document) {

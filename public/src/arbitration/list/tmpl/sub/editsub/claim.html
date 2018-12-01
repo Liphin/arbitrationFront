@@ -1,16 +1,39 @@
-<div>
+<div style="height: 100%; overflow-y: scroll">
+
+    <!--第一行-->
+    <div style="display: flex">
+        <!--操作者类型-->
+        <div style="flex: 1">
+            <span>操作者类型：</span>
+            <label class="radio-inline">
+                <input type="radio" ng-model="arbilist.arbiApplyData['overall']['operaterType']" name="operaterType{{$index}}" value="申请人"> 申请人
+            </label>
+            <label class="radio-inline">
+                <input type="radio" ng-model="arbilist.arbiApplyData['overall']['operaterType']" name="operaterType{{$index}}"  value="第三方"> 第三方
+            </label>
+        </div>
+
+        <!--操作者名称-->
+        <div style="flex: 1">
+            <span>操作者名称：</span>
+            <input class="inputStyle" style="width: 242px"  type="text" ng-model="arbilist.arbiApplyData['overall']['operater']" />
+        </div>
+    </div>
+
+
+
     <!--事实与理由-->
     <div>
-        <span>事实与理由</span>
-        <input type="text" ng-model="arbilist.arbiApplyData['claim']['reason']" maxlength="2000" placeholder="请输入事实与理由（最长2000个字）"/>
+        <span>事实与理由：</span>
+        <input class="inputStyle" style="width: 80%" type="text" ng-model="arbilist.arbiApplyData['claim']['reason']" maxlength="2000" placeholder="请输入事实与理由（最长2000个字）"/>
     </div>
     <!--请求项-->
     <div>
         <!--请求项添加-->
-        <div ng-click="arbilist.addClaimItems()">
-            <span>请求项</span>
-            <span>+ 添加请求项</span>
-        </div>
+        <!--<div ng-click="arbilist.addClaimItems()">-->
+            <!--<span>请求项</span>-->
+            <!--<span>+ 添加请求项</span>-->
+        <!--</div>-->
 
         <!--请求项内容-->
         <div ng-repeat="value in arbilist.arbiApplyData['claim']['claimItems'] track by $index">

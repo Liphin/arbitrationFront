@@ -1,107 +1,113 @@
 <!--证据材料-->
-<div ng-repeat="value in arbilist.arbiApplyData['evidences'] track by $index">
+<div style="height: 100%; overflow-y: scroll">
+    <div ng-repeat="value in arbilist.arbiApplyData['evidences'] track by $index">
 
-    <!--证据提供者类型-->
-    <div>
-        <span>证据提供者类型：</span>
-        <label class="radio-inline">
-            <input type="radio" ng-model="value['providerType']" name="providerType" value="申请方"> 申请方
-        </label>
-        <label class="radio-inline">
-            <input type="radio" ng-model="value['providerType']" name="providerType" value="被申请方"> 被申请方
-        </label>
-        <label class="radio-inline">
-            <input type="radio" ng-model="value['providerType']" name="providerType" value="第三方"> 第三方
-        </label>
-        <label class="radio-inline">
-            <input type="radio" ng-model="value['providerType']" name="providerType" value="其他"> 其他
-        </label>
-    </div>
-
-    <!--代理人名称-->
-    <div>
-        <span>证据提供者名称</span>
-        <input type="text" ng-model="value['provider']" maxlength="500" placeholder="请输入证据提供者名称（不大于500个字）">
-        <span>（如有多个请用英文逗号分隔）</span>
-    </div>
-
-
-    <!--证据条目-->
-    <div>
-        <!--请求项添加-->
-        <div ng-click="arbilist.addEvidenceItems($index)">
-            <span>请求项</span>
-            <span>+ 添加请求项</span>
+        <!--证据提供者类型-->
+        <div>
+            <span>证据提供者类型：</span>
+            <label class="radio-inline">
+                <input type="radio" ng-model="value['providerType']" name="providerType{{$index}}" value="申请方"> 申请方
+            </label>
+            <label class="radio-inline">
+                <input type="radio" ng-model="value['providerType']" name="providerType{{$index}}" value="被申请方"> 被申请方
+            </label>
+            <label class="radio-inline">
+                <input type="radio" ng-model="value['providerType']" name="providerType{{$index}}" value="第三方"> 第三方
+            </label>
+            <label class="radio-inline">
+                <input type="radio" ng-model="value['providerType']" name="providerType{{$index}}" value="其他"> 其他
+            </label>
         </div>
+
+        <!--代理人名称-->
+        <div>
+            <span>证据提供者名称</span>
+            <input type="text" ng-model="value['provider']" maxlength="500" placeholder="请输入证据提供者名称（不大于500个字）">
+            <span>（如有多个请用英文逗号分隔）</span>
+        </div>
+
 
         <!--证据条目-->
-        <div ng-repeat="itemValue in value['evidenceItems'] track by $index">
-
-            <!--证据名称-->
-            <div>
-                <span>证据名称</span>
-                <input type="text" ng-model="itemValue['materialCode']" maxlength="50" placeholder="请输入证据材料名称（不大于50个字）">
-            </div>
-            <!--材料名称-->
-            <div>
-                <span>材料名称</span>
-                <input type="text" ng-model="itemValue['materialCode']">
+        <div>
+            <!--请求项添加-->
+            <div ng-click="arbilist.addEvidenceItems($index)">
+                <span>请求项</span>
+                <span>+ 添加请求项</span>
             </div>
 
+            <!--证据条目-->
+            <div ng-repeat="itemValue in value['evidenceItems'] track by $index">
 
-            <!--证明内容-->
-            <div>
-                <span>证明内容</span>
-                <input type="text" ng-model="itemValue['content']" maxlength="2000" placeholder="请输入证明内容（不大于2000个字）">
-            </div>
-
-            <!--是否有原件-->
-            <div>
-                <span>是否有原件：</span>
-                <label class="radio-inline">
-                    <input type="radio" ng-model="itemValue['hasOriginal']" name="providerType" ng-value="true" checked> 是
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" ng-model="itemValue['hasOriginal']" name="providerType" ng-value="false"> 否
-                </label>
-            </div>
-
-
-            <!--附件上传-->
-            <div>
-                <div ng-click="arbilist.addFile('evidences', $parent.$index, $index)">
-                    <span>附件上传 +</span>
+                <!--证据名称-->
+                <div>
+                    <span>证据名称</span>
+                    <input type="text" ng-model="itemValue['materialCode']" maxlength="50"
+                           placeholder="请输入证据材料名称（不大于50个字）">
+                </div>
+                <!--材料名称-->
+                <div>
+                    <span>材料名称</span>
+                    <input type="text" ng-model="itemValue['materialCode']">
                 </div>
 
-                <!--循环读取上传附件的数据-->
-                <div ng-repeat="fileValue in itemValue['files'] track by $index">
-                    <span>点击上传附件</span>
-                    <input file-proxy type="file" parent-parent-index="{{$parent.$parent.$index}}" parent-index="{{$parent.$index}}" file-index="{{$index}}" edit-type="evidences" />
+
+                <!--证明内容-->
+                <div>
+                    <span>证明内容</span>
+                    <input type="text" ng-model="itemValue['content']" maxlength="2000"
+                           placeholder="请输入证明内容（不大于2000个字）">
                 </div>
+
+                <!--是否有原件-->
+                <div>
+                    <span>是否有原件：</span>
+                    <label class="radio-inline">
+                        <input type="radio" ng-model="itemValue['hasOriginal']" name="providerType{{$parent.$index}}{{$index}}" ng-value="true"
+                               checked> 是
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" ng-model="itemValue['hasOriginal']" name="providerType{{$parent.$index}}{{$index}}" ng-value="false"> 否
+                    </label>
+                </div>
+
+
+                <!--附件上传-->
+                <div>
+                    <div ng-click="arbilist.addFile('evidences', $parent.$index, $index)">
+                        <span>附件上传 +</span>
+                    </div>
+
+                    <!--循环读取上传附件的数据-->
+                    <div ng-repeat="fileValue in itemValue['files'] track by $index">
+                        <span>点击上传附件</span>
+                        <input file-proxy type="file" parent-parent-index="{{$parent.$parent.$index}}"
+                               parent-index="{{$parent.$index}}" file-index="{{$index}}" edit-type="evidences"/>
+                    </div>
+                </div>
+
+
+                <!--附加数据-->
+                <div>
+                    <div ng-click="arbilist.addAddictionData('evidences', $parent.$index, $index)">
+                        <span>附加数据</span>
+                    </div>
+
+                    <div ng-repeat="(extKey, extValue) in itemValue['extData']">
+                        <select class="form-control" ng-model="extKey">
+                            <option ng-repeat="(eviExtValOptionKey, eviExtValOptionValue) in arbilist.extDataHelper['evidences'] track by $index"
+                                    value="{{eviExtValOptionKey}}">{{eviExtValOptionValue['name']}}
+                            </option>
+                        </select>
+                        <!--TODO placeholder的值根据eviExtValOption变化而变化-->
+                        <input type="text" ng-model="extValue"
+                               placeholder="{{arbilist.extDataHelper['evidences'][extKey]['placeholder']}}"/>
+                    </div>
+                </div>
+
             </div>
-
-
-            <!--附加数据-->
-            <div>
-                <div ng-click="arbilist.addAddictionData('evidences', $parent.$index, $index)">
-                    <span>附加数据</span>
-                </div>
-
-                <div ng-repeat="(extKey, extValue) in itemValue['extData']">
-                    <select class="form-control" ng-model="extKey">
-                        <option ng-repeat="(eviExtValOptionKey, eviExtValOptionValue) in arbilist.extDataHelper['evidences'] track by $index" value="{{eviExtValOptionKey}}">{{eviExtValOptionValue['name']}}</option>
-                    </select>
-                    <!--TODO placeholder的值根据eviExtValOption变化而变化-->
-                    <input type="text" ng-model="extValue" placeholder="{{arbilist.extDataHelper['evidences'][extKey]['placeholder']}}"/>
-                </div>
-            </div>
-
         </div>
     </div>
-
 </div>
-
-
 
 
 

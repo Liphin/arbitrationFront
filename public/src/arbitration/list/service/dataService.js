@@ -8,7 +8,6 @@ app.factory('ArbiListDataSer', function () {
     var arbiApplyDataSupply = {
         //选项true or false设置
         'options': {
-            'general': false,
             'claim': true,
             'litigants': false,
             'agents': false,
@@ -385,8 +384,10 @@ app.factory('ArbiListDataSer', function () {
                         'content': '这里是测试证据名称，这里是测试证据名称',//证明内容。
                         'hasOriginal': true,//是否有原件：true，false
                         "extData": {
+                            "repaymentPrincipal": "0",/*已还本金*/
                             "overdueMonth": "12"/*逾期月份*/,
-                            "overduePrincipal": "34324"/*剩余本金*/
+                            "overduePrincipal": "123",/*剩余本金*/
+
                         }
                     }
                 ]
