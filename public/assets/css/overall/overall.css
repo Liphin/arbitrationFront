@@ -199,6 +199,15 @@ iframe, embed{
     border:1px solid lightgray;
     border-width: 0 0 1px 0;
     width: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.arbiEditLeft div:hover{
+    background: #e4f2f7;
+    border-color: #e4f2f7;
+    color: black;
 }
 
 .inputStyle{
@@ -208,6 +217,21 @@ iframe, embed{
     border-width: 0 0 1px 0;
 }
 
+.textAreaStyle{
+    outline: none;
+    padding: 4px 10px;
+    border: 1px solid #bdbdbd;
+}
+
+.selectedItem{
+    background: #5bc0de;
+    color: white;
+}
+/*编辑菜单鼠标放上去时样式变化*/
+.listOptMenu span:hover {
+    background: #78a1bf;
+    cursor: pointer;
+}
 
 
 

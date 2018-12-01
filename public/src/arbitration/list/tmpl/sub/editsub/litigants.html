@@ -1,81 +1,60 @@
 <!--当事人-->
-<div style="height: 100%; overflow-y: scroll">
-    <div ng-repeat="value in arbilist.arbiApplyData['litigants'] track by $index">
+<div style="height: 100%; overflow-y: scroll" class="scrollBar-7">
+    <div ng-repeat="value in arbilist.arbiApplyData['litigants'] track by $index" style="margin-bottom: 30px; padding: 20px 15px;border: 5px solid lightgrey;width: 95%;border-radius: 5px">
         <!--当事人分类-->
         <div>
-            <span>当事人分类：</span>
-            <label class="radio-inline">
-                <input type="radio" ng-model="value['litigantType']" name="litigantType{{$index}}" value="申请人"> 申请人
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="value['litigantType']" name="litigantType{{$index}}" value="被申请人"> 被申请人
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="value['litigantType']" name="litigantType{{$index}}" value="第三方"> 第三方
-            </label>
+            <span style="font-size: 15px; font-weight: bold; color: #3689aa">{{value['litigantType']}} —— {{value['materialCode']}}：</span>
         </div>
+        <!--<div>-->
+            <!--<span>当事人分类：</span>-->
+            <!--<label class="radio-inline">-->
+                <!--<input type="radio" ng-model="value['litigantType']" name="litigantType{{$index}}" value="申请人"> 申请人-->
+            <!--</label>-->
+            <!--<label class="radio-inline">-->
+                <!--<input type="radio" ng-model="value['litigantType']" name="litigantType{{$index}}" value="被申请人"> 被申请人-->
+            <!--</label>-->
+            <!--<label class="radio-inline">-->
+                <!--<input type="radio" ng-model="value['litigantType']" name="litigantType{{$index}}" value="第三方"> 第三方-->
+            <!--</label>-->
+        <!--</div>-->
 
         <!--操作者名称-->
-        <div>
-            <span>当事人性质：</span>
-            <label class="radio-inline">
-                <input type="radio" ng-model="value['nature']" name="litigantNature{{$index}}" value="自然人"> 自然人
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="value['nature']" name="litigantNature{{$index}}" value="企业"> 企业
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="value['nature']" name="litigantNature{{$index}}" value="个体户"> 个体户
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="value['nature']" name="litigantNature{{$index}}" value="其他组织"> 其他组织
-            </label>
-        </div>
+        <!--<div>-->
+            <!--<span>当事人性质：</span>-->
+            <!--<label class="radio-inline">-->
+                <!--<input type="radio" ng-model="value['nature']" name="litigantNature{{$index}}" value="自然人"> 自然人-->
+            <!--</label>-->
+            <!--<label class="radio-inline">-->
+                <!--<input type="radio" ng-model="value['nature']" name="litigantNature{{$index}}" value="企业"> 企业-->
+            <!--</label>-->
+            <!--<label class="radio-inline">-->
+                <!--<input type="radio" ng-model="value['nature']" name="litigantNature{{$index}}" value="个体户"> 个体户-->
+            <!--</label>-->
+            <!--<label class="radio-inline">-->
+                <!--<input type="radio" ng-model="value['nature']" name="litigantNature{{$index}}" value="其他组织"> 其他组织-->
+            <!--</label>-->
+        <!--</div>-->
 
-        <!--当事人名称-->
-        <div>
-            <span>当事人名称：</span>
-            <input type="text" ng-model="value['name']" maxlength="50" placeholder="请输入当事人名称（不大于50个字）">
-            <span>（当事人性质为企业、个体户和其他组织时，请填写机构名称）</span>
-        </div>
+        <div style="display: flex; margin-top: 15px">
+            <!--当事人名称-->
+            <div style="flex: 1">
+                <span>当事人名称：</span>
+                <input type="text" class="inputStyle" ng-model="value['name']" maxlength="50" placeholder="请输入当事人名称（不大于50个字）">
+                <!--<span>（当事人性质为企业、个体户和其他组织时，请填写机构名称）</span>-->
+            </div>
 
-        <!--联系号码-->
-        <div>
-            <span>联系号码</span>
-            <input type="text" ng-model="value['mobiles']" maxlength="250" placeholder="请输入联系号码（不大于250个字符）">
-            <span>（如有多个请用英文逗号分隔）</span>
-        </div>
-
-        <!--联系人名称-->
-        <div>
-            <span>联系人名称</span>
-            <input type="text" ng-model="value['contacts']" maxlength="250" placeholder="请输入联系名称（不大于250个字符）">
-            <span>（如有多个请用英文逗号分隔）</span>
+            <!--联系号码-->
+            <div style="flex: 1">
+                <span>联系号码：</span>
+                <input type="text" class="inputStyle" style="width: 242px" ng-model="value['mobiles']" maxlength="250" placeholder="如有多个请用英文逗号分隔（不大于250个字符）">
+                <!--<span>（如有多个请用英文逗号分隔）</span>-->
+            </div>
         </div>
 
 
-        <!--法定代表人（企业、个体户必填）-->
-        <div ng-if="value['nature']=='企业'||value['nature']=='个体户'">
-            <span>法定代表人</span>
-            <input type="text" ng-model="value['legalRepresent']" maxlength="50" placeholder="请输入法定代表人（不大于50个字符）">
-        </div>
-
-
-        <!--法定代表人职务-->
-        <div ng-if="value['nature']=='企业'">
-            <span>法定代表人职务</span>
-            <select ng-model="value['post']">
-                <option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['identityType']"
-                        value="{{value}}">{{value}}
-                </option>
-            </select>
-        </div>
-
-
-        <!--（自然人、个体户必填）-->
-        <div ng-if="value['nature']=='自然人'||value['nature']=='个体户'">
-            <!--当事人性别-->
-            <div>
+        <div style="display: flex;margin-top: 15px">
+            <!--性别-->
+            <div style="flex: 1">
                 <span>联系人性别：</span>
                 <label class="radio-inline">
                     <input type="radio" ng-model="value['sex']" name="litigantSex{{$index}}" value="男"> 男
@@ -83,79 +62,138 @@
                 <label class="radio-inline">
                     <input type="radio" ng-model="value['sex']" name="litigantSex{{$index}}" value="女"> 女
                 </label>
-                <span>（个体户请填写负责人的性别）</span>
-            </div>
-            <!--证件类型-->
-            <div>
-                <span>证件类型</span>
-                <select ng-model="value['idCardType']">
-                    <option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['post']"
-                            value="{{value}}">{{value}}
-                    </option>
-                </select>
+                <!--<span>（个体户请填写负责人的性别）</span>-->
             </div>
 
-            <!--证件号码-->
-            <div>
-                <span>证件号码</span>
-                <input type="text" ng-model="value['idCardNo']" maxlength="50" placeholder="请输入证件号码（不大于50个字符）">
+            <!--联系人名称-->
+            <div style="flex: 1">
+                <span>联系人名称：</span>
+                <input type="text" ng-model="value['contacts']" input-width-setting="litigantsContact" class="inputStyle" maxlength="250" placeholder="如有多个请用英文逗号分隔（不大于250个字符）">
             </div>
         </div>
+
+
+        <div style="display: flex; margin-top: 15px">
+            <!--证件号码-->
+            <div style="flex: 1">
+                <span>身份证号码：</span>
+                <input type="text" class="inputStyle" ng-model="value['idCardNo']" maxlength="50" placeholder="请输入身份证证件号码（不大于50个字符）">
+            </div>
+
+            <!--联系邮箱。如有多个请用英文逗号分隔。-->
+            <div style="flex: 1">
+                <span>联系邮箱：</span>
+                <input type="text" class="inputStyle" input-width-setting="litigantsEmail" ng-model="value['emails']" maxlength="250" placeholder="如有多个请用英文逗号分隔（不大于250个字符）">
+            </div>
+        </div>
+
+
+
+        <!--法定代表人（企业、个体户必填）-->
+        <!--<div ng-if="value['nature']=='企业'||value['nature']=='个体户'">-->
+            <!--<span>法定代表人</span>-->
+            <!--<input type="text" ng-model="value['legalRepresent']" maxlength="50" placeholder="请输入法定代表人（不大于50个字符）">-->
+        <!--</div>-->
+
+
+        <!--法定代表人职务-->
+        <!--<div ng-if="value['nature']=='企业'">-->
+            <!--<span>法定代表人职务</span>-->
+            <!--<select ng-model="value['post']">-->
+                <!--<option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['identityType']"-->
+                        <!--value="{{value}}">{{value}}-->
+                <!--</option>-->
+            <!--</select>-->
+        <!--</div>-->
+
+
+        <!--（自然人、个体户必填）-->
+        <!--<div ng-if="value['nature']=='自然人'||value['nature']=='个体户'">-->
+            <!--&lt;!&ndash;当事人性别&ndash;&gt;-->
+            <!--<div>-->
+                <!--<span>联系人性别：</span>-->
+                <!--<label class="radio-inline">-->
+                    <!--<input type="radio" ng-model="value['sex']" name="litigantSex{{$index}}" value="男"> 男-->
+                <!--</label>-->
+                <!--<label class="radio-inline">-->
+                    <!--<input type="radio" ng-model="value['sex']" name="litigantSex{{$index}}" value="女"> 女-->
+                <!--</label>-->
+                <!--<span>（个体户请填写负责人的性别）</span>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;证件类型&ndash;&gt;-->
+            <!--<div>-->
+                <!--<span>证件类型</span>-->
+                <!--<select ng-model="value['idCardType']">-->
+                    <!--<option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['post']"-->
+                            <!--value="{{value}}">{{value}}-->
+                    <!--</option>-->
+                <!--</select>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash;证件号码&ndash;&gt;-->
+            <!--<div>-->
+                <!--<span>证件号码</span>-->
+                <!--<input type="text" ng-model="value['idCardNo']" maxlength="50" placeholder="请输入证件号码（不大于50个字符）">-->
+            <!--</div>-->
+        <!--</div>-->
 
 
         <!--（企业、个体户、其他组织必填）-->
-        <div ng-if="value['nature']=='企业'||value['nature']=='个体户'||value['nature']=='其他组织'">
-            <!--证照类型（企业、个体户、其他组织必填）-->
-            <div>
-                <span>证照类型</span>
-                <select ng-model="value['identityType']">
-                    <option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['idCardType']"
-                            value="{{value}}">{{value}}
-                    </option>
-                </select>
-            </div>
+        <!--<div ng-if="value['nature']=='企业'||value['nature']=='个体户'||value['nature']=='其他组织'">-->
+            <!--&lt;!&ndash;证照类型（企业、个体户、其他组织必填）&ndash;&gt;-->
+            <!--<div>-->
+                <!--<span>证照类型</span>-->
+                <!--<select ng-model="value['identityType']">-->
+                    <!--<option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['idCardType']"-->
+                            <!--value="{{value}}">{{value}}-->
+                    <!--</option>-->
+                <!--</select>-->
+            <!--</div>-->
 
-            <!--营业执照号码（企业、个体户、其他组织必填）-->
-            <div>
-                <span>证照号码</span>
-                <input type="text" ng-model="value['identityNo']" maxlength="100" placeholder="请输入证照号码（不大于50个字符）">
-            </div>
-        </div>
+            <!--&lt;!&ndash;营业执照号码（企业、个体户、其他组织必填）&ndash;&gt;-->
+            <!--<div>-->
+                <!--<span>证照号码</span>-->
+                <!--<input type="text" ng-model="value['identityNo']" maxlength="100" placeholder="请输入证照号码（不大于50个字符）">-->
+            <!--</div>-->
+        <!--</div>-->
 
 
-        <!--联系邮箱。如有多个请用英文逗号分隔。-->
-        <div>
-            <span>联系邮箱</span>
-            <input type="text" ng-model="value['emails']" maxlength="250" placeholder="请输入联系邮箱（不大于250个字符）">
-            <span>（如有多个请用英文逗号分隔）</span>
-        </div>
+        <!--&lt;!&ndash;联系邮箱。如有多个请用英文逗号分隔。&ndash;&gt;-->
+        <!--<div>-->
+            <!--<span>联系邮箱</span>-->
+            <!--<input type="text" ng-model="value['emails']" maxlength="250" placeholder="请输入联系邮箱（不大于250个字符）">-->
+            <!--<span>（如有多个请用英文逗号分隔）</span>-->
+        <!--</div>-->
 
         <!--联系地址（如有多个请用英文逗号分隔）-->
-        <div>
-            <span>联系地址</span>
-            <input type="text" ng-model="value['addresses']" maxlength="250" placeholder="请输入联系地址（不大于250个字符）">
-            <span>（如有多个请用英文逗号分隔）</span>
+        <div style="margin-top: 15px">
+            <span>联系地址：</span>
+            <input type="text" class="inputStyle" style="width: 633px;margin-left: 15px" ng-model="value['addresses']" maxlength="250" placeholder="如有多个请用英文逗号分隔（不大于250个字符）">
         </div>
 
         <!--材料名称-->
-        <div>
-            <span>材料名称</span>
-            <input type="text" ng-model="value['materialCode']" placeholder="请填写该当事人材料名称">
-        </div>
+        <!--<div>-->
+            <!--<span>材料名称</span>-->
+            <!--<input type="text" ng-model="value['materialCode']" placeholder="请填写该当事人材料名称">-->
+        <!--</div>-->
 
 
         <!--附件上传-->
-        <div>
-            <div ng-click="arbilist.addFile('litigants', $index)">
-                <span>附件上传 +</span>
-            </div>
+        <div style="margin-top: 15px">
+            <!--<div ng-click="arbilist.addFile('litigants', $index)">-->
+                <!--<span>附件上传 +</span>-->
+            <!--</div>-->
 
             <!--循环读取上传附件的数据-->
             <div ng-repeat="fileValue in value['files'] track by $index">
-                <span>点击上传附件</span>
-                <input file-proxy type="file" parent-parent-index="null" parent-index="{{$parent.$index}}"
+                <span>附件上传：</span>
+                <input style="display: inline-block; border: 1px solid lightgrey; margin-left: 15px;padding:3px; border-radius: 5px" file-proxy type="file" parent-parent-index="null" parent-index="{{$parent.$index}}"
                        file-index="{{$index}}" edit-type="litigants"/>
+                <span style="margin-left: 15px;font-weight: bold; color: #3689aa;text-decoration: underline"> 请上传{{arbilist.getFilePrefixName(fileValue['fileName'])}}（文件类型范围:pdf/png/jpg）</span>
             </div>
         </div>
     </div>
+
+    <!--占位符-->
+    <div style="width: 100%; height: 20px"></div>
 </div>

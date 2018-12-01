@@ -82,3 +82,201 @@ app.directive('fileProxy', ['OverallGeneralSer', 'OverallDataSer', 'ArbiListData
             }
         }
     }]);
+
+
+/**
+ * 输入框的宽度信息设置
+ */
+app.directive('inputWidthSetting', [function () {
+    return {
+        restrict: 'A',
+        scope: {
+            inputWidthSetting: '@',
+        },
+        link: function (scope, element, attrs) {
+            switch (scope.inputWidthSetting) {
+                case 'interestAndPenaltyClaimRate': {
+                    element.css('width', '91px');
+                    break;
+                }
+                case 'lawyerFee':{
+                    element.css('margin-left','15px');
+                    element.css('width','242px');
+                    break;
+                }
+                case 'propertyAddress':{
+                    element.css('width','570px');
+                    break;
+                }
+                case 'realEstateRegistrationCertificateNumber':{
+                    element.css('width','528px');
+                    break;
+                }
+                case 'litigantsContact':{
+                    element.css('width','228px');
+                    break;
+                }
+                case 'litigantsEmail':{
+                    element.css('width','242px');
+                    break;
+                }
+                //借款抵押合同
+                case 'loanContractNumber':{
+                    element.css('width','200px');
+                    break;
+                }
+                case 'borrowerServedMobile':{
+                    element.css('width','158px');
+                    break;
+                }
+                case 'conventionalPrincipal':{
+                    element.css('width','146px');
+                    break;
+                }
+                case 'PenaltyDayRate':{
+                    element.css('width','177px');
+                    break;
+                }
+                case 'repaymentMethod':{
+                    element.css('width','242px');
+                    break;
+                }
+                case 'loanTerm':{
+                    element.css('width','242px');
+                    break;
+                }
+                case 'borrowerServedMail':{
+                    element.css('width','200px');
+                    break;
+                }
+                case 'loanContractSignDate':{
+                    element.css('width','212px');
+                    break;
+                }
+                case 'borrowerName':{
+                    element.css('width','230px');
+                    break;
+                }
+                //补充合同
+                case 'beneficiaryAccountName':{
+                    element.css('width','185px');
+                    break;
+                }
+                case 'supplementalAgreementSignDate':{
+                    element.css('width','157px');
+                    break;
+                }
+                case 'bankOfdeposit':{
+                    element.css('width','228px');
+                    break;
+                }
+                case 'thirdParty':{
+                    element.css('width','242px');
+                    break;
+                }
+                case 'beneficiaryAccountNumber':{
+                    element.css('width','257px');
+                    break;
+                }
+                case 'transactionDate':{
+                    element.css('width','213px');
+                    break;
+                }
+                case 'transactionMoney':{
+                    element.css('width','258px');
+                    break;
+                }
+                //证明
+                case 'IDCardNumber':{
+                    element.css('width','215px');
+                    break;
+                }
+                case 'paymentAccountName':{
+                    element.css('width','226px');
+                    break;
+                }
+                //收款确认书
+                case 'confirmationSignDate':{
+                    element.css('width','170px');
+                    break;
+                }
+                case 'cashAmount':{
+                    element.css('width','257px');
+                    break;
+                }
+                //不动产登记证明，不动产证书
+                case 'mortgagee':{
+                    element.css('width','219px');
+                    break;
+                }
+                case 'amountOfSecuredCaims':{
+                    element.css('width','205px');
+                    break;
+                }
+                case 'mortgagerName':{
+                    element.css('width','222px');
+                    break;
+                }
+
+            }
+        }
+    }
+}]);
+
+
+/**
+ * ext数据的宽度动态变化
+ */
+app.directive('extSetting', [function () {
+    return {
+        restrict: 'A',
+        scope: {
+            extSetting: '@',
+        },
+        link: function (scope, element, attrs) {
+            switch (scope.extSetting) {
+                case 'propertyAddress': {
+                    element.css('flex', '100%');
+                    break;
+                }
+                case 'realEstateRegistrationCertificateNumber': {
+                    element.css('flex', '100%');
+                    break;
+                }
+            }
+        }
+    }
+}]);
+
+
+/**
+ * 上传文件的特殊标识
+ */
+app.directive('fileSetting', [function () {
+    return {
+        restrict: 'A',
+        scope: {
+            fileSetting: '@',
+        },
+        link: function (scope, element, attrs) {
+            switch (scope.fileSetting) {
+                case '《不动产登记证明》《不动产权证书》.pdf': {
+                    element.css('display', 'block');
+                    element.css('margin', '10px 0 0 90px');
+                    break;
+                }
+            }
+        }
+    }
+}]);
+
+
+
+
+
+
+
+
+
+
+

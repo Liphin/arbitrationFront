@@ -18,6 +18,8 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
 
     //数据初始化操作
     var arbilist = this;
+    arbilist.listData = ArbiListDataSer.listData;
+    arbilist.overallData = ArbiListDataSer.overallData;
     arbilist.extDataHelper = ArbiListDataSer.extDataHelper;
     arbilist.arbiApplyData = ArbiListDataSer.arbiApplyData;
     arbilist.arbiApplyDataSupply = ArbiListDataSer.arbiApplyDataSupply;
@@ -144,7 +146,7 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
         // for (var i in formDataCopy) {
         //     formDataCopy[i] = JSON.stringify(formDataCopy[i]);
         // }
-        formDataCopy['arbcaseInfo']=JSON.stringify(formDataCopy['arbcaseInfo']);
+        formDataCopy['arbcaseInfo'] = JSON.stringify(formDataCopy['arbcaseInfo']);
         //console.log(formData);
         console.log(formDataCopy);
 
@@ -166,10 +168,10 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
         //遍历target中每个数据
         for (var i in target) {
             //如果该数据为对象或数组则回调处理，否则encodeURI处理
-            if(target[i] instanceof Object || target[i] instanceof Array){
+            if (target[i] instanceof Object || target[i] instanceof Array) {
                 encodeEachParam(target[i]);
 
-            }else{
+            } else {
                 target[i] = encodeURIComponent(target[i]);
             }
             // switch (Object.prototype.toString.call(target[i])) {
@@ -193,9 +195,34 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
     };
 
 
+    /**
+     * 获取上传附件的前缀名称
+     */
+    arbilist.getFilePrefixName = function (name) {
+        return name.split('.')[0];
+    };
+
+
     //测试选择项
     // ArbiListDataSer.arbiApplyData['litigants'].push(ArbiListDataSer.arbiApplyDataSupply['litigants']);
     // ArbiListDataSer.arbiApplyData['agents'].push(ArbiListDataSer.arbiApplyDataSupply['agents']);
     // ArbiListDataSer.arbiApplyData['evidences'].push(ArbiListDataSer.arbiApplyDataSupply['evidences']);
 
+
+    /**
+     * 创建新仲裁案件信息
+     */
+    arbilist.createNewArbiInfo = function () {
+        ArbiListDataSer.overallData['showEdit'] = true;
+    }
+
+
 });
+
+
+
+
+
+
+
+
