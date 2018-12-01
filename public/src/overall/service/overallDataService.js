@@ -36,7 +36,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
     var redirect = {
         'loginHome': '/login/home',
         'arbiList': '/arbitration/list',
-        'arbiEdit': '/arbitration/edit',
+        'arbiListTest': '/arbitration/listTest',
     };
 
 

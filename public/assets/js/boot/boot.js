@@ -65,6 +65,7 @@ head.load(
     'src/arbitration/list/module.js',
     'src/arbitration/list/directive/directive.js',
     'src/arbitration/list/directive/directiveUrl.js',
+    'src/arbitration/list/service/dataHelperService.js',
     'src/arbitration/list/service/dataService.js',
     'src/arbitration/list/service/service.js',
     'src/arbitration/list/controller.js',

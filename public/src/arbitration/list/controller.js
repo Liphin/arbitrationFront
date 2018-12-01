@@ -4,7 +4,7 @@
 var app = angular.module('Angular.arbilist');
 
 app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $location,
-                                         OverallGeneralSer, $cookies) {
+                                         OverallGeneralSer, $cookies, ArbiListDataHelperSer) {
 
     //检查是否有cookie或在本session里
     if (!OverallDataSer.overallData['loginStatus'] && $cookies.get('loginStatus') != 'success') {
@@ -140,15 +140,7 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
 
         //拷贝一个表单数组并对其进行encode操作
         var formDataCopy = angular.copy(formData);
-        //encodeEachParam(formDataCopy);
-
-        //循环遍历一级每个元素进行调整
-        // for (var i in formDataCopy) {
-        //     formDataCopy[i] = JSON.stringify(formDataCopy[i]);
-        // }
         formDataCopy['arbcaseInfo'] = JSON.stringify(formDataCopy['arbcaseInfo']);
-        //console.log(formData);
-        console.log(formDataCopy);
 
         //提交诉讼信息到server
         var url = OverallDataSer.urlData['frontEndHttp']['submitNewArbiData'];
@@ -162,40 +154,6 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
 
 
     /**
-     * urlEncode每个param数据节点
-     */
-    var encodeEachParam = function (target) {
-        //遍历target中每个数据
-        for (var i in target) {
-            //如果该数据为对象或数组则回调处理，否则encodeURI处理
-            if (target[i] instanceof Object || target[i] instanceof Array) {
-                encodeEachParam(target[i]);
-
-            } else {
-                target[i] = encodeURIComponent(target[i]);
-            }
-            // switch (Object.prototype.toString.call(target[i])) {
-            //     /*String类型数据*/
-            //     case '[object String]': {
-            //         target[i] = encodeURIComponent(target[i]);
-            //         break;
-            //     }
-            //     /*Array类型*/
-            //     case '[object Array]': {
-            //         encodeEachParam(target[i])
-            //         break;
-            //     }
-            //     /*Object类型*/
-            //     case '[object Object]': {
-            //         encodeEachParam(target[i])
-            //         break;
-            //     }
-            // }
-        }
-    };
-
-
-    /**
      * 获取上传附件的前缀名称
      */
     arbilist.getFilePrefixName = function (name) {
@@ -203,10 +161,7 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
     };
 
 
-    //测试选择项
-    // ArbiListDataSer.arbiApplyData['litigants'].push(ArbiListDataSer.arbiApplyDataSupply['litigants']);
-    // ArbiListDataSer.arbiApplyData['agents'].push(ArbiListDataSer.arbiApplyDataSupply['agents']);
-    // ArbiListDataSer.arbiApplyData['evidences'].push(ArbiListDataSer.arbiApplyDataSupply['evidences']);
+
 
 
     /**
@@ -214,7 +169,54 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
      */
     arbilist.createNewArbiInfo = function () {
         ArbiListDataSer.overallData['showEdit'] = true;
-    }
+        if($location.path()==OverallDataSer.redirect['arbiListTest']){
+            for (var i in ArbiListDataSer.arbiApplyData) {
+                ArbiListDataSer.arbiApplyData[i] = angular.copy(ArbiListDataHelperSer.arbiApplyDataTest[i]);
+            }
+        }else{
+            for (var i in ArbiListDataSer.arbiApplyData) {
+                ArbiListDataSer.arbiApplyData[i] = angular.copy(ArbiListDataHelperSer.arbiApplyDataPure[i]);
+            }
+        }
+    };
+
+
+    /**
+     * urlEncode每个param数据节点
+     */
+    var resetNewData = function (target) {
+        //遍历target中每个数据
+        for (var i in target) {
+            //如果该数据为对象或数组则回调处理，否则encodeURI处理
+            switch (Object.prototype.toString.call(target[i])) {
+                /*String类型数据*/
+                case '[object String]': {
+                    target[i] = '';
+                    break;
+                }
+                /*Number类型*/
+                case '[object Number]': {
+                    target[i] = 0;
+                    break;
+                }
+                /*Boolean类型*/
+                case '[object Boolean]': {
+                    target[i] = true;
+                    break;
+                }
+                /*Array类型*/
+                case '[object Array]': {
+                    resetNewData(target[i])
+                    break;
+                }
+                /*Object类型*/
+                case '[object Object]': {
+                    resetNewData(target[i])
+                    break;
+                }
+            }
+        }
+    };
 
 
 });
