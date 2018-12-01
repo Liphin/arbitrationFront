@@ -16,7 +16,7 @@ var bodyParser = require('body-parser');
 var device = require('express-device');
 var ServerSer = require('./serverSer');
 var MiniSer = require('./mini/MiniSer');
-//var mongoDBSer = require('./mongo/MongoSer');
+var mongoDBSer = require('./mongo/MongoSer');
 var serverSerData = require('./serverSerData');
 
 
@@ -57,6 +57,20 @@ app.post('/managerLogin', function (req, res) {
 
 
 /**
+ * 获取所有仲裁数据并返回list数组
+ */
+app.post('/getArbiList', function (req, res) {
+    //查找arbilist数据表并返回所有提交过的仲裁数据
+    mongoDBSer.findDocuments('arbilist', {}, function (docs) {
+        res.send({
+            'status_code': 200,
+            'data': docs
+        });
+    });
+});
+
+
+/**
  * 提交新的诉讼数据
  */
 app.post('/submitNewArbiData', function (req, res) {
@@ -69,25 +83,55 @@ app.post('/submitNewArbiData', function (req, res) {
         'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c'
     };
 
-    console.log('request body', req.body);
+    //console.log('request body', req.body);
     // console.log('encoded request body', encodeURIComponent(req.body));
 
     //上传数据到易简网
     request.post({
         url: urlPost,
-        formData: req.body,
+        formData: req.body['submitData'],
         headers: headers,
         rejectUnauthorized: false
 
     }, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            console.log('upload new arbi data to server', body);
-            res.send(body);
+            if (body['code'] == 1) {
+                //保存到mongo数据库
+                //list数据，存储基础展示数据，不存detail数据
+                var saveListData = req.body['saveData'];
+                saveListData['arbcaseId'] = body['arbcaseId'];
+
+                //info数据，存储detail数据，用于查询详情时使用
+                var saveDetailData = req.body['submitData'];
+                saveDetailData['arbcaseId'] = body['arbcaseId'];
+
+                //分别异步插入list和info数据document中
+                mongoDBSer.insertOneDocuments('arbilist', saveListData, function () {
+                });
+                mongoDBSer.insertOneDocuments('arbidetail', saveDetailData, function () {
+                });
+
+                //返回arbcaseId
+                res.send({
+                    'status_code': 200,
+                    'data': body['arbcaseId'],
+                });
+
+            } else {
+                res.send({
+                    'status_code': body['code'],
+                    'data': body['message'],
+                })
+            }
 
         } else {
             //发送数据到易简网出错
             console.log('post data to YiJian error');
             res.send(false);
+            res.send({
+                'status_code': 400,
+                'data': 'post data error',
+            })
         }
     });
 });

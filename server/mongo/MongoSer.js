@@ -44,7 +44,7 @@ var findDocuments = function (collection, findObj, callback) {
  * @param insertObj
  * @param callback
  */
-var insertOneDocuments = function (db, collection, insertObj, callback) {
+var insertOneDocuments = function (collection, insertObj, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
         db.db(dbArbitration).collection(collection).insertOne(insertObj, function (err, res) {
@@ -62,7 +62,7 @@ var insertOneDocuments = function (db, collection, insertObj, callback) {
  * @param insertObj
  * @param callback
  */
-var insertManyDocuments = function (db, collection, insertObj, callback) {
+var insertManyDocuments = function (collection, insertObj, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
         db.db(dbArbitration).collection(collection).insertMany(insertObj, function (err, res) {
@@ -81,7 +81,7 @@ var insertManyDocuments = function (db, collection, insertObj, callback) {
  * @param updateObj 更新对象
  * @param callback
  */
-var updateOneDocuments = function (db, collection, whereStr, updateObj, callback) {
+var updateOneDocuments = function (collection, whereStr, updateObj, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
         var updateStr = {$set: updateObj};
@@ -101,7 +101,7 @@ var updateOneDocuments = function (db, collection, whereStr, updateObj, callback
  * @param updateObj 更新对象
  * @param callback
  */
-var updateManyDocuments = function (db, collection, whereStr, updateObj, callback) {
+var updateManyDocuments = function (collection, whereStr, updateObj, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
         var updateStr = {$set: updateObj};
@@ -121,7 +121,7 @@ var updateManyDocuments = function (db, collection, whereStr, updateObj, callbac
  * @param whereStr 查询条件
  * @param callback
  */
-var deleteOneDocuments = function (db, collection, whereStr, callback) {
+var deleteOneDocuments = function (collection, whereStr, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
         db.db(dbArbitration).collection(collection).deleteOne(whereStr, function (err, res) {
@@ -139,7 +139,7 @@ var deleteOneDocuments = function (db, collection, whereStr, callback) {
  * @param whereStr 查询条件
  * @param callback
  */
-var deleteManyDocuments = function (db, collection, whereStr, callback) {
+var deleteManyDocuments = function (collection, whereStr, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
         db.db(dbArbitration).collection(collection).deleteMany(whereStr, function (err, res) {

@@ -88,6 +88,17 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
 
 
     /**
+     * 返回当前时间，格式为2018-01-01 12:00:00
+     * @returns {string}
+     */
+    var getCurrentDataTime = function () {
+        var date = new Date();
+        return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + "  " + date.getHours() + ":" +
+            date.getMinutes() + ":" + date.getSeconds();
+    };
+
+
+    /**
      * 设置需要添加完成动画时添加此句
      */
     var setSubmitAnimateSuccess = function (successWord) {
@@ -201,7 +212,7 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
      * 上传资源文件信息
      * 用于提交文件操作，并开放callback函数接口
      */
-    var uploadResource = function (obj,callback) {
+    var uploadResource = function (obj, callback) {
         var fd = new FormData();
         //动态装载数据
         for (var i in obj) {
@@ -253,7 +264,6 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
     };
 
 
-
     /**
      * 组装生成新闻时间
      * @returns {string}
@@ -288,8 +298,9 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
         httpGetFiles: httpGetFiles,
         httpPostData: httpPostData,
         getTimeStamp: getTimeStamp,
+        getCurrentDataTime: getCurrentDataTime,
         httpPostData2: httpPostData2,
-        uploadFileToYJW:uploadFileToYJW,
+        uploadFileToYJW: uploadFileToYJW,
         uploadResource: uploadResource,
         sqlInjectFilter: sqlInjectFilter,
         checkDataNotEmpty: checkDataNotEmpty,
