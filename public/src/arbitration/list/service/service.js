@@ -169,7 +169,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
                 //刷新重新获取arbi列表数据
                 getArbiList();
             }
-        }, () => {
+        }, function () {
         });
     };
 
@@ -195,8 +195,11 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
                     ArbiListDataSer.listData.push(responseData['data'][i]);
                 }
                 console.log(ArbiListDataSer.listData);
+
+            } else {
+                alert("提交失败：" + responseData['data']);
             }
-        }, () => {
+        }, function () {
             OverallDataSer.overallData['loadingData'] = false;
         });
     };
@@ -271,7 +274,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
                     ArbiListDataSer.arbiApplyData['evidences'] = arbcaseInfo['evidences'];
                 }
             }
-        }, () => {
+        }, function () {
         });
     };
 
@@ -304,7 +307,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
             } else {
                 alert("很抱歉，系统出错，请联系系统管理员：" + JSON.stringify(responseData['data']))
             }
-        }, () => {
+        }, function () {
         });
     };
 
@@ -339,7 +342,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
             } else {
                 alert("很抱歉，系统出错，请联系系统管理员：" + JSON.stringify(responseData['data']))
             }
-        }, () => {
+        }, function () {
         });
     };
 
@@ -390,10 +393,9 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
             } else {
                 alert("很抱歉，系统出错，请联系系统管理员：" + JSON.stringify(responseData['data']))
             }
-        }, () => {
+        }, function () {
         });
     };
-
 
 
     return {
