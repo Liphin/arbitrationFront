@@ -27,6 +27,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
             'submitNewArbiData': baseUrlData['frontEndHttp'] + 'submitNewArbiData',
             'getArbiList': baseUrlData['frontEndHttp'] + 'getArbiList',
             'saveArbiInfo': baseUrlData['frontEndHttp'] + 'saveArbiInfo',
+            'viewArbiOpt': baseUrlData['frontEndHttp'] + 'viewArbiOpt',
         }
     };
 

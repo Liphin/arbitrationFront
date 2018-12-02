@@ -294,6 +294,44 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
     };
 
 
+    /**
+     * urlEncode每个param数据节点
+     */
+    var resetNewData = function (target) {
+        //遍历target中每个数据
+        for (var i in target) {
+            //如果该数据为对象或数组则回调处理，否则encodeURI处理
+            switch (Object.prototype.toString.call(target[i])) {
+                /*String类型数据*/
+                case '[object String]': {
+                    target[i] = '';
+                    break;
+                }
+                /*Number类型*/
+                case '[object Number]': {
+                    target[i] = 0;
+                    break;
+                }
+                /*Boolean类型*/
+                case '[object Boolean]': {
+                    target[i] = true;
+                    break;
+                }
+                /*Array类型*/
+                case '[object Array]': {
+                    resetNewData(target[i])
+                    break;
+                }
+                /*Object类型*/
+                case '[object Object]': {
+                    resetNewData(target[i])
+                    break;
+                }
+            }
+        }
+    };
+
+
     return {
         httpGetFiles: httpGetFiles,
         httpPostData: httpPostData,

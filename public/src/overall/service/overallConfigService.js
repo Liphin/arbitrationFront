@@ -16,11 +16,6 @@ overallModule.config(function ($routeProvider, $httpProvider, $sceDelegateProvid
             templateUrl: 'src/arbitration/list/tmpl/index.html',
             controller: 'ArbiListCtrl',
             controllerAs: 'arbilist',
-            // resolve: {
-            //     check: function (OverallSer) {
-            //         return OverallSer.processLogonStatus(20, '/login/home');
-            //     }
-            // }
         })
         .when('/arbitration/listTest', {
             templateUrl: 'src/arbitration/list/tmpl/index.html',

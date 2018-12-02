@@ -152,6 +152,8 @@ var deleteManyDocuments = function (collection, whereStr, callback) {
 
 
 module.exports ={
+    dbArbitration:dbArbitration,
+    connectToMongo:connectToMongo,
     findDocuments: findDocuments,
     insertOneDocuments: insertOneDocuments,
     insertManyDocuments: insertManyDocuments,

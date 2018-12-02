@@ -103,37 +103,36 @@
                         <input style="margin-top: 12px" type="checkbox" ng-model="news['toDelete']">
                     </th>
                     <td style="padding: 15px 0 0 0;text-align: center; width: 78px;">
-                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{list['arbcaseId']}}</span>
+                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{list['data']['arbcaseId']}}</span>
                     </td>
                     <td style="padding: 15px 0 0 0;text-align: center; width: 78px;">
-                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{list['litigantsFrom']}}</span>
+                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{list['data']['litigantsFrom']}}</span>
                     </td>
                     <td style="padding: 15px 0 0 0;text-align: center; width: 78px;">
-                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{list['litigantsTo']}}</span>
+                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{list['data']['litigantsTo']}}</span>
                     </td>
                     <td style="padding: 15px 0 0 0;text-align: center; width: 200px;font-size: 13px;">
-                        <span style="width: 360px;display: inline-block;font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);overflow: hidden; white-space: nowrap; text-overflow: ellipsis">{{list['reason']}}...</span>
+                        <span style="width: 360px;display: inline-block;font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);overflow: hidden; white-space: nowrap; text-overflow: ellipsis">{{list['data']['reason']}}...</span>
                     </td>
                     <td style="padding: 15px 0 0 0;text-align: center; width: 160px;">
-                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{list['createTime']}}</span>
+                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{list['data']['updateTime']}}</span>
                     </td>
                     <td style="padding: 15px 0 0 0;text-align: center; width: 100px;">
-                        <div ng-mouseleave="list['menu']=false" style="position: relative">
+                        <div ng-mouseleave="list['data']['menu']=false" style="position: relative">
                             <!--&lt;!&ndash;置顶标识小图标&ndash;&gt;-->
                             <!--<img title="已置顶" ng-if="news['stick_cd']==1" src="/assets/img/content/topSet.png" style="width: 15px !important;position: absolute; top: 7px;right: 0;opacity: 0.8">-->
                             <!--鼠标放上去时调出操作菜单面板-->
-                            <div ng-if="list['menu']" id="62" name="Text_62" class="listOptMenu" style="box-shadow: 0px 0 7px rgba(74,136,181,1);position: absolute;left: -240px;top: -10px;font-size: 13px;height: 31px; z-index:62; padding: 7px 3px ; color: rgba(255,255,255,1); border-radius: 5px 5px 5px 5px; background:rgba(74,136,181,1); ">
+                            <div ng-if="list['data']['menu']" id="62" name="Text_62" class="listOptMenu" style="box-shadow: 0px 0 7px rgba(74,136,181,1);position: absolute;left: -240px;top: -10px;font-size: 13px;height: 31px; z-index:62; padding: 7px 3px ; color: rgba(255,255,255,1); border-radius: 5px 5px 5px 5px; background:rgba(74,136,181,1); ">
                                 <!--<span style="padding: 9px 15px;" ng-click="content.newsOpt('top', news['id'], $index)"></span>-->
                                 <!--<span ng-if="news['stick_cd']==1">取消置顶</span>-->
                                 <!--<span ng-if="news['stick_cd']==0">置顶</span>-->
                                 <span style="padding: 9px 15px;"
-                                      ng-click="arbilist.ReListOpt('delete', report['id'], $index)">撤销案件</span>
+                                      ng-click="arbilist.ArbiListOpt('withdraw', list['timestamp'], $index)">撤销案件</span>
                                 <span style="padding: 9px 15px;"
-                                      ng-click="arbilist.ReListOpt('delete', report['id'], $index)">查看进度</span>
-                                <span style="padding: 9px 15px;" ng-click="arbilist.ReListOpt('view', report['id'], $index)">详情/编辑</span>
+                                      ng-click="arbilist.ArbiListOpt('progress', list['timestamp'], $index)">查看进度</span>
+                                <span style="padding: 9px 15px;" ng-click="arbilist.ArbiListOpt('view', list['timestamp'], $index)">详情/编辑</span>
                             </div>
-                            <div ng-mouseenter="list['menu']=true" style="cursor: pointer; border: 1px solid gainsboro; border-radius: 5px;height: 28px;width: 60px;padding: 5px;position: relative; top: -5px; right: -15px"
-                                 ng-click="arbilist.ReListOpt('view',report)">
+                            <div ng-mouseenter="list['data']['menu']=true" style="cursor: pointer; border: 1px solid gainsboro; border-radius: 5px;height: 28px;width: 60px;padding: 5px;position: relative; top: -5px; right: -15px">
                                 <span style="padding: 0;position: relative;top: -3px;font-size: 12px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">操作</span>
                                 <span class="glyphicon glyphicon-menu-hamburger" style="position: relative;top: -1px;;padding: 0;font-size: 12px;" aria-hidden="true"></span>
                             </div>

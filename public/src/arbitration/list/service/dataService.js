@@ -7,28 +7,21 @@ app.factory('ArbiListDataSer', function () {
 
     //全局数据设置
     var overallData = {
-        'showEdit': false
+        'arbcaseId':'',//arbitration的Id
+        'showEdit': false,
+        'timestamp':'',//目标timestamp
     };
 
     //列表展示数据
-    var listData = [
-        {
-            'arbcaseId': '2018002188OP',
-            'litigantsFrom': '申请人',
-            'litigantsTo': '被申请人',
-            'reason': '打算对方水电费是的发生的范德萨辅导费地方打分多少发生的范德萨发的范德萨发',
-            'createTime': '2018-12-23 22:00:00',
-            'menu': false,
-        }
-    ];
+    var listData = [];
 
     var arbiApplyDataSupply = {
         //选项true or false设置
         'options': {
-            'claim': false,
+            'claim': true,
             'litigants': false,
             'agents': false,
-            'evidences': true
+            'evidences': false
         },
 
         //通过5.7查询全局字段信息

@@ -71,6 +71,59 @@ app.post('/getArbiList', function (req, res) {
 
 
 /**
+ * 查看arbi数据的操作
+ */
+app.post('/viewArbiOpt', function (req, res) {
+    //查找arbilist数据表并返回所有提交过的仲裁数据
+    mongoDBSer.findDocuments('arbidetail', {'timestamp': req.body['timestamp']}, function (docs) {
+        res.send({
+            'status_code': 200,
+            'data': docs
+        });
+    });
+});
+
+
+/**
+ * 保存arbi数据
+ */
+app.post('/saveArbiInfo', function (req, response) {
+    var param = req.body;
+    var arbiDetail = {
+        'timestamp': param['timestamp'],
+        'data': param['submitData'],
+    };
+    var arbiList = {
+        'timestamp': param['timestamp'],
+        'data': param['saveData'],
+    };
+    mongoDBSer.connectToMongo(function (db) {
+        db.db(mongoDBSer.dbArbitration).collection('arbilist').find({'timestamp': param['timestamp']}).toArray(function (err, docs) {
+            if (docs.length > 0) {
+                //已有该记录插入，进行update操作
+                var whereStr = {'timestamp': param['timestamp']};
+                db.db(mongoDBSer.dbArbitration).collection('arbilist').updateOne(whereStr, {$set: {'data': arbiList['data']}}, function (err, res) {
+                    db.db(mongoDBSer.dbArbitration).collection('arbidetail').updateOne(whereStr, {$set: {'data': arbiDetail['data']}}, function (err, res) {
+                        response.send({'status_code': 200});
+                        db.close();
+                    });
+                });
+
+            } else {
+                //未有该记录插入，进行insert操作
+                db.db(mongoDBSer.dbArbitration).collection('arbilist').insertOne(arbiList, function (err, res) {
+                    db.db(mongoDBSer.dbArbitration).collection('arbidetail').insertOne(arbiDetail, function (err, res) {
+                        response.send({'status_code': 200});
+                        db.close();
+                    });
+                });
+            }
+        });
+    })
+});
+
+
+/**
  * 提交新的诉讼数据
  */
 app.post('/submitNewArbiData', function (req, res) {
@@ -193,21 +246,6 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
             res.send(false);
         }
     });
-});
-
-
-/**
- * 返回基础配置文件
- */
-app.get('/targetSetting', function (req, res) {
-    //res.send(serverSerData.targetSetting)
-});
-
-/**
- * 小程序获取用户openId数据
- */
-app.get('/getMiniUserOpenId', function (req, res) {
-    miniSer.getMiniUserOpenId(req, res)
 });
 
 
