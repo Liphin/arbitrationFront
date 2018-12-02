@@ -311,6 +311,7 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
         headers: headers,
         rejectUnauthorized: false
     }, function (error, response, bodyJson) {
+        console.log(bodyJson);
         var body = JSON.parse(bodyJson);
         if (!error && response.statusCode == 200) {
             //重命名文件名
@@ -323,6 +324,7 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
                     res.send(false);
 
                 } else {
+                    console.log('rename success');
                     res.send(body)
                 }
             });
