@@ -185,8 +185,8 @@ app.post('/submitNewArbiData', function (req, res) {
 
             } else {
                 res.send({
-                    'status_code': body['code'],
-                    'data': body['message'],
+                    'status_code': body['fault']['code'],
+                    'data': body['fault']['message'],
                 })
             }
 
@@ -221,7 +221,8 @@ app.post('/progressArbiOpt', function (req, response) {
         rejectUnauthorized: false,
         insecure: true
     };
-    request(options, function (err, res, body) {
+    request(options, function (err, res, bodyJson) {
+        var body = JSON.parse(bodyJson);
         if (!err) {
             console.log(body);
             response.send({
@@ -256,7 +257,8 @@ app.post('/withdrawArbiOpt', function (req, response) {
         headers: headers,
         rejectUnauthorized: false
 
-    }, function (error, response, body) {
+    }, function (error, response, bodyJson) {
+        var body = JSON.parse(bodyJson);
         if (!error && response.statusCode == 200) {
             console.log(body);
             response.send({
@@ -311,7 +313,8 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
         formData: formData,
         headers: headers,
         rejectUnauthorized: false
-    }, function (error, response, body) {
+    }, function (error, response, bodyJson) {
+        var body = JSON.parse(bodyJson);
         if (!error && response.statusCode == 200) {
             //重命名文件名
             var tempFileUrl = serverSerData.resourcePath + '/' + req.body['tempFileName'];
@@ -355,7 +358,6 @@ var deleteArbiListItem = function (db, toDeleteArray, i, toContinue, response) {
             response.send({
                 'status_code': 200,
             })
-
         } else {
             ++i;
             deleteArbiListItem(db, toDeleteArray, i, i < toDeleteArray.length - 1, response)

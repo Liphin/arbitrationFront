@@ -149,6 +149,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
             if (responseData['status_code'] == 200) {
                 //刷新重新获取arbi列表数据
                 getArbiList();
+                alert("提交成功");
 
             }else {
                 alert("提交失败：" + responseData['data']);
@@ -171,6 +172,8 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
             if (responseData['status_code'] == 200) {
                 //刷新重新获取arbi列表数据
                 getArbiList();
+                alert("保存成功");
+
             }else {
                 alert("保存失败：" + responseData['data']);
             }
