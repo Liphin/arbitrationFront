@@ -97,6 +97,16 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
         };
 
 
+        /**
+         * 下载附件文件操作
+         */
+        arbilist.downloadFile = function (fileValue) {
+            ArbiListSer.downloadFile(fileValue);
+        };
+
+
+
+
         //暂时未用到方法****************************************************************************************
         /**
          * 添加附加数据信息

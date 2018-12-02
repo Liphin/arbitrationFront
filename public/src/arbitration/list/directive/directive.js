@@ -34,12 +34,13 @@ app.directive('fileProxy', ['OverallGeneralSer', 'OverallDataSer', 'ArbiListData
                         alert("文件上传仅支持以下格式：" + JSON.stringify(OverallDataSer.overallData['fileSuffix']));
 
                     }
+
                     //文件上传到server
                     else {
                         //准备上传数据
                         var formData = {
                             'fileName': fullName,
-                            'tempFileName': OverallGeneralSer.getTimeStamp() + "." + nameArray[1],
+                            'tempFileName': OverallGeneralSer.getTimeStamp(),
                             'file': element[0].files[0]
                         };
                         //上传到阿里云服务器server

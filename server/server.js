@@ -302,7 +302,7 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
         if (!error && response.statusCode == 200) {
             //重命名文件名
             var tempFileUrl = serverSerData.resourcePath + '/' + req.body['tempFileName'];
-            var newFileUrl = serverSerData.resourcePath + '/' + body['fileKey'] + '.' + body['type'];
+            var newFileUrl = serverSerData.resourcePath + '/' + body['fileKey'];
             fs.rename(tempFileUrl, newFileUrl, function (err) {
                 if (err) {
                     //重命名文件出错

@@ -30,6 +30,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
             'viewArbiOpt': baseUrlData['frontEndHttp'] + 'viewArbiOpt',
             'progressArbiOpt': baseUrlData['frontEndHttp'] + 'progressArbiOpt',
             'withdrawArbiOpt': baseUrlData['frontEndHttp'] + 'withdrawArbiOpt',
+            'getResource': baseUrlData['frontEndHttp'] + 'resource',
         }
     };
 

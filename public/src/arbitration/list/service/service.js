@@ -328,17 +328,43 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
         };
         OverallGeneralSer.httpPostData2(data, url, function (responseData) {
             if (responseData['status_code'] == 200) {
-                if(responseData['data']['code']==1){
+                if (responseData['data']['code'] == 1) {
                     alert("案件撤销操作成功");
 
-                }else{
-                    alert("很抱歉，案件撤销失败，请联系系统管理员："+ JSON.stringify(responseData['data']['message']));
+                } else {
+                    alert("很抱歉，案件撤销失败，请联系系统管理员：" + JSON.stringify(responseData['data']['message']));
                 }
 
-            }else{
+            } else {
                 alert("很抱歉，系统出错，请联系系统管理员：" + JSON.stringify(responseData['data']))
             }
         }, () => {
+        });
+    };
+
+
+    /**
+     * 下载文件操作
+     * @param fileValue
+     */
+    var downloadFile = function (fileValue) {
+        var url = OverallDataSer.urlData['frontEndHttp']['getResource'] + fileValue['fileKey'];
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: "binary",
+            processData: false,
+            success: function (result) {
+                //从网络流中读入数据并保存文件
+                var blob = new Blob([result], {type: 'application/octet-stream'});
+                var fileName = fileValue['fileName'];
+                saveAs(blob, fileName);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                //打印错误消息体
+                alert("很抱歉，系统出错，请联系系统管理员：" + errorThrown)
+                console.error('error', errorThrown)
+            }
         });
     };
 
@@ -349,11 +375,19 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
         ArbiListOpt: ArbiListOpt,
         getArbiList: getArbiList,
         saveArbiInfo: saveArbiInfo,
+        downloadFile: downloadFile,
         progressArbiOpt: progressArbiOpt,
         submitNewArbiData: submitNewArbiData,
         addAddictionData: addAddictionData,
         createNewArbiInfo: createNewArbiInfo,
         chooseArbiFillOption: chooseArbiFillOption,
     }
-
 });
+
+
+
+
+
+
+
+
