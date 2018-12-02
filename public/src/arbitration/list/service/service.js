@@ -150,6 +150,8 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
                 //刷新重新获取arbi列表数据
                 getArbiList();
                 alert("提交成功");
+                //关闭编辑面板
+                ArbiListDataSer.overallData['showEdit']=false;
 
             }else {
                 alert("提交失败：" + JSON.stringify(responseData['data']));
