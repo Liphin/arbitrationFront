@@ -44,15 +44,15 @@ app.use(bodyParser.urlencoded({limit: serverSerData.httpDataLimit, extended: tru
  * 管理员登录设置
  */
 app.post('/managerLogin', function (req, res) {
-    res.send(true);
-    // mongoDBSer.findDocuments("manager", req.body, function (resData) {
-    //     //若该账号密码正确则返回查找数据库后第一个数值，否则返回false
-    //     if (resData.length > 0) {
-    //         res.send(resData[0]);
-    //     } else {
-    //         res.send(false);
-    //     }
-    // });
+    //res.send(true);
+    mongoDBSer.findDocuments("manager", req.body, function (resData) {
+        //若该账号密码正确则返回查找数据库后第一个数值，否则返回false
+        if (resData.length > 0) {
+            res.send(resData[0]);
+        } else {
+            res.send(false);
+        }
+    });
 });
 
 
