@@ -57,21 +57,21 @@ app.directive('fileProxy', ['OverallGeneralSer', 'OverallDataSer', 'ArbiListData
                                     case 'litigants': {
                                         //litigants的设置：litigants-->files->fileKey
                                         ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileKey'] = fileKey;
-                                        ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileName'] = fullName;
+                                        //ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileName'] = fullName;
                                         break;
                                     }
                                     case 'agents': {
                                         //agents的设置：agents-->files->fileKey
                                         ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileKey'] = fileKey;
-                                        ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileName'] = fullName;
+                                        //ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileName'] = fullName;
                                         break;
                                     }
                                     case 'evidences': {
                                         //evidences的设置： evidences-->evidenceItems-->files->fileKey
                                         ArbiListDataSer.arbiApplyData[scope.editType][scope.parentParentIndex]['evidenceItems']
                                             [scope.parentIndex]['files'][scope.fileIndex]['fileKey'] = fileKey;
-                                        ArbiListDataSer.arbiApplyData[scope.editType][scope.parentParentIndex]['evidenceItems']
-                                            [scope.parentIndex]['files'][scope.fileIndex]['fileName'] = fullName;
+                                        // ArbiListDataSer.arbiApplyData[scope.editType][scope.parentParentIndex]['evidenceItems']
+                                        //     [scope.parentIndex]['files'][scope.fileIndex]['fileName'] = fullName;
                                         break;
                                     }
                                 }
