@@ -75,6 +75,7 @@ app.directive('fileProxy', ['OverallGeneralSer', 'OverallDataSer', 'ArbiListData
                                         break;
                                     }
                                 }
+                                alert("上传成功");
                             }
                         });
                     }
