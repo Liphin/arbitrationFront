@@ -87,7 +87,7 @@ app.post('/viewArbiOpt', function (req, res) {
 /**
  * 插入或更新arbitration数据库
  */
-var insertUpdateArbiDb = function (arbiDetail, arbiList) {
+var insertUpdateArbiDb = function (arbiDetail, arbiList, callback) {
     mongoDBSer.connectToMongo(function (db) {
         db.db(mongoDBSer.dbArbitration).collection('arbilist').find({'timestamp': arbiDetail['timestamp']}).toArray(function (err, docs) {
             if (docs.length > 0) {
@@ -95,7 +95,7 @@ var insertUpdateArbiDb = function (arbiDetail, arbiList) {
                 var whereStr = {'timestamp': arbiDetail['timestamp']};
                 db.db(mongoDBSer.dbArbitration).collection('arbilist').updateOne(whereStr, {$set: {'data': arbiList['data']}}, function (err, res) {
                     db.db(mongoDBSer.dbArbitration).collection('arbidetail').updateOne(whereStr, {$set: {'data': arbiDetail['data']}}, function (err, res) {
-                        response.send({'status_code': 200});
+                        callback();
                         db.close();
                     });
                 });
@@ -104,7 +104,7 @@ var insertUpdateArbiDb = function (arbiDetail, arbiList) {
                 //未有该记录插入，进行insert操作
                 db.db(mongoDBSer.dbArbitration).collection('arbilist').insertOne(arbiList, function (err, res) {
                     db.db(mongoDBSer.dbArbitration).collection('arbidetail').insertOne(arbiDetail, function (err, res) {
-                        response.send({'status_code': 200});
+                        callback();
                         db.close();
                     });
                 });
@@ -127,7 +127,9 @@ app.post('/saveArbiInfo', function (req, response) {
         'timestamp': param['timestamp'],
         'data': param['saveData'],
     };
-    insertUpdateArbiDb(arbiDetail, arbiList);
+    insertUpdateArbiDb(arbiDetail, arbiList, function () {
+        response.send({'status_code': 200});
+    });
 });
 
 
@@ -167,18 +169,18 @@ app.post('/submitNewArbiData', function (req, res) {
                 };
 
                 //存储detail数据，用于查询详情时使用
-                var saveDetailData ={
+                var saveDetailData = {
                     'timestamp': req.body['timestamp'],
                     'data': req.body['submitData']
                 };
 
                 //分别异步插入或更新arbilist和arbidetail中
-                insertUpdateArbiDb(saveDetailData, saveListData);
-
-                //返回arbcaseId
-                res.send({
-                    'status_code': 200,
-                    'data': body['arbcaseId'],
+                insertUpdateArbiDb(saveDetailData, saveListData, function () {
+                    //返回arbcaseId
+                    res.send({
+                        'status_code': 200,
+                        'data': body['arbcaseId'],
+                    });
                 });
 
             } else {
