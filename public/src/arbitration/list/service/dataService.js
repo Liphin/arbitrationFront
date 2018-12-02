@@ -7,9 +7,24 @@ app.factory('ArbiListDataSer', function () {
 
     //全局数据设置
     var overallData = {
-        'arbcaseId':'',//arbitration的Id
+        'arbcaseId': '',//arbitration的Id
         'showEdit': false,
-        'timestamp':'',//目标timestamp
+        'timestamp': '',//目标timestamp
+        'progress': {
+            'status': false, //默认初始化时为false，不显示
+            'data': [
+                {
+                    "title": '进度1',
+                    "processDate": '2019-22-12',
+                    "processResult": '正在处理中'
+                },
+                {
+                    "title": '进度2',
+                    "processDate": '2020-22-12',
+                    "processResult": '正在处理中'
+                }
+            ],//案件办理进度
+        }
     };
 
     //列表展示数据
@@ -21,7 +36,7 @@ app.factory('ArbiListDataSer', function () {
             'claim': true,
             'litigants': false,
             'agents': false,
-            'evidences': false
+            'evidences': false,
         },
 
         //通过5.7查询全局字段信息
@@ -109,12 +124,12 @@ app.factory('ArbiListDataSer', function () {
     };
 
     //仲裁应用数据
-    var arbiApplyData= {
-        'overall':{},
-        'claim':{},
-        'litigants':{},
-        'agents':{},
-        'evidences':{}
+    var arbiApplyData = {
+        'overall': {},
+        'claim': {},
+        'litigants': {},
+        'agents': {},
+        'evidences': {}
     };
 
 

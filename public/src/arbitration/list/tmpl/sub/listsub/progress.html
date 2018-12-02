@@ -1,0 +1,32 @@
+<!--案件进度页面-->
+<div ng-if="arbilist.overallData['progress']['status']" style="display: flex;align-items: center;justify-content: center;position:fixed; top: 0; left: 0; bottom: 0; right: 0;background: rgba(0,0,0,0.47); z-index: 10000">
+    <div style="padding: 20px;;background: white; display: flex;flex-direction: column;border-radius: 20px; width: 70%; min-height: 0;height: 90%; max-width: 1000px; max-height: 800px">
+        <!--顶部关闭按钮-->
+        <div style="margin-top: -20px;height: 32px;text-align: center">
+            <span style="font-size: 18px;text-align: center; position: relative; top: 10px;"></span>
+            <span ng-click="arbilist.overallData['progress']['status']=false" style="float: right; font-size: 35px; cursor: pointer;">&times;</span>
+        </div>
+
+        <!--案件各具体进度描述-->
+        <div>
+            <table class="table table-hover" style="font-size: 15px">
+                <caption style="text-align: center;font-size: 18px;font-weight: bold;margin-bottom: 15px">案件进展描述</caption>
+                <thead>
+                <tr class="tableTrStyle">
+                    <th>描述</th>
+                    <th>处理时间</th>
+                    <th>处理结果</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="tableTrStyle" ng-repeat="value in arbilist.overallData['progress']['data'] track by $index">
+                    <td>{{value['title']}}</td>
+                    <td>{{value['processDate']}}</td>
+                    <td>{{value['processResult']}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

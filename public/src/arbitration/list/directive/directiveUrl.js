@@ -62,3 +62,13 @@ app.directive('editLitigants', ['$document', function ($document) {
     };
 }]);
 
+/**
+ * 查询案件进度页面
+ */
+app.directive('arbiProgress', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/arbitration/list/tmpl/sub/listsub/progress.html'
+    };
+}]);
+

@@ -124,6 +124,8 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
             litigantsTo: ArbiListDataSer.arbiApplyData['litigants'][1]['name'],
             reason: ArbiListDataSer.arbiApplyData['claim']['reason'],
             updateTime: OverallGeneralSer.getCurrentDataTime(),
+            operaterType: ArbiListDataSer.arbiApplyData['overall']['operaterType'],
+            operater: ArbiListDataSer.arbiApplyData['overall']['operater'],
         };
 
         //包装整合最终的提交数据
@@ -177,6 +179,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
      */
     var getArbiList = function () {
         //post请求获取list数据
+        OverallDataSer.overallData['loadingData'] = true;
         var url = OverallDataSer.urlData['frontEndHttp']['getArbiList'];
         OverallGeneralSer.httpPostData2({}, url, function (responseData) {
             if (responseData['status_code'] == 200) {
@@ -193,6 +196,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
                 console.log(ArbiListDataSer.listData);
             }
         }, () => {
+            OverallDataSer.overallData['loadingData'] = false;
         });
     };
 
@@ -228,9 +232,11 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
                 break;
             }
             case 'progress': {
+                progressArbiOpt(timestamp, index);
                 break;
             }
             case 'withdraw': {
+                withdrawArbiOpt(timestamp, index);
                 break;
             }
         }
@@ -269,12 +275,81 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
     };
 
 
+    /**
+     * 根据timestamp查询易简网数据
+     * @param timestamp
+     * @param index
+     */
+    var progressArbiOpt = function (timestamp, index) {
+        //如果该案件条目尚未提交则直接返回，否则进行查询操作
+        if (ArbiListDataSer.listData[index]['data']['arbcaseId'] == '未提交') {
+            alert("该案件信息尚未提交，无法查看案件进度");
+            return;
+        }
+
+        var url = OverallDataSer.urlData['frontEndHttp']['progressArbiOpt'];
+        var data = {
+            'arbcaseId': ArbiListDataSer.listData[index]['data']['arbcaseId'],
+            'operaterType': ArbiListDataSer.listData[index]['data']['operaterType'],
+            'operater': ArbiListDataSer.listData[index]['data']['operater'],
+        };
+        OverallGeneralSer.httpPostData2(data, url, function (responseData) {
+            if (responseData['status_code'] == 200) {
+                ArbiListDataSer.overallData['progress']['status'] = true;//打开进度展示页面
+                ArbiListDataSer.overallData['progress']['data'].length = 0;//清空并重新添加进度数据到progress中
+                for (var i in responseData['data']['progress']) {
+                    ArbiListDataSer.overallData['progress']['data'].push(responseData['data']['progress'][i]);
+                }
+            } else {
+                alert("很抱歉，系统出错，请联系系统管理员：" + JSON.stringify(responseData['data']))
+            }
+        }, () => {
+        });
+    };
+
+
+    /**
+     * 撤销仲裁请求数据
+     * @param timestamp
+     * @param index
+     */
+    var withdrawArbiOpt = function (timestamp, index) {
+        //如果该案件条目尚未提交则直接返回，否则进行查询操作
+        if (ArbiListDataSer.listData[index]['data']['arbcaseId'] == '未提交') {
+            alert("该案件信息尚未提交，无法撤销仲裁请求");
+            return;
+        }
+
+        var url = OverallDataSer.urlData['frontEndHttp']['withdrawArbiOpt'];
+        var data = {
+            'arbcaseId': ArbiListDataSer.listData[index]['data']['arbcaseId'],
+            'operaterType': ArbiListDataSer.listData[index]['data']['operaterType'],
+            'operater': ArbiListDataSer.listData[index]['data']['operater'],
+        };
+        OverallGeneralSer.httpPostData2(data, url, function (responseData) {
+            if (responseData['status_code'] == 200) {
+                if(responseData['data']['code']==1){
+                    alert("案件撤销操作成功");
+
+                }else{
+                    alert("很抱歉，案件撤销失败，请联系系统管理员："+ JSON.stringify(responseData['data']['message']));
+                }
+
+            }else{
+                alert("很抱歉，系统出错，请联系系统管理员：" + JSON.stringify(responseData['data']))
+            }
+        }, () => {
+        });
+    };
+
+
     return {
         addFile: addFile,
         dataInit: dataInit,
         ArbiListOpt: ArbiListOpt,
         getArbiList: getArbiList,
         saveArbiInfo: saveArbiInfo,
+        progressArbiOpt: progressArbiOpt,
         submitNewArbiData: submitNewArbiData,
         addAddictionData: addAddictionData,
         createNewArbiInfo: createNewArbiInfo,

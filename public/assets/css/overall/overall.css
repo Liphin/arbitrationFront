@@ -233,6 +233,10 @@ iframe, embed{
     cursor: pointer;
 }
 
+.tableTrStyle td, .tableTrStyle th{
+    text-align: center;
+}
+
 
 
 
