@@ -204,11 +204,11 @@ iframe, embed{
     align-items: center;
     cursor: pointer;
 }
-.arbiEditLeft div:hover{
-    background: #e4f2f7;
-    border-color: #e4f2f7;
-    color: black;
-}
+/*.arbiEditLeft div:hover{*/
+    /*background: #e4f2f7;*/
+    /*border-color: #e4f2f7;*/
+    /*color: black;*/
+/*}*/
 
 .inputStyle{
     outline: none;

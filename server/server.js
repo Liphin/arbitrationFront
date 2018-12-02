@@ -208,18 +208,15 @@ app.post('/submitNewArbiData', function (req, res) {
 app.post('/progressArbiOpt', function (req, response) {
     //获取指定案件的进度
     var urlGet = 'https://14.23.88.138:7777/api/arb/1.0/arbcaseProgress/' + req.body['arbcaseId'] +
-        '?operaterType=' + req.body['operaterType'] + '&operater=' + req.body['operater'];
+        '?operaterType=' + encodeURIComponent(req.body['operaterType']) + '&operater=' + encodeURIComponent(req.body['operater']);
     var options = {
         url: urlGet,
         method: 'GET',
         headers: {
             'Accept': 'application/json',
-            'headers': {
-                Authorization: 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c',
-            }
+            'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c',
         },
-        rejectUnauthorized: false,
-        insecure: true
+        rejectUnauthorized: false
     };
     request(options, function (err, res, bodyJson) {
         var body = JSON.parse(bodyJson);
@@ -243,7 +240,7 @@ app.post('/progressArbiOpt', function (req, response) {
 /**
  * 撤销仲裁请求
  */
-app.post('/withdrawArbiOpt', function (req, response) {
+app.post('/withdrawArbiOpt', function (req, res) {
     //获取指定案件的进度
     var urlPost = 'https://14.23.88.138:7777/api/arb/1.0/claimWithdraw/' + req.body['arbcaseId'];
     //设置头部
@@ -261,7 +258,7 @@ app.post('/withdrawArbiOpt', function (req, response) {
         var body = JSON.parse(bodyJson);
         if (!error && response.statusCode == 200) {
             console.log(body);
-            response.send({
+            res.send({
                 'status_code': 200,
                 'data': body,
             });
@@ -269,7 +266,7 @@ app.post('/withdrawArbiOpt', function (req, response) {
         } else {
             //发送数据到易简网出错
             console.log('post withdrawArbiOpt error', error, body);
-            response.send({
+            res.send({
                 'status_code': 400,
                 'data': 'post data error',
             })

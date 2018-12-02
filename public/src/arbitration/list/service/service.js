@@ -151,9 +151,9 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
                 getArbiList();
                 alert("提交成功");
                 //关闭编辑面板
-                ArbiListDataSer.overallData['showEdit']=false;
+                ArbiListDataSer.overallData['showEdit'] = false;
 
-            }else {
+            } else {
                 alert("提交失败：" + JSON.stringify(responseData['data']));
             }
 
@@ -176,7 +176,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
                 getArbiList();
                 alert("保存成功");
 
-            }else {
+            } else {
                 alert("保存失败：" + JSON.stringify(responseData['data']));
             }
         }, function () {
@@ -362,7 +362,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
      * @param fileValue
      */
     var downloadFile = function (fileValue) {
-        var url = OverallDataSer.urlData['frontEndHttp']['getResource'] + fileValue['fileKey'];
+        var url = OverallDataSer.urlData['frontEndHttp']['getResource'] + '/' + fileValue['fileKey'];
         $.ajax({
             url: url,
             type: 'GET',
