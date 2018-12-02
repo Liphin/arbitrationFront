@@ -323,6 +323,35 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
 
 
 /**
+ * 多选删除仲裁数据
+ */
+app.post('/deleteBatchArbi', function (req, response) {
+    var toDeleteArray = req.body['toDeleteArray'];
+    mongoDBSer.connectToMongo(function (db) {
+        deleteArbiListItem(db, toDeleteArray, 0, 0 < toDeleteArray.length - 1, response);
+    });
+});
+/**
+ * 删除db中数据操作
+ */
+var deleteArbiListItem = function (db, toDeleteArray, i, toContinue, response) {
+    var whereStr = {'timestamp': toDeleteArray[i]};
+    db.db(mongoDBSer.dbArbitration).collection('arbilist').deleteOne(whereStr, function (err, res) {
+        if (!toContinue) {
+            db.close();
+            response.send({
+                'status_code': 200,
+            })
+
+        } else {
+            ++i;
+            deleteArbiListItem(db, toDeleteArray, i, i < toDeleteArray.length - 1, response)
+        }
+    });
+};
+
+
+/**
  * mongoDB处理
  */
 // var MongoClient = require('mongodb').MongoClient;

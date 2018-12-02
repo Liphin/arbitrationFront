@@ -105,6 +105,13 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
         };
 
 
+        /**
+         * 多选删除仲裁数据
+         */
+        arbilist.deleteBatchArbi = function () {
+            ArbiListSer.deleteBatchArbi();
+        };
+
 
 
         //暂时未用到方法****************************************************************************************

@@ -187,6 +187,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
                 ArbiListDataSer.listData.length = 0;
                 //循环遍历数组，装载数据到list中
                 for (var i in responseData['data']) {
+                    responseData['data'][i]['data']['toDelete'] = false;
                     responseData['data'][i]['data']['menu'] = false;
                     if (responseData['data'][i]['data']['arbcaseId'] == '') {
                         responseData['data'][i]['data']['arbcaseId'] = '未提交';
@@ -369,6 +370,32 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
     };
 
 
+    /**
+     * 多选删除仲裁数据
+     */
+    var deleteBatchArbi = function () {
+        var url = OverallDataSer.urlData['frontEndHttp']['deleteBatchArbi'];
+        //装载多选待删除数据
+        var data = [];
+        for (var i in ArbiListDataSer.listData) {
+            if (ArbiListDataSer.listData[i]['data']['toDelete'] == true) {
+                data.push(ArbiListDataSer.listData[i]['timestamp'])
+            }
+        }
+        OverallGeneralSer.httpPostData2({'toDeleteArray': data}, url, function (responseData) {
+            if (responseData['status_code'] == 200) {
+                //刷新重新获取arbi列表数据
+                getArbiList();
+
+            } else {
+                alert("很抱歉，系统出错，请联系系统管理员：" + JSON.stringify(responseData['data']))
+            }
+        }, () => {
+        });
+    };
+
+
+
     return {
         addFile: addFile,
         dataInit: dataInit,
@@ -376,6 +403,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
         getArbiList: getArbiList,
         saveArbiInfo: saveArbiInfo,
         downloadFile: downloadFile,
+        deleteBatchArbi: deleteBatchArbi,
         progressArbiOpt: progressArbiOpt,
         submitNewArbiData: submitNewArbiData,
         addAddictionData: addAddictionData,

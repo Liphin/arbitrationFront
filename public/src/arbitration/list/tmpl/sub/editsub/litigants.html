@@ -191,7 +191,7 @@
                 <input style="display: inline-block; border: 1px solid lightgrey; margin-left: -60px;width: 60px; opacity: 0; cursor: pointer" file-proxy type="file" parent-parent-index="null" parent-index="{{$parent.$index}}"
                        file-index="{{$index}}" edit-type="litigants"/>
                 <span ng-click="arbilist.downloadFile(fileValue)" ng-if="fileValue['fileKey']!=''" class="fa fa-file-pdf-o" style="margin-left: 15px;cursor: pointer; font-size: 20px; color: rebeccapurple"></span>
-                <span style="margin-left: 15px;font-weight: bold; color: #3689aa;text-decoration: underline"> 请上传{{arbilist.getFilePrefixName(fileValue['fileName'])}}（文件类型范围:pdf/png/jpg）</span>
+                <span style="margin-left: 15px;"> 请上传{{arbilist.getFilePrefixName(fileValue['fileName'])}}（文件类型范围:pdf/png/jpg）</span>
             </div>
         </div>
     </div>

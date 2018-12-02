@@ -9,7 +9,6 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         'loginStatus': false,
         'loadingData': false, //
         'requestDataErrorMsg': '尊敬的客户，服务出错，请稍后重试',
-
         'fileSuffix': ['doc','docx','pdf','xls','xlsx','png','jpeg','jpg','gif','pfx','zip'], //文件后缀辅助数据
     };
 
@@ -31,6 +30,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
             'progressArbiOpt': baseUrlData['frontEndHttp'] + 'progressArbiOpt',
             'withdrawArbiOpt': baseUrlData['frontEndHttp'] + 'withdrawArbiOpt',
             'getResource': baseUrlData['frontEndHttp'] + 'resource',
+            'deleteBatchArbi': baseUrlData['frontEndHttp'] + 'deleteBatchArbi',
         }
     };
 
