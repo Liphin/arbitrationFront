@@ -149,6 +149,9 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
             if (responseData['status_code'] == 200) {
                 //刷新重新获取arbi列表数据
                 getArbiList();
+
+            }else {
+                alert("提交失败：" + responseData['data']);
             }
 
         }, function () {
@@ -168,6 +171,8 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
             if (responseData['status_code'] == 200) {
                 //刷新重新获取arbi列表数据
                 getArbiList();
+            }else {
+                alert("保存失败：" + responseData['data']);
             }
         }, function () {
         });
@@ -197,7 +202,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
                 console.log(ArbiListDataSer.listData);
 
             } else {
-                alert("提交失败：" + responseData['data']);
+                alert("请求失败：" + responseData['data']);
             }
         }, function () {
             OverallDataSer.overallData['loadingData'] = false;

@@ -153,8 +153,9 @@ app.post('/submitNewArbiData', function (req, res) {
         headers: headers,
         rejectUnauthorized: false
 
-    }, function (error, response, body) {
+    }, function (error, response, bodyJson) {
         if (!error && response.statusCode == 200) {
+            var body = JSON.parse(bodyJson);
             console.log('submit response', body);
             if (body['code'] == 1) {
                 //保存到mongo数据库
