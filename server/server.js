@@ -314,20 +314,34 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
         console.log(bodyJson);
         var body = JSON.parse(bodyJson);
         if (!error && response.statusCode == 200) {
+
             //重命名文件名
             var tempFileUrl = serverSerData.resourcePath + '/' + req.body['tempFileName'];
             var newFileUrl = serverSerData.resourcePath + '/' + body['fileKey'];
-            fs.rename(tempFileUrl, newFileUrl, function (err) {
-                if (err) {
-                    //重命名文件出错
-                    console.log('rename failure');
-                    res.send(false);
 
-                } else {
-                    console.log('rename success');
-                    res.send(body)
+            //如果已经存在该文件先删除，否则将导致重命名后文件异常
+            fs.access(newFileUrl, error => {
+
+                if (!error) {
+                    console.log('remove file first', newFileUrl);
+                    fs.unlinkSync(newFileUrl);
                 }
+
+                fs.rename(tempFileUrl, newFileUrl, function (err) {
+                    if (err) {
+                        //重命名文件出错
+                        console.log('rename failure', err);
+                        res.send(false);
+
+                    } else {
+                        console.log('rename success');
+                        res.send(body)
+                    }
+                });
             });
+
+
+
         } else {
             //发送数据到易简网出错
             console.log('post data to YiJian error');
