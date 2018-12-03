@@ -141,6 +141,12 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
      * 提交新的诉讼数据到服务器
      */
     var submitNewArbiData = function () {
+        //对已提交了的案件修改需到易简网上修改
+        if (ArbiListDataSer.overallData['arbcaseId'] != '未提交' && ArbiListDataSer.overallData['arbcaseId'] != '已撤销') {
+            alert("该案件信息已提交，需登录易简网进行修改。");
+            return;
+        }
+
         //整理提交的arbi数据
         var formData = preWrapArbiData();
         //提交诉讼信息到server
@@ -166,6 +172,12 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
      * 保存最新仲裁信息到数据库
      */
     var saveArbiInfo = function () {
+        //对已提交了的案件修改需到易简网上修改
+        if (ArbiListDataSer.overallData['arbcaseId'] != '未提交' && ArbiListDataSer.overallData['arbcaseId'] != '已撤销') {
+            alert("该案件信息已提交，需登录易简网进行修改。");
+            return;
+        }
+
         //整理提交的arbi数据
         var formData = preWrapArbiData();
         //post请求保存数据信息
@@ -343,6 +355,8 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
         OverallGeneralSer.httpPostData2(data, url, function (responseData) {
             if (responseData['status_code'] == 200) {
                 if (responseData['data']['code'] == 1) {
+                    ArbiListDataSer.listData[index]['data']['arbcaseId'] = '已撤销';
+                    saveArbiInfo();
                     alert("案件撤销操作成功");
 
                 } else {
