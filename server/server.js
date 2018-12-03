@@ -291,7 +291,11 @@ var storage = multer.diskStorage({
 });
 var upload = multer({storage: storage});
 app.post('/uploadResource', upload.single('file'), function (req, res) {
-    console.log('post filename', req.body['fileName'],JSON.stringify(req.file.toString('base64')));
+    //转换成base64数据
+    var tempFileUrl = serverSerData.resourcePath + '/' + req.body['tempFileName'];
+    var fileData = fs.readFileSync(tempFileUrl);
+    var base64Image = new Buffer(fileData, 'binary').toString('base64');
+
     //上传到易简网平台
     var urlPost = 'https://14.23.88.138:7777/api/1.0/file';
     //设置头部
@@ -302,7 +306,7 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
     //表单数据设置
     var formData = {
         'fileName': encodeURIComponent(req.body['fileName']),
-        'fileBody': encodeURIComponent(req.file.toString('base64'))
+        'fileBody': base64Image
     };
     //上传数据到易简网
     request.post({
@@ -314,9 +318,7 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
         console.log(bodyJson);
         var body = JSON.parse(bodyJson);
         if (!error && response.statusCode == 200) {
-
             //重命名文件名
-            var tempFileUrl = serverSerData.resourcePath + '/' + req.body['tempFileName'];
             var newFileUrl = serverSerData.resourcePath + '/' + body['fileKey'];
 
             //如果已经存在该文件先删除，否则将导致重命名后文件异常
@@ -339,8 +341,6 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
                     }
                 });
             });
-
-
 
         } else {
             //发送数据到易简网出错
