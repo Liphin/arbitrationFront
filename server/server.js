@@ -156,6 +156,7 @@ app.post('/submitNewArbiData', function (req, res) {
         rejectUnauthorized: false
 
     }, function (error, response, bodyJson) {
+        console.log(bodyJson);
         if (!error && response.statusCode == 200) {
             var body = JSON.parse(bodyJson);
             console.log('submit response', body);
@@ -219,9 +220,9 @@ app.post('/progressArbiOpt', function (req, response) {
         rejectUnauthorized: false
     };
     request(options, function (err, res, bodyJson) {
+        console.log(bodyJson);
         var body = JSON.parse(bodyJson);
         if (!err) {
-            console.log(body);
             response.send({
                 'status_code': 200,
                 'data': body,
@@ -255,9 +256,9 @@ app.post('/withdrawArbiOpt', function (req, res) {
         rejectUnauthorized: false
 
     }, function (error, response, bodyJson) {
+        console.log(bodyJson);
         var body = JSON.parse(bodyJson);
         if (!error && response.statusCode == 200) {
-            console.log(body);
             res.send({
                 'status_code': 200,
                 'data': body,
