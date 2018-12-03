@@ -291,6 +291,7 @@ var storage = multer.diskStorage({
 });
 var upload = multer({storage: storage});
 app.post('/uploadResource', upload.single('file'), function (req, res) {
+    console.log('post filename', req.body['fileName']);
     //上传到易简网平台
     var urlPost = 'https://14.23.88.138:7777/api/1.0/file';
     //设置头部
@@ -300,8 +301,6 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
     };
     //表单数据设置
     var formData = {
-        'operaterType': encodeURIComponent('申请人'),
-        'operater': encodeURIComponent('管理员'),
         'fileName': encodeURIComponent(req.body['fileName']),
         'fileBody': req.file.toString('base64')
     };
