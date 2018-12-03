@@ -60,14 +60,14 @@ app.directive('fileProxy', ['OverallGeneralSer', 'OverallDataSer', 'ArbiListData
                                         ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileKey'] = fileKey;
                                         //更换名字的后缀名
                                         originName = ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileName'];
-                                        ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileName'] = originName.split('.')[0] + nameArray[1];
+                                        ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileName'] = originName.split('.')[0] + '.' + nameArray[1];
                                         break;
                                     }
                                     case 'agents': {
                                         //agents的设置：agents-->files->fileKey
                                         ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileKey'] = fileKey;
                                         originName = ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileName'];
-                                        ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileName'] = originName.split('.')[0] + nameArray[1];
+                                        ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileName'] = originName.split('.')[0] + '.' + nameArray[1];
                                         break;
                                     }
                                     case 'evidences': {
@@ -77,7 +77,7 @@ app.directive('fileProxy', ['OverallGeneralSer', 'OverallDataSer', 'ArbiListData
                                         originName = ArbiListDataSer.arbiApplyData[scope.editType][scope.parentParentIndex]['evidenceItems']
                                             [scope.parentIndex]['files'][scope.fileIndex]['fileName'];
                                         ArbiListDataSer.arbiApplyData[scope.editType][scope.parentParentIndex]['evidenceItems']
-                                            [scope.parentIndex]['files'][scope.fileIndex]['fileName'] = originName.split('.')[0] + nameArray[1];
+                                            [scope.parentIndex]['files'][scope.fileIndex]['fileName'] = originName.split('.')[0] + '.' + nameArray[1];
 
                                         break;
                                     }
