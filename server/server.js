@@ -220,7 +220,7 @@ app.post('/progressArbiOpt', function (req, response) {
         rejectUnauthorized: false
     };
     request(options, function (err, res, bodyJson) {
-        console.log(bodyJson);
+        console.log('bodyJson',bodyJson);
         var body = JSON.parse(bodyJson);
         if (!err) {
             response.send({
