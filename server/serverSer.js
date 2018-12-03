@@ -1,6 +1,7 @@
 /**
  * Created by Administrator on 2018/5/15.
  */
+var request = require('request');
 
 function ServerSer() {
 
@@ -73,6 +74,43 @@ function ServerSer() {
         }
         return status;
     };
+
+
+    /**
+     * 每天任务获取accessToken数据操作
+     * TODO 完善生产环境下获取access_token
+     */
+    this.scheduleGetAccessToken = function () {
+        //获取accessToken
+        var urlGet = 'https://14.23.88.138:7777/token?grant_type=GRANT_TYPE&username=USERNAME&password=PASSWORD';
+        var options = {
+            url: urlGet,
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c',
+            },
+            rejectUnauthorized: false
+        };
+        request(options, function (err, res, bodyJson) {
+            console.log('bodyJson',bodyJson);
+            var body = JSON.parse(bodyJson);
+            if (!err) {
+                response.send({
+                    'status_code': 200,
+                    'data': body,
+                });
+            } else {
+                console.log(err, body);
+                res.send({
+                    'status_code': 400,
+                    'data': 'get data error',
+                })
+            }
+        });
+    }
+
+
 }
 
 module.exports = ServerSer;

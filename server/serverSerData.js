@@ -14,9 +14,15 @@ var isProd = targetSetting['settingData']['isProd']; //是否为生产环境
 var httpDataLimit = '25mb';
 var appConfig = targetSetting['appConfig'];
 
+//全局数据变量
+var overallData = {
+    'access_token': '',
+};
+
 module.exports = {
     targetSetting: targetSetting,
     httpDataLimit: httpDataLimit,
+    overallData: overallData,
     appConfig: appConfig,
     basePath: basePath,
     projectPath: projectPath,
