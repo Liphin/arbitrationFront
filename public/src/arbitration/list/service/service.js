@@ -356,6 +356,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
             if (responseData['status_code'] == 200) {
                 if (responseData['data']['code'] == 1) {
                     ArbiListDataSer.listData[index]['data']['arbcaseId'] = '已撤销';
+                    ArbiListDataSer.overallData['arbcaseId'] = '已撤销'; //由于会重新赋值该对象的值，所以进行修改
                     saveArbiInfo();
                     alert("案件撤销操作成功");
 
