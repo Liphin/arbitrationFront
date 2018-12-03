@@ -302,7 +302,7 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
     //表单数据设置
     var formData = {
         'fileName': encodeURIComponent(req.body['fileName']),
-        'fileBody': req.file.toString('base64')
+        'fileBody': encodeURIComponent(req.file.toString('base64'))
     };
     //上传数据到易简网
     request.post({
