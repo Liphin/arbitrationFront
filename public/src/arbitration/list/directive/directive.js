@@ -53,25 +53,32 @@ app.directive('fileProxy', ['OverallGeneralSer', 'OverallDataSer', 'ArbiListData
                             //上传数据成功
                             else {
                                 var fileKey = responseData['fileKey'];
+                                var originName = '';
                                 switch (scope.editType) {
                                     case 'litigants': {
                                         //litigants的设置：litigants-->files->fileKey
                                         ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileKey'] = fileKey;
-                                        //ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileName'] = fullName;
+                                        //更换名字的后缀名
+                                        originName = ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileName'];
+                                        ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileName'] = originName.split('.')[0] + nameArray[1];
                                         break;
                                     }
                                     case 'agents': {
                                         //agents的设置：agents-->files->fileKey
                                         ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileKey'] = fileKey;
-                                        //ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileName'] = fullName;
+                                        originName = ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileName'];
+                                        ArbiListDataSer.arbiApplyData[scope.editType][scope.parentIndex]['files'][scope.fileIndex]['fileName'] = originName.split('.')[0] + nameArray[1];
                                         break;
                                     }
                                     case 'evidences': {
                                         //evidences的设置： evidences-->evidenceItems-->files->fileKey
                                         ArbiListDataSer.arbiApplyData[scope.editType][scope.parentParentIndex]['evidenceItems']
                                             [scope.parentIndex]['files'][scope.fileIndex]['fileKey'] = fileKey;
-                                        // ArbiListDataSer.arbiApplyData[scope.editType][scope.parentParentIndex]['evidenceItems']
-                                        //     [scope.parentIndex]['files'][scope.fileIndex]['fileName'] = fullName;
+                                        originName = ArbiListDataSer.arbiApplyData[scope.editType][scope.parentParentIndex]['evidenceItems']
+                                            [scope.parentIndex]['files'][scope.fileIndex]['fileName'];
+                                        ArbiListDataSer.arbiApplyData[scope.editType][scope.parentParentIndex]['evidenceItems']
+                                            [scope.parentIndex]['files'][scope.fileIndex]['fileName'] = originName.split('.')[0] + nameArray[1];
+
                                         break;
                                     }
                                 }
@@ -101,122 +108,122 @@ app.directive('inputWidthSetting', [function () {
                     element.css('width', '91px');
                     break;
                 }
-                case 'lawyerFee':{
-                    element.css('margin-left','15px');
-                    element.css('width','242px');
+                case 'lawyerFee': {
+                    element.css('margin-left', '15px');
+                    element.css('width', '242px');
                     break;
                 }
-                case 'propertyAddress':{
-                    element.css('width','570px');
+                case 'propertyAddress': {
+                    element.css('width', '570px');
                     break;
                 }
-                case 'realEstateRegistrationCertificateNumber':{
-                    element.css('width','528px');
+                case 'realEstateRegistrationCertificateNumber': {
+                    element.css('width', '528px');
                     break;
                 }
-                case 'litigantsContact':{
-                    element.css('width','228px');
+                case 'litigantsContact': {
+                    element.css('width', '228px');
                     break;
                 }
-                case 'litigantsEmail':{
-                    element.css('width','242px');
+                case 'litigantsEmail': {
+                    element.css('width', '242px');
                     break;
                 }
                 //借款抵押合同
-                case 'loanContractNumber':{
-                    element.css('width','200px');
+                case 'loanContractNumber': {
+                    element.css('width', '200px');
                     break;
                 }
-                case 'borrowerServedMobile':{
-                    element.css('width','158px');
+                case 'borrowerServedMobile': {
+                    element.css('width', '158px');
                     break;
                 }
-                case 'conventionalPrincipal':{
-                    element.css('width','146px');
+                case 'conventionalPrincipal': {
+                    element.css('width', '146px');
                     break;
                 }
-                case 'PenaltyDayRate':{
-                    element.css('width','177px');
+                case 'PenaltyDayRate': {
+                    element.css('width', '177px');
                     break;
                 }
-                case 'repaymentMethod':{
-                    element.css('width','242px');
+                case 'repaymentMethod': {
+                    element.css('width', '242px');
                     break;
                 }
-                case 'loanTerm':{
-                    element.css('width','242px');
+                case 'loanTerm': {
+                    element.css('width', '242px');
                     break;
                 }
-                case 'borrowerServedMail':{
-                    element.css('width','200px');
+                case 'borrowerServedMail': {
+                    element.css('width', '200px');
                     break;
                 }
-                case 'loanContractSignDate':{
-                    element.css('width','212px');
+                case 'loanContractSignDate': {
+                    element.css('width', '212px');
                     break;
                 }
-                case 'borrowerName':{
-                    element.css('width','230px');
+                case 'borrowerName': {
+                    element.css('width', '230px');
                     break;
                 }
                 //补充合同
-                case 'beneficiaryAccountName':{
-                    element.css('width','185px');
+                case 'beneficiaryAccountName': {
+                    element.css('width', '185px');
                     break;
                 }
-                case 'supplementalAgreementSignDate':{
-                    element.css('width','157px');
+                case 'supplementalAgreementSignDate': {
+                    element.css('width', '157px');
                     break;
                 }
-                case 'bankOfdeposit':{
-                    element.css('width','228px');
+                case 'bankOfdeposit': {
+                    element.css('width', '228px');
                     break;
                 }
-                case 'thirdParty':{
-                    element.css('width','242px');
+                case 'thirdParty': {
+                    element.css('width', '242px');
                     break;
                 }
-                case 'beneficiaryAccountNumber':{
-                    element.css('width','257px');
+                case 'beneficiaryAccountNumber': {
+                    element.css('width', '257px');
                     break;
                 }
-                case 'transactionDate':{
-                    element.css('width','213px');
+                case 'transactionDate': {
+                    element.css('width', '213px');
                     break;
                 }
-                case 'transactionMoney':{
-                    element.css('width','258px');
+                case 'transactionMoney': {
+                    element.css('width', '258px');
                     break;
                 }
                 //证明
-                case 'IDCardNumber':{
-                    element.css('width','215px');
+                case 'IDCardNumber': {
+                    element.css('width', '215px');
                     break;
                 }
-                case 'paymentAccountName':{
-                    element.css('width','226px');
+                case 'paymentAccountName': {
+                    element.css('width', '226px');
                     break;
                 }
                 //收款确认书
-                case 'confirmationSignDate':{
-                    element.css('width','170px');
+                case 'confirmationSignDate': {
+                    element.css('width', '170px');
                     break;
                 }
-                case 'cashAmount':{
-                    element.css('width','257px');
+                case 'cashAmount': {
+                    element.css('width', '257px');
                     break;
                 }
                 //不动产登记证明，不动产证书
-                case 'mortgagee':{
-                    element.css('width','219px');
+                case 'mortgagee': {
+                    element.css('width', '219px');
                     break;
                 }
-                case 'amountOfSecuredCaims':{
-                    element.css('width','205px');
+                case 'amountOfSecuredCaims': {
+                    element.css('width', '205px');
                     break;
                 }
-                case 'mortgagerName':{
-                    element.css('width','222px');
+                case 'mortgagerName': {
+                    element.css('width', '222px');
                     break;
                 }
 
