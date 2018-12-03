@@ -308,8 +308,8 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
      */
     var progressArbiOpt = function (timestamp, index) {
         //如果该案件条目尚未提交则直接返回，否则进行查询操作
-        if (ArbiListDataSer.listData[index]['data']['arbcaseId'] == '未提交') {
-            alert("该案件信息尚未提交，无法查看案件进度");
+        if (ArbiListDataSer.listData[index]['data']['arbcaseId'] == '未提交' || ArbiListDataSer.listData[index]['data']['arbcaseId'] == '已撤销') {
+            alert("该案件信息尚未提交或已撤销，无法查看案件进度");
             return;
         }
 
