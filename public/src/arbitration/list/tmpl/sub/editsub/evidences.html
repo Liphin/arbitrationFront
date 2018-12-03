@@ -77,7 +77,7 @@
                 <!--证明内容-->
                 <div style="margin-top: 15px">
                     <span style="margin-right: 15px">证明内容：</span>
-                    <textarea class="textAreaStyle" style="width: 595px; height: 80px;vertical-align: top" ng-model="value['content']" maxlength="2000"
+                    <textarea class="textAreaStyle" style="width: 595px; height: 80px;vertical-align: top" ng-model="itemValue['content']" maxlength="2000"
                               placeholder="请输入证明内容（最长2000个字）"></textarea>
                 </div>
 
@@ -95,7 +95,7 @@
                         <input style="display: inline-block; border: 1px solid lightgrey; margin-left: -60px;width: 60px; opacity: 0; cursor: pointer" file-proxy type="file" parent-parent-index="{{$parent.$parent.$index}}"
                                parent-index="{{$parent.$index}}" file-index="{{$index}}" edit-type="evidences"/>
                         <span ng-click="arbilist.downloadFile(fileValue)" ng-if="fileValue['fileKey']!=''" class="fa fa-file-pdf-o" style="margin-left: 15px;cursor: pointer; font-size: 20px; color: rebeccapurple"></span>
-                        <span style="margin-left: 15px;" file-setting="{{fileValue['fileName']}}"> 请上传{{arbilist.getFilePrefixName(fileValue['fileName'])}}（文件类型范围:pdf/png/jpg）</span>
+                        <span style="margin-left: 15px;" file-setting="{{fileValue['fileName']}}"> 请上传{{arbilist.getFilePrefixName(fileValue['fileName'])}}（文件类型范围:pdf）</span>
                     </div>
                 </div>
 
@@ -118,7 +118,7 @@
 
                         <!--TODO placeholder的值根据eviExtValOption变化而变化-->
                         <!--附加数据value值-->
-                        <input type="text" ng-model="extValue" class="inputStyle" input-width-setting="{{extKey}}"
+                        <input type="text" ng-model="itemValue['extData'][extKey]" class="inputStyle" input-width-setting="{{extKey}}"
                                placeholder="{{arbilist.extDataHelper['evidences'][extKey]['placeholder']}}"/>
                     </div>
                 </div>

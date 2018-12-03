@@ -81,6 +81,14 @@ app.directive('fileProxy', ['OverallGeneralSer', 'OverallDataSer', 'ArbiListData
 
                                         break;
                                     }
+                                    case 'claim':{
+                                        //claim的设置
+                                        ArbiListDataSer.arbiApplyData[scope.editType]['files'][scope.fileIndex]['fileKey'] = fileKey;
+                                        //更换名字的后缀名
+                                        originName = ArbiListDataSer.arbiApplyData[scope.editType]['files'][scope.fileIndex]['fileName'];
+                                        ArbiListDataSer.arbiApplyData[scope.editType]['files'][scope.fileIndex]['fileName'] = originName.split('.')[0] + '.' + nameArray[1];
+                                        break;
+                                    }
                                 }
                                 alert("上传成功");
                             }

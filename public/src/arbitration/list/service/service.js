@@ -142,10 +142,10 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
      */
     var submitNewArbiData = function () {
         //对已提交了的案件修改需到易简网上修改
-        // if (ArbiListDataSer.overallData['arbcaseId'] != '未提交' && ArbiListDataSer.overallData['arbcaseId'] != '已撤销') {
-        //     alert("该案件信息已提交，需登录易简网进行修改。");
-        //     return;
-        // }
+        if (ArbiListDataSer.overallData['arbcaseId'] != '未提交' && ArbiListDataSer.overallData['arbcaseId'] != '已撤销') {
+            alert("该案件信息已提交，需登录易简网进行修改。");
+            return;
+        }
 
         //整理提交的arbi数据
         var formData = preWrapArbiData();
@@ -173,10 +173,10 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
      */
     var saveArbiInfo = function () {
         //对已提交了的案件修改需到易简网上修改
-        // if (ArbiListDataSer.overallData['arbcaseId'] != '未提交' && ArbiListDataSer.overallData['arbcaseId'] != '已撤销') {
-        //     alert("该案件信息已提交，需登录易简网进行修改。");
-        //     return;
-        // }
+        if (ArbiListDataSer.overallData['arbcaseId'] != '未提交' && ArbiListDataSer.overallData['arbcaseId'] != '已撤销') {
+            alert("该案件信息已提交，需登录易简网进行修改。");
+            return;
+        }
 
         //整理提交的arbi数据
         var formData = preWrapArbiData();
@@ -232,7 +232,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
      */
     var createNewArbiInfo = function () {
         ArbiListDataSer.overallData['showEdit'] = true;
-        ArbiListDataSer.overallData['arbcaseId'] = ''; //赋值该arbcaseId为空
+        ArbiListDataSer.overallData['arbcaseId'] = '未提交'; //赋值该arbcaseId为空
         ArbiListDataSer.overallData['timestamp'] = OverallGeneralSer.getTimeStamp(); //初始化timestamp
 
         if ($location.path() == OverallDataSer.redirect['arbiListTest']) {
@@ -341,7 +341,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
      */
     var withdrawArbiOpt = function (timestamp, index) {
         //如果该案件条目尚未提交则直接返回，否则进行查询操作
-        if (ArbiListDataSer.listData[index]['data']['arbcaseId'] == '未提交') {
+        if (ArbiListDataSer.listData[index]['data']['arbcaseId'] == '未提交' || ArbiListDataSer.listData[index]['data']['arbcaseId'] == '已撤销') {
             alert("该案件信息尚未提交，无法撤销仲裁请求");
             return;
         }

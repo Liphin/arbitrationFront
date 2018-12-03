@@ -17,7 +17,12 @@ app.factory('ArbiListDataHelperSer', function () {
         },
         'claim': {
             'reason': '输入事实与理由',//原因
-            'files': [],//附件数组信息
+            "files":[
+                {
+                    "fileName":"仲裁申请书.pdf"/*文件类型范围:pdf*/,
+                    "fileKey":"ff801ab637267fb1f6ab961a3ff166d3}"/*fileKey*/
+                }
+            ],
             'claimItems': [
                 {
                     "materialCode": "第（一）项仲裁请求",
@@ -317,7 +322,12 @@ app.factory('ArbiListDataHelperSer', function () {
         },
         'claim': {
             'reason': '',//原因
-            'files': [],//附件数组信息
+            "files":[
+                {
+                    "fileName":"仲裁申请书.pdf"/*文件类型范围:pdf*/,
+                    "fileKey":""/*fileKey*/
+                }
+            ],
             'claimItems': [
                 {
                     "materialCode": "第（一）项仲裁请求",

@@ -113,7 +113,6 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
         };
 
 
-
         //暂时未用到方法****************************************************************************************
         /**
          * 添加附加数据信息
@@ -133,6 +132,13 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
         arbilist.addEvidenceItems = function (index) {
             ArbiListDataSer.arbiApplyData['evidences'][index]['evidenceItems'].push(ArbiListDataSer.arbiApplyDataSupply['evidenceItems']);
         };
+
+        /**
+         * 测试选项操作
+         */
+        arbilist.test = function () {
+            console.log(ArbiListDataSer.arbiApplyData);
+        }
 
     }
 );

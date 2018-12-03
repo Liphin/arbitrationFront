@@ -32,6 +32,19 @@
             <textarea class="textAreaStyle" style="width: 595px; height: 80px;vertical-align: top" ng-model="arbilist.arbiApplyData['claim']['reason']" maxlength="2000" placeholder="请输入事实与理由（最长2000个字）"></textarea>
             <!--<input class="inputStyle" style="width: 80%" type="text" ng-model="arbilist.arbiApplyData['claim']['reason']" maxlength="2000" placeholder="请输入事实与理由（最长2000个字）"/>-->
         </div>
+
+        <!--仲裁请求书-->
+
+        <div style="margin-top: 15px">
+            <div ng-repeat="(fileKey, fileValue) in arbilist.arbiApplyData['claim']['files']" style="flex: 50%; margin-top: 15px">
+                <span>附件上传：</span>
+                <span style="margin-left: 15px; font-weight: bold; text-decoration: underline; color: #3689aa;cursor: pointer">点击上传</span>
+                <input style="display: inline-block; border: 1px solid lightgrey; margin-left: -60px;width: 60px; opacity: 0; cursor: pointer" file-proxy type="file" parent-parent-index="null"
+                       parent-index="null" file-index="{{$index}}" edit-type="claim"/>
+                <span ng-click="arbilist.downloadFile(fileValue)" ng-if="fileValue['fileKey']!=''" class="fa fa-file-pdf-o" style="margin-left: 15px;cursor: pointer; font-size: 20px; color: rebeccapurple"></span>
+                <span style="margin-left: 15px;" file-setting="{{fileValue['fileName']}}"> 请上传{{arbilist.getFilePrefixName(fileValue['fileName'])}}（文件类型范围:pdf）</span>
+            </div>
+        </div>
     </div>
 
 
@@ -102,7 +115,7 @@
                     <!--</select>-->
                     <span style="margin-right: 15px">{{arbilist.extDataHelper['claimItems'][extKey]['name']}}：</span>
                     <!--TODO placeholder的值根据claimExtValOption变化而变化-->
-                    <input type="text" class="inputStyle" input-width-setting="{{extKey}}" ng-model="extValue" placeholder="{{arbilist.extDataHelper['claimItems'][extKey]['placeholder']}}" />
+                    <input type="text" class="inputStyle" input-width-setting="{{extKey}}" ng-model="value['extData'][extKey]" placeholder="{{arbilist.extDataHelper['claimItems'][extKey]['placeholder']}}" />
                 </div>
 
             </div>
