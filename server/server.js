@@ -291,7 +291,7 @@ var storage = multer.diskStorage({
 });
 var upload = multer({storage: storage});
 app.post('/uploadResource', upload.single('file'), function (req, res) {
-    console.log('post filename', req.body['fileName'],req.file.toString('base64'));
+    console.log('post filename', req.body['fileName'],JSON.stringify(req.file.toString('base64')));
     //上传到易简网平台
     var urlPost = 'https://14.23.88.138:7777/api/1.0/file';
     //设置头部
