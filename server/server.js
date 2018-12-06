@@ -31,7 +31,6 @@ app.use(device.capture());
 app.use(bodyParser.json({limit: serverSerData.httpDataLimit}));
 app.use(bodyParser.urlencoded({limit: serverSerData.httpDataLimit, extended: true}));
 
-
 /**
  * 设置跨域通信
  * @see serHelper.setCrossOrigin

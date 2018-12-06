@@ -54,7 +54,7 @@
 
         <div style="display: flex;margin-top: 15px">
             <!--性别-->
-            <div style="flex: 1">
+            <div ng-if="value['materialCode']!='出借人（企业）'" style="flex: 1">
                 <span>联系人性别：</span>
                 <label class="radio-inline">
                     <input type="radio" ng-model="value['sex']" name="litigantSex{{$index}}" value="男"> 男
@@ -166,9 +166,27 @@
         <!--</div>-->
 
         <!--联系地址（如有多个请用英文逗号分隔）-->
-        <div style="margin-top: 15px">
+        <div style="display: flex; margin-top: 15px">
             <span>联系地址：</span>
             <input type="text" class="inputStyle" style="width: 633px;margin-left: 15px" ng-model="value['addresses']" maxlength="250" placeholder="如有多个请用英文逗号分隔（不大于250个字符）">
+        </div>
+
+        <div ng-if = "value['materialCode']=='出借人（企业）'" style="margin-top: 15px">
+            <div style="flex: 1;margin-top: 15px">
+                <span>企业证件类型：</span>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="value['identityType']" name="identityType{{$index}}" value="统一社会信用代码证号"> 统一社会信用代码证号
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="value['identityType']" name="identityType{{$index}}" value="组织机构代码"> 组织机构代码
+                </label>
+                <!--<span>（个体户请填写负责人的性别）</span>-->
+            </div>
+
+            <div style="flex: 1;margin-top: 15px">
+                <span>企业证件代码：</span>
+                <input type="text" class="inputStyle" style="width: 350px;margin-left: 15px" ng-model="value['identityNo']" maxlength="100" placeholder="三证合一的填统一社会信用代码证号或者组织机构代码（不大于50个字符）">
+            </div>
         </div>
 
         <!--材料名称-->
