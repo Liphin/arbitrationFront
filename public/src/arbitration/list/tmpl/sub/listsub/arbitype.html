@@ -1,0 +1,26 @@
+<!--获取的仲裁类型-->
+<div ng-if="arbilist.overallData['arbiType']['status']" style="display: flex;align-items: center;justify-content: center;position:fixed; top: 0; left: 0; bottom: 0; right: 0;background: rgba(0,0,0,0.47); z-index: 10000">
+    <div style="padding: 20px;;background: white; display: flex;flex-direction: column;border-radius: 20px; width: 70%; min-height: 0;height: 90%; max-width: 1000px; max-height: 800px">
+        <!--顶部关闭按钮-->
+        <div style="margin-top: -20px;height: 32px;text-align: center">
+            <span style="font-size: 18px;text-align: center; position: relative; top: 10px;"></span>
+            <span ng-click="arbilist.overallData['arbiType']['status']=false" style="float: right; font-size: 35px; cursor: pointer;">&times;</span>
+        </div>
+
+        <!--案件各具体进度描述-->
+        <div>
+            <div style="font-size: 17px; margin-bottom: 20px">案件类型选择</div>
+            <!--各个案件的详细页面操作-->
+            <div style="display: flex; flex-direction: row; ">
+                <div ng-repeat="value in arbilist.overallData['arbiType']['array']" ng-click="arbilist.selectArbiType(value['type'])" style="margin: 30px; cursor: pointer;">
+                    <div class="caseChoose" style="border: 1px solid lightgrey;padding: 20px">
+                        <img src="/assets/img/report/case.png" style="width: 70px; height: 70px">
+                    </div>
+                    <div style="margin-top: 10px">{{value['name']}}</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

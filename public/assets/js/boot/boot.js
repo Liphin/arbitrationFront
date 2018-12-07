@@ -37,6 +37,13 @@ head.load(
     'assets/js/jquery/FileSaver.js',
     'assets/js/jquery/jqueryBinaryTransport.js',
 
+    //angularjs下载组价
+    'assets/js/download/angular-file-saver.bundle.js',
+    'assets/js/download/angular-file-saver.service.js',
+    'assets/js/download/blob.service.js',
+    'assets/js/download/file-saver.service.js',
+    'assets/js/download/utils.service.js',
+
 
     /*overall part Angular框架全局设置*/
     'src/overall/module/overallModule.js',

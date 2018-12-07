@@ -20,17 +20,30 @@
 
             <!--右侧数据展示-->
             <div style="flex: 1;height: 100%; padding: 0 0 0 25px;">
-                <!--声明数据-->
-                <edit-claim ng-if="arbilist.arbiApplyDataSupply['options']['claim']" ></edit-claim>
+                <!--显示隐藏组件模块操作-->
+                <div ng-repeat="value in arbilist.overallData['arbiType']['array']" ng-if="arbilist.overallData['arbiType']['targetType']==value['type']">
+                    <!--声明数据-->
+                    <div ng-include="'src/arbitration/list/tmpl/sub/editsub/'+value['type']+'/claim.html'" ng-if="arbilist.arbiApplyDataSupply['options']['claim']" ></div>
+                    <!--申请人资料-->
+                    <div ng-include="'src/arbitration/list/tmpl/sub/editsub/'+value['type']+'/litigants.html'" ng-if="arbilist.arbiApplyDataSupply['options']['litigants']" ></div>
+                    <!--代理人资料-->
+                    <div ng-include="'src/arbitration/list/tmpl/sub/editsub/'+value['type']+'/agents.html'" ng-if="arbilist.arbiApplyDataSupply['options']['agents']" ></div>
+                    <!--证据资料-->
+                    <div ng-include="'src/arbitration/list/tmpl/sub/editsub/'+value['type']+'/evidences.html'" ng-if="arbilist.arbiApplyDataSupply['options']['evidences']" ></div>
 
-                <!--申请人资料-->
-                <edit-litigants ng-if="arbilist.arbiApplyDataSupply['options']['litigants']"></edit-litigants>
+                    <!--&lt;!&ndash;声明数据&ndash;&gt;-->
+                    <!--<edit-claim ng-if="arbilist.arbiApplyDataSupply['options']['claim']" ></edit-claim>-->
 
-                <!--代理人资料-->
-                <edit-agents ng-if="arbilist.arbiApplyDataSupply['options']['agents']"></edit-agents>
+                    <!--&lt;!&ndash;申请人资料&ndash;&gt;-->
+                    <!--<edit-litigants ng-if="arbilist.arbiApplyDataSupply['options']['litigants']"></edit-litigants>-->
 
-                <!--证据资料-->
-                <edit-evidence ng-if="arbilist.arbiApplyDataSupply['options']['evidences']"></edit-evidence>
+                    <!--&lt;!&ndash;代理人资料&ndash;&gt;-->
+                    <!--<edit-agents ng-if="arbilist.arbiApplyDataSupply['options']['agents']"></edit-agents>-->
+
+                    <!--&lt;!&ndash;证据资料&ndash;&gt;-->
+                    <!--<edit-evidence ng-if="arbilist.arbiApplyDataSupply['options']['evidences']"></edit-evidence>-->
+                </div>
+
             </div>
         </div>
 

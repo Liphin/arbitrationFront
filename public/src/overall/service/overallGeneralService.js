@@ -143,6 +143,39 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
 
 
     /**
+     * http get获取资源数据
+     */
+    var httpGetFiles2 = function (url, callback) {
+        OverallDataSer.overallData['loadingData'] = true;
+        $http({
+            method: 'Get',
+            url: url,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            responseType: 'blob'
+        }).success(function (result) {
+            var blob = new Blob([result], {type: 'application/octet-stream'});
+            //读取Blob数据
+            var reader = new FileReader();
+            reader.readAsText(blob, 'utf-8');
+            reader.onload = function (e) {
+                var strInline = reader.result.replace(/\s/g, ''); //把数据转为一行
+                var strNoComment = strInline.replace(/\/\*.+?\*\/|\/\/.*(?=[\n\r])/g, ''); //取消注释操作
+                var jsonDoc = JSON.parse(strNoComment); //json解析
+                OverallDataSer.overallData['loadingData'] = false; //重置loading状态
+                callback(jsonDoc);
+            }
+
+        }).error(function (result) {
+            //console.log("download error：",result);
+            alert("很抱歉，获取约束文档失败，请稍后重试！" + JSON.stringify(result))
+
+        }).finally(function () {
+            OverallDataSer.overallData['loadingData'] = false;
+        });
+    };
+
+
+    /**
      * http post获取资源数据
      */
     var httpPostData = function (url, obj, callback, markLoadData) {
@@ -333,6 +366,7 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
 
 
     return {
+        httpGetFiles2: httpGetFiles2,
         httpGetFiles: httpGetFiles,
         httpPostData: httpPostData,
         getTimeStamp: getTimeStamp,

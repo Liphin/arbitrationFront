@@ -3,8 +3,7 @@
  */
 var app = angular.module('Angular.arbilist');
 
-app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, OverallDataSer, OverallGeneralSer, $location) {
-
+app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGeneralSer, $location) {
 
     /**
      * 页面数据初始化
@@ -102,13 +101,22 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
             delete ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray'];
         }
 
+        //装载仲裁案件的数据
+        wrapArbiData();
+    };
+
+
+    /**
+     * 包装数据即将发送到后台操作
+     */
+    var wrapArbiData = function () {
         //提交的表单数据
         var submitData = {
             operaterType: ArbiListDataSer.arbiApplyData['overall']['operaterType'],
             operater: ArbiListDataSer.arbiApplyData['overall']['operater'],
             arbcaseInfo: JSON.stringify({
-                caseFlowType: "qidaifuturetech-p2p-1",
-                commissionCode: "gzac",
+                caseFlowType: ArbiListDataSer.arbiApplyData['overall']['productCode'],
+                commissionCode: ArbiListDataSer.arbiApplyData['commissionCode'],
                 claim: ArbiListDataSer.arbiApplyData['claim'],
                 litigants: ArbiListDataSer.arbiApplyData['litigants'],
                 agents: ArbiListDataSer.arbiApplyData['agents'],
@@ -228,26 +236,6 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
 
 
     /**
-     * 创建新仲裁案件信息
-     */
-    var createNewArbiInfo = function () {
-        ArbiListDataSer.overallData['showEdit'] = true;
-        ArbiListDataSer.overallData['arbcaseId'] = '未提交'; //赋值该arbcaseId为空
-        ArbiListDataSer.overallData['timestamp'] = OverallGeneralSer.getTimeStamp(); //初始化timestamp
-
-        if ($location.path() == OverallDataSer.redirect['arbiListTest']) {
-            for (var i in ArbiListDataSer.arbiApplyData) {
-                ArbiListDataSer.arbiApplyData[i] = angular.copy(ArbiListDataHelperSer.arbiApplyDataTest[i]);
-            }
-        } else {
-            for (var i in ArbiListDataSer.arbiApplyData) {
-                ArbiListDataSer.arbiApplyData[i] = angular.copy(ArbiListDataHelperSer.arbiApplyDataPure[i]);
-            }
-        }
-    };
-
-
-    /**
      *
      * @constructor
      */
@@ -283,17 +271,21 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
                     ArbiListDataSer.overallData['arbcaseId'] = ArbiListDataSer.listData[index]['data']['arbcaseId']; //赋值该arbcaseId值
                     ArbiListDataSer.overallData['timestamp'] = responseData['data'][0]['timestamp']; //赋值该timestamp
 
-                    //初始化edit的数据操作
-                    var arbcaseInfo = JSON.parse(responseData['data'][0]['data']['arbcaseInfo']);
+                    //整体操作者和约束文案数据
                     ArbiListDataSer.arbiApplyData['overall'] = {
                         'operaterType': responseData['data'][0]['data']['operaterType'],
                         'operater': responseData['data'][0]['data']['operater'],
                         'productCode': responseData['data'][0]['data']['productCode']
                     };
-                    ArbiListDataSer.arbiApplyData['claim'] = arbcaseInfo['claim'];
-                    ArbiListDataSer.arbiApplyData['litigants'] = arbcaseInfo['litigants'];
-                    ArbiListDataSer.arbiApplyData['agents'] = arbcaseInfo['agents'];
-                    ArbiListDataSer.arbiApplyData['evidences'] = arbcaseInfo['evidences'];
+
+                    //仲裁内容数据填充
+                    var arbcaseInfo = JSON.parse(responseData['data'][0]['data']['arbcaseInfo']);
+                    for (var i in arbcaseInfo) {
+                        ArbiListDataSer.arbiApplyData[i] = arbcaseInfo[i];
+                    }
+
+                    //对初始化后的数据进行其他辅助操作
+                    afterArbiInfoInit();
                 }
             }
         }, function () {
@@ -423,6 +415,70 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
     };
 
 
+    /**
+     * 选择仲裁类型
+     */
+    var selectArbiType = function (type) {
+        //设置产品类型数据
+        ArbiListDataSer.arbiApplyData['overall']['productCode'] = type;
+
+        //获取获取对应的type类型的json文件
+        if ($location.path() == OverallDataSer.redirect['arbiList']) {
+            var url = OverallDataSer.urlData['frontEndHttp']['getArbiJson'] + "/" + type + "/" + type + ".json";
+            OverallGeneralSer.httpGetFiles2(url, function (responseData) {
+                console.log(1)
+                createNewArbiInfo(responseData);
+            });
+
+        } else if ($location.path() == OverallDataSer.redirect['arbiListTest']) {
+            var url2 = OverallDataSer.urlData['frontEndHttp']['getArbiJson'] + "/" + type + "/" + type + "-test.json";
+            OverallGeneralSer.httpGetFiles2(url2, function (responseData) {
+                createNewArbiInfo(responseData);
+            });
+        }
+    };
+
+
+    /**
+     * 创建新仲裁案件信息
+     */
+    var createNewArbiInfo = function (targetData) {
+        //获取原数据的一个深拷贝
+        var targetDataCopy = angular.copy(targetData);
+
+        //如果是该环境下的文件则进行循环赋值操作
+        for (var i in ArbiListDataSer.arbiApplyData) {
+            if (OverallGeneralSer.checkDataNotEmpty(targetDataCopy[i])) {
+                ArbiListDataSer.arbiApplyData[i] = targetDataCopy[i];
+            }
+        }
+        //对仲裁数据初始化后执行的操作
+        afterArbiInfoInit();
+
+        //展开面板为true
+        ArbiListDataSer.overallData['showEdit'] = true;
+        ArbiListDataSer.overallData['arbcaseId'] = '未提交'; //赋值该arbcaseId为空
+        ArbiListDataSer.overallData['timestamp'] = OverallGeneralSer.getTimeStamp(); //初始化timestamp
+    };
+
+
+    /**
+     * 进入编辑页面后对部分数据进行转换操作
+     */
+    var afterArbiInfoInit = function () {
+        //1、对每个代理人权限数据进行辅助增加，增加数组对象
+        for (var i in ArbiListDataSer.arbiApplyData['agents']) {
+            ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray'] = angular.copy(ArbiListDataSer.arbiApplyDataSupply['powerDetailArray']);
+            //对每个代理人的每个权限查看是否已经在detail中包含，若是则转换radio input
+            for (var j in ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray']) {
+                if (ArbiListDataSer.arbiApplyData['agents'][i]['powerDetail'].indexOf(ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray'][j]['name']) > -1) {
+                    ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray'][j]['status'] = true;
+                }
+            }
+        }
+    };
+
+
     return {
         addFile: addFile,
         dataInit: dataInit,
@@ -430,6 +486,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, ArbiListDataHelperSer, Ove
         getArbiList: getArbiList,
         saveArbiInfo: saveArbiInfo,
         downloadFile: downloadFile,
+        selectArbiType: selectArbiType,
         deleteBatchArbi: deleteBatchArbi,
         progressArbiOpt: progressArbiOpt,
         submitNewArbiData: submitNewArbiData,

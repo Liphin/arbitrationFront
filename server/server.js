@@ -219,7 +219,7 @@ app.post('/progressArbiOpt', function (req, response) {
         rejectUnauthorized: false
     };
     request(options, function (err, res, bodyJson) {
-        console.log('bodyJson',bodyJson);
+        console.log('bodyJson', bodyJson);
         var body = JSON.parse(bodyJson);
         if (!err) {
             response.send({
@@ -435,6 +435,7 @@ var deleteArbiListItem = function (db, toDeleteArray, i, toContinue, response) {
 
 //资源文件获取
 app.use("/resource", express.static(serverSerData.resourcePath));
+app.use("/json", express.static(serverSerData.basePath + "/json"));
 app.use("/", express.static(serverSerData.projectPath + "/public"));
 app.listen(PORT);
 console.log("Server is running at port: " + PORT + " , and at environment: " + global.env);

@@ -20,8 +20,8 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
         var arbilist = this;
         arbilist.listData = ArbiListDataSer.listData;
         arbilist.overallData = ArbiListDataSer.overallData;
-        arbilist.extDataHelper = ArbiListDataSer.extDataHelper;
         arbilist.arbiApplyData = ArbiListDataSer.arbiApplyData;
+        arbilist.extDataHelper = ArbiListDataHelperSer.extDataHelper;
         arbilist.arbiApplyDataSupply = ArbiListDataSer.arbiApplyDataSupply;
         ArbiListSer.dataInit();
 
@@ -94,6 +94,14 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
          */
         arbilist.ArbiListOpt = function (optType, timestamp, index) {
             ArbiListSer.ArbiListOpt(optType, timestamp, index);
+        };
+
+
+        /**
+         * 选择仲裁类型
+         */
+        arbilist.selectArbiType = function (type) {
+            ArbiListSer.selectArbiType(type)
         };
 
 

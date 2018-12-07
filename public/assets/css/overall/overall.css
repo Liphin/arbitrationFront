@@ -237,6 +237,11 @@ iframe, embed{
     text-align: center;
 }
 
+.caseChoose:hover{
+    border-color: #7bb0cc;
+    background: #fffffa;
+}
+
 
 
 

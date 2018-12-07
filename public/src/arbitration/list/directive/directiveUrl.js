@@ -72,3 +72,12 @@ app.directive('arbiProgress', ['$document', function ($document) {
     };
 }]);
 
+/**
+ * 案件类型页面
+ */
+app.directive('arbiType', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/arbitration/list/tmpl/sub/listsub/arbitype.html'
+    };
+}]);
