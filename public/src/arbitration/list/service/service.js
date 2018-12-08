@@ -102,7 +102,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
         }
 
         //装载仲裁案件的数据
-        wrapArbiData();
+        return wrapArbiData();
     };
 
 
