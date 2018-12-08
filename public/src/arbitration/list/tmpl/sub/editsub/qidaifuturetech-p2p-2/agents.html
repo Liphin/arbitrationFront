@@ -1,0 +1,155 @@
+<!--代理人-->
+<div  style="height: 100%; overflow-y: scroll" class="scrollBar-7">
+    <div ng-repeat="value in arbilist.arbiApplyData['agents'] track by $index" style="margin-bottom: 30px; padding: 20px 15px;border: 5px solid lightgrey;width: 95%;border-radius: 5px">
+        <!--材料名称-->
+        <!--<div>-->
+        <!--<span>材料名称</span>-->
+        <!--<input type="text" ng-model="value['materialCode']">-->
+        <!--</div>-->
+        <span style="font-size: 15px; font-weight: bold; color: #3689aa">{{value['materialCode']}}</span>
+
+
+        <div style="display: flex; margin-top: 15px">
+            <!--当事人类型-->
+            <div style="flex: 1">
+                <span>当事人类型：</span>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="value['litigantType']" name="litigantType{{$index}}" value="申请人"> 申请人
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="value['litigantType']" name="litigantType{{$index}}" value="被申请人"> 被申请人
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="value['litigantType']" name="litigantType{{$index}}" value="第三人"> 第三人
+                </label>
+            </div>
+
+            <!--委托人名称-->
+            <div  style="flex: 1">
+                <span>委托人名称：</span>
+                <input type="text" style="width: 242px;" ng-model="value['principals']" placeholder="如果多个请用英文逗号分隔">
+            </div>
+        </div>
+
+
+        <div style="display: flex; margin-top: 15px">
+            <!--代理人分类-->
+            <div style="flex: 1">
+                <span>代理人分类：</span>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="value['agentType']" name="agentType{{$index}}" value="律师代理"> 律师代理
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="value['agentType']" name="agentType{{$index}}" value="公民代理"> 公民代理
+                </label>
+            </div>
+
+            <!--代理人性别-->
+            <div style="flex: 1">
+                <span>代理人性别：</span>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="value['sex']" name="agentSex{{$index}}" value="男"> 男
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="value['sex']" name="agentSex{{$index}}" value="女"> 女
+                </label>
+            </div>
+        </div>
+
+
+        <!--证件类型-->
+        <!--<div>-->
+            <!--<span>证件类型</span>-->
+            <!--<select ng-model="value['identityType']">-->
+                <!--<option ng-repeat="value in arbilist.arbiApplyDataSupply['overallVariable']['post']" value="{{value}}">{{value}}</option>-->
+            <!--</select>-->
+        <!--</div>-->
+
+
+        <div style="display: flex; margin-top: 15px">
+            <!--代理人名称-->
+            <div style="flex: 1">
+                <span>代理人名称：</span>
+                <input type="text" class="inputStyle" style="width: 242px" ng-model="value['name']" maxlength="25" placeholder="请输入代理人名称（不大于25个字）">
+            </div>
+
+            <!--证件号码-->
+            <div style="flex: 1">
+                <span>身份证号码：</span>
+                <input type="text" class="inputStyle" style="width: 242px;" ng-model="value['identityNo']" maxlength="50" placeholder="请输入证件号码（不大于50个字）">
+            </div>
+        </div>
+
+
+        <div style="display: flex; margin-top: 15px">
+            <!--联系号码-->
+            <div style="flex: 1">
+                <span>代理人手机：</span>
+                <input type="text" class="inputStyle" style="width: 242px;" ng-model="value['mobiles']" maxlength="250" placeholder="请输入联系号码（不大于250个字）">
+            </div>
+
+            <!--联系邮箱-->
+            <div style="flex: 1">
+                <span>代理人邮箱：</span>
+                <input type="text" class="inputStyle" style="width: 242px;" ng-model="value['emails']"  maxlength="250" placeholder="如有多个请用英文逗号分隔（不大于250个字）">
+            </div>
+        </div>
+
+
+        <!--公司名称-->
+        <div style="margin-top: 15px">
+            <span>代理人公司：</span>
+            <input type="text" class="inputStyle" style="width: 242px;" ng-model="value['company']" maxlength="50" placeholder="请输入公司名称（不大于50个字）">
+        </div>
+
+
+        <!--联系地址-->
+        <div style="margin-top: 15px">
+            <span>代理人地址：</span>
+            <input type="text" class="inputStyle" style="width: 608px;" ng-model="value['addresses']" maxlength="250" placeholder="如有多个请用英文逗号分隔（不大于250个字）">
+        </div>
+
+
+        <!--代理权限-->
+        <div style="margin-top: 15px">
+            <span>代理人权限：</span>
+            <label class="radio-inline">
+                <input type="radio" ng-model="value['power']" name="agentPower{{$index}}" value="一般代理"> 一般代理
+            </label>
+            <label class="radio-inline">
+                <input type="radio" ng-model="value['power']" name="agentPower{{$index}}" value="特殊权限"> 特殊权限
+            </label>
+        </div>
+        <!--如为特殊权限，则此项必填-->
+        <div ng-if="value['power']=='特殊权限'" style="display: flex; flex-direction: row; margin-top: 15px">
+            <span style="margin-right: 15px">特殊权限：</span>
+            <div style="flex: 1">
+                <label style="margin: 0 10px 10px 0" class="checkbox-inline" ng-repeat="(powerDepictKey, powerDepictValue) in value['powerDetailArray'] track by $index">
+                    <input type="checkbox" ng-model="powerDepictValue['status']"> {{powerDepictValue['name']}}
+                </label>
+            </div>
+        </div>
+
+
+        <!--附件上传-->
+        <div style="margin-top: 25px">
+            <!--<div ng-click="arbilist.addFile('agents', $index)">-->
+                <!--<span>附件上传 +</span>-->
+            <!--</div>-->
+
+            <!--循环读取上传附件的数据-->
+            <div ng-repeat="fileValue in value['files'] track by $index" style="margin-bottom: 15px">
+                <span>附件上传：</span>
+                <span style="margin-left: 15px; font-weight: bold; text-decoration: underline; color: #3689aa;cursor: pointer">点击上传</span>
+                <input style="display: inline-block; border: 1px solid lightgrey; margin-left: -60px;width: 60px; opacity: 0; cursor: pointer" file-proxy type="file" parent-parent-index="null" parent-index="{{$parent.$index}}" file-index="{{$index}}" edit-type="agents" />
+                <span ng-click="arbilist.downloadFile(fileValue)" ng-if="fileValue['fileKey']!=''" class="fa fa-file-pdf-o" style="margin-left: 15px;cursor: pointer; font-size: 20px; color: rebeccapurple"></span>
+                <span style="margin-left: 15px;"> 请上传{{arbilist.getFilePrefixName(fileValue['fileName'])}}（文件类型范围:pdf/png/jpg）</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

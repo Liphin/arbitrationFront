@@ -242,27 +242,27 @@ app.factory('ArbiListDataHelperSer', function () {
     //
     //
     // var arbiApplyDataTest = {
-    //         'overall': {
+    //         "overall": {
     //             'operaterType': '申请人', //操作者类型， 申请人、第三方
     //             'operater': '操作者名称', //操作者名称
     //             'productCode': 'qidaifuturetech-p2p-1' //固定productCode
     //         },
-    //         'claim': {
-    //             'reason': '输入事实与理由',//原因
+    //         "claim": {
+    //             "reason": '输入事实与理由',//原因
     //             "files":[
     //                 {
     //                     "fileName":"仲裁申请书.pdf"/*文件类型范围:pdf*/,
     //                     "fileKey":"ff801ab637267fb1f6ab961a3ff166d3}"/*fileKey*/
     //                 }
     //             ],
-    //             'claimItems': [
+    //             "claimItems": [
     //                 {
     //                     "materialCode": "第（一）项仲裁请求",
     //                     "payItem": "0"/*无标的请求项*/,
-    //                     'claimContent': '证据请求内容',//请求内容
-    //                     'claimType': '给付之诉',//请求类型：确认之诉，给付之诉，形成之诉
-    //                     'disputeFee': 0, //请求标的
-    //                     'litigants': '打蜡1',//当事人名称
+    //                     "claimContent": "证据请求内容",//请求内容
+    //                     "claimType": "给付之诉",//请求类型：确认之诉，给付之诉，形成之诉
+    //                     "disputeFee": 0, //请求标的
+    //                     "litigants": "打蜡1",//当事人名称
     //                     "extData": {
     //                         "claimMoney": "234324"/*请求本金*/,
     //                         "startDate": "2012-32-23", /*起算日期*/
@@ -272,32 +272,32 @@ app.factory('ArbiListDataHelperSer', function () {
     //                 {
     //                     "materialCode": "第（二）项仲裁请求",
     //                     "payItem": "0"/*无标的请求项*/,
-    //                     'claimContent': '证据请求内容',//请求内容
-    //                     'claimType': '给付之诉',//请求类型：确认之诉，给付之诉，形成之诉
-    //                     'disputeFee': 0, //请求标的
-    //                     'litigants': '打蜡1',//当事人名称
+    //                     "claimContent": '证据请求内容',//请求内容
+    //                     "claimType": '给付之诉',//请求类型：确认之诉，给付之诉，形成之诉
+    //                     "disputeFee": 0, //请求标的
+    //                     "litigants": "打蜡1",//当事人名称
     //                     "extData": {
     //                         "lawyerFee": "121元"/*律师费*/
     //                     }
     //                 },
     //                 {
     //                     "materialCode": "第（三）项仲裁请求",
-    //                     'claimContent': '证据请求内容',//请求内容
-    //                     'claimType': '给付之诉',//请求类型：确认之诉，给付之诉，形成之诉
+    //                     "claimContent": '证据请求内容',//请求内容
+    //                     "claimType": '给付之诉',//请求类型：确认之诉，给付之诉，形成之诉
     //                     "payItem": "0"/*无标的请求项*/,
-    //                     'disputeFee': 0, //请求标的
-    //                     'litigants': '打蜡1',//当事人名称
+    //                     "disputeFee": 0, //请求标的
+    //                     "litigants": "打蜡1",//当事人名称
     //                     "extData": {
     //                         "propertyAddress": "是打发大水发大水费大幅度发"/*抵押房产地址*/
     //                     }
     //                 },
     //                 {
     //                     "materialCode": "第（四）项仲裁请求",
-    //                     'claimContent': '证据请求内容',//请求内容
+    //                     "claimContent": '证据请求内容',//请求内容
     //                     "claimType": "仲裁费"/*请求类型*/,
     //                     "payItem": "0"/*无标的请求项*/,
-    //                     'disputeFee': 0, //请求标的
-    //                     'litigants': '打蜡1',//当事人名称
+    //                     "disputeFee": 0, //请求标的
+    //                     "litigants": "打蜡1",//当事人名称
     //                 }
     //             ] //请求项内容
     //         },
@@ -355,20 +355,20 @@ app.factory('ArbiListDataHelperSer', function () {
     //                 "litigantType":"被申请人"/*当事人类型*/
     //             }
     //         ],
-    //         'agents': [
+    //         "agents": [
     //             {
-    //                 'agentType': '律师代理',//代理人分类：律师代理、公民代理。
-    //                 'name': '真三',//代理人名称。
-    //                 'sex': '男',//性别：男、女。
-    //                 'identityType': '身份证',//证件类型。通过5.7查询全局字段信息接口获取证件类型。
-    //                 'identityNo': '441721199312177617',//证件号码。
-    //                 'mobiles': '13243435533',//联系号码。如有多个请用英文逗号分隔。
-    //                 'litigantType': '申请人',//当事人类型：申请人、被申请人、第三人
-    //                 'principals': '委托人A,委托人B',//委托人名称。如果多个请用逗号分隔。
-    //                 'power': '一般代理',//代理权限：一般代理、特殊权限。
-    //                 'company': '广州**有限公司',//公司名称。
-    //                 'emails': 'berrsonbar@qq.com',//联系邮箱。如有多个请用英文逗号分隔。
-    //                 'addresses': '广东省阳江市***路,广东省**市答案了路',//联系地址。如有多个请用英文逗号分隔。
+    //                 "agentType": "律师代理",//代理人分类：律师代理、公民代理。
+    //                 "name": '真三',//代理人名称。
+    //                 "sex": '男',//性别：男、女。
+    //                 "identityType": '身份证',//证件类型。通过5.7查询全局字段信息接口获取证件类型。
+    //                 "identityNo": '441721199312177617',//证件号码。
+    //                 "mobiles": '13243435533',//联系号码。如有多个请用英文逗号分隔。
+    //                 "litigantType": '申请人',//当事人类型：申请人、被申请人、第三人
+    //                 "principals": '委托人A,委托人B',//委托人名称。如果多个请用逗号分隔。
+    //                 "power": '一般代理',//代理权限：一般代理、特殊权限。
+    //                 "company": '广州**有限公司',//公司名称。
+    //                 "emails": 'berrsonbar@qq.com',//联系邮箱。如有多个请用英文逗号分隔。
+    //                 "addresses": '广东省阳江市***路,广东省**市答案了路',//联系地址。如有多个请用英文逗号分隔。
     //                 "materialCode": "申请人代理人",
     //                 "powerDetail": "代为提起仲裁请求;代为参加庭审、进行质证、辩论;代为和解、调解;代为主张、变更、放弃仲裁请求;代为签收法律文书;代为申请执行等"/*代理权限明细|非必填*/,
     //                 "files": [
@@ -385,7 +385,7 @@ app.factory('ArbiListDataHelperSer', function () {
     //                         "fileKey": "ff801ab637267fb1f6ab961a3ff166d3}"/*fileKey*/
     //                     }
     //                 ],
-    //                 'powerDetailArray': [
+    //                 "powerDetailArray": [
     //                     {'name': '代为提起仲裁请求', 'status': false},
     //                     {'name': '代为参加庭审、进行质证、辩论', 'status': false},
     //                     {'name': '代为和解、调解', 'status': false},
@@ -467,9 +467,9 @@ app.factory('ArbiListDataHelperSer', function () {
     //                     },
     //                     {
     //                         "materialCode": "《证明》",
-    //                         'name': '测试证据名称',//证据名称
-    //                         'content': '这里是测试证据名称，这里是测试证据名称',//证明内容。
-    //                         'hasOriginal': true,//是否有原件：true，false
+    //                         "name": '测试证据名称',//证据名称
+    //                         "content": '这里是测试证据名称，这里是测试证据名称',//证明内容。
+    //                         "hasOriginal": true,//是否有原件：true，false
     //                         "extData": {
     //                             "transactionDate": "3132132321312"/*转账日期*/,
     //                             "paymentAccountName": "东莞团贷网互联网科技服务有限公司"/*付款账号户名|示例:东莞团贷网互联网科技服务有限公司*/,
@@ -487,9 +487,9 @@ app.factory('ArbiListDataHelperSer', function () {
     //                     },
     //                     {
     //                         "materialCode": "《收款确认书》",
-    //                         'name': '测试证据名称',//证据名称
-    //                         'content': '这里是测试证据名称，这里是测试证据名称',//证明内容。
-    //                         'hasOriginal': true,//是否有原件：true，false
+    //                         "name": "测试证据名称",//证据名称
+    //                         "content": "这里是测试证据名称，这里是测试证据名称",//证明内容。
+    //                         "hasOriginal": "true",//是否有原件：true，false
     //                         "extData": {
     //                             "lenderName": "fsdfsdfs"/*出借人姓名*/,
     //                             "borrowerName": "sfdffdf"/*借款人姓名*/,
@@ -508,9 +508,9 @@ app.factory('ArbiListDataHelperSer', function () {
     //                     },
     //                     {
     //                         "materialCode": "《不动产登记证明》《不动产权证书》",
-    //                         'name': '测试证据名称',//证据名称
-    //                         'content': '这里是测试证据名称，这里是测试证据名称',//证明内容。
-    //                         'hasOriginal': true,//是否有原件：true，false
+    //                         "name": "测试证据名称",//证据名称
+    //                         "content": "这里是测试证据名称，这里是测试证据名称",//证明内容。
+    //                         "hasOriginal": "true",//是否有原件：true，false
     //                         "extData": {
     //                             "mortgageRegistrationDate": "2017年11月20日"/*抵押登记日期|示例:2017年11月20日*/,
     //                             "propertyAddress": "至少明确到市|示例:南宁市兴宁区秀厢大道103号澳华花园57号楼2单元101"/*抵押房产地址|描述:至少明确到市|示例:南宁市兴宁区秀厢大道103号澳华花园57号楼2单元101*/,
@@ -529,9 +529,9 @@ app.factory('ArbiListDataHelperSer', function () {
     //                     },
     //                     {
     //                         "materialCode": "《委托代理合同》及发票",
-    //                         'name': '测试证据名称',//证据名称
-    //                         'content': '这里是测试证据名称，这里是测试证据名称',//证明内容。
-    //                         'hasOriginal': true,//是否有原件：true，false
+    //                         "name": "测试证据名称",//证据名称
+    //                         "content": "这里是测试证据名称，这里是测试证据名称",//证明内容。
+    //                         "hasOriginal": "true",//是否有原件：true，false
     //                         "extData": {
     //                             "borrowerName": "打法撒旦法"/*借款人姓名*/,
     //                             "lawyerfee": "21421"/*律师费*/
@@ -545,9 +545,9 @@ app.factory('ArbiListDataHelperSer', function () {
     //                     },
     //                     {
     //                         "materialCode": "《还款情况表》",
-    //                         'name': '测试证据名称',//证据名称
-    //                         'content': '这里是测试证据名称，这里是测试证据名称',//证明内容。
-    //                         'hasOriginal': true,//是否有原件：true，false
+    //                         "name": "测试证据名称",//证据名称
+    //                         "content": "这里是测试证据名称，这里是测试证据名称",//证明内容。
+    //                         "hasOriginal": "true",//是否有原件：true，false
     //                         "extData": {
     //                             "repaymentPrincipal": "0", /*已还本金*/
     //                             "overdueMonth": "12"/*逾期月份*/,

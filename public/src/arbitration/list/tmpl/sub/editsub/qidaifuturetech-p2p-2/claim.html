@@ -1,0 +1,127 @@
+<div style="height: 100%; overflow-y: scroll" class="scrollBar-7">
+
+    <!--基本信息-->
+    <div style="padding: 20px 15px;border: 5px solid lightgrey;width: 95%;border-radius: 5px">
+        <div style="margin-bottom: 10px;">
+            <span style="font-size: 15px; font-weight: bold; color: #3689aa">一、基本信息</span>
+        </div>
+
+        <!--第一行-->
+        <div style="display: flex">
+            <!--操作者类型-->
+            <div style="flex: 1">
+                <span>操作者类型：</span>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="arbilist.arbiApplyData['overall']['operaterType']" name="operaterType{{$index}}" value="申请人"> 申请人
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="arbilist.arbiApplyData['overall']['operaterType']" name="operaterType{{$index}}"  value="第三方"> 第三方
+                </label>
+            </div>
+
+            <!--操作者名称-->
+            <div style="flex: 1">
+                <span>操作者名称：</span>
+                <input class="inputStyle" style="width: 242px"  type="text" ng-model="arbilist.arbiApplyData['overall']['operater']" placeholder="请输入操作者名称" />
+            </div>
+        </div>
+
+        <!--事实与理由-->
+        <div style="margin-top: 15px">
+            <span style="vertical-align: top">事实与理由：</span>
+            <textarea class="textAreaStyle" style="width: 595px; height: 80px;vertical-align: top" ng-model="arbilist.arbiApplyData['claim']['reason']" maxlength="2000" placeholder="请输入事实与理由（最长2000个字）"></textarea>
+            <!--<input class="inputStyle" style="width: 80%" type="text" ng-model="arbilist.arbiApplyData['claim']['reason']" maxlength="2000" placeholder="请输入事实与理由（最长2000个字）"/>-->
+        </div>
+
+        <!--仲裁请求书-->
+
+        <div style="margin-top: 15px">
+            <div ng-repeat="(fileKey, fileValue) in arbilist.arbiApplyData['claim']['files']" style="flex: 50%; margin-top: 15px">
+                <span>附件上传：</span>
+                <span style="margin-left: 15px; font-weight: bold; text-decoration: underline; color: #3689aa;cursor: pointer">点击上传</span>
+                <input style="display: inline-block; border: 1px solid lightgrey; margin-left: -60px;width: 60px; opacity: 0; cursor: pointer" file-proxy type="file" parent-parent-index="null"
+                       parent-index="null" file-index="{{$index}}" edit-type="claim"/>
+                <span ng-click="arbilist.downloadFile(fileValue)" ng-if="fileValue['fileKey']!=''" class="fa fa-file-pdf-o" style="margin-left: 15px;cursor: pointer; font-size: 20px; color: rebeccapurple"></span>
+                <span style="margin-left: 15px;" file-setting="{{fileValue['fileName']}}"> 请上传{{arbilist.getFilePrefixName(fileValue['fileName'])}}（文件类型范围:pdf）</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!--请求项-->
+    <div style="">
+        <!--请求项添加-->
+        <!--<div ng-click="arbilist.addClaimItems()">-->
+            <!--<span>请求项</span>-->
+            <!--<span>+ 添加请求项</span>-->
+        <!--</div>-->
+
+        <!--请求项内容-->
+        <div ng-repeat="value in arbilist.arbiApplyData['claim']['claimItems'] track by $index" style="margin-top: 30px; padding: 20px 15px;border: 5px solid lightgrey;width: 95%;border-radius: 5px">
+            <!--仲裁请求描述-->
+            <div style="margin-bottom: 10px;font-size: 15px; font-weight: bold; color: #3689aa">
+                <!--仲裁请求名称-->
+                <span>{{value['materialCode']}}</span>
+                <!--请求类型-->
+                <span>（{{value['claimType']}}）</span>
+            </div>
+
+            <div style="margin-top: 15px;display: flex">
+                <!--请求标的-->
+                <div style="flex: 1">
+                    <span style="">请求标的：</span>
+                    <input type="number" class="inputStyle" ng-model="value['disputeFee']" step="0.01" max="10000000000000.00" min="0.00" style="margin-left: 15px">
+                </div>
+
+                <!--当事人名称-->
+                <div style="flex: 1">
+                    <span style="">当事人名称：</span>
+                    <input style="width: 242px" class="inputStyle" type="text" ng-model="value['litigants']" maxlength="100" placeholder="如有多个请用英文逗号分隔"/>
+                    <!--<span>（如有多个请用英文逗号分隔）</span>-->
+                </div>
+            </div>
+
+            <!--请求类型-->
+            <!--<div>-->
+                <!--<span style="margin-right: 15px">请求类型：</span>-->
+                <!--<span>{{value['claimType']}}</span>-->
+                <!--&lt;!&ndash;<select class="form-control" ng-model="value['claimType']">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<option value="确认之诉">确认之诉</option>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<option value="给付之诉">给付之诉</option>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<option value="形成之诉">形成之诉</option>&ndash;&gt;-->
+                <!--&lt;!&ndash;</select>&ndash;&gt;-->
+            <!--</div>-->
+
+
+            <!--请求内容-->
+            <div style="margin-top: 15px">
+                <span style="margin-right: 15px">请求内容：</span>
+                <textarea class="textAreaStyle" style="width: 595px; height: 80px;vertical-align: top" ng-model="value['claimContent']" maxlength="2000" placeholder="请输入事实与理由（最长2000个字）"></textarea>
+            </div>
+
+
+            <!--附加数据-->
+            <div style="display: flex; flex-direction: row;flex-wrap: wrap;">
+                <!--&lt;!&ndash;附加数据值&ndash;&gt;-->
+                <!--<div ng-click="arbilist.addAddictionData('claim', $index)">-->
+                    <!--<span>附加数据</span>-->
+                    <!--<span>附加数据添加+</span>-->
+                <!--</div>-->
+
+                <!--附加数据填写-->
+                <div ng-repeat="(extKey, extValue) in value['extData']" style="flex: 50%; margin-top: 15px">
+                    <!--<select class="form-control" ng-model="extKey">-->
+                        <!--<option ng-repeat="(claimExtOptionKey, claimExtOptionVal) in arbilist.extDataHelper['claimItems'] track by $index" value="{{claimExtOptionKey}}">{{claimExtOptionVal['name']}}</option>-->
+                    <!--</select>-->
+                    <span style="margin-right: 15px">{{arbilist.extDataHelper['claimItems'][extKey]['name']}}：</span>
+                    <!--TODO placeholder的值根据claimExtValOption变化而变化-->
+                    <input type="text" class="inputStyle" input-width-setting="{{extKey}}" ng-model="value['extData'][extKey]" placeholder="{{arbilist.extDataHelper['claimItems'][extKey]['placeholder']}}" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--占位符-->
+    <div style="width: 100%; height: 50px"></div>
+</div>
