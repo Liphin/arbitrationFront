@@ -280,8 +280,8 @@ app.factory('ArbiListDataHelperSer', function () {
                 'placeholder': '示例:2018年07月24日'
             },
             "compensatorypenalty": {
-                'name': "代偿日期",
-                'placeholder': '代偿违约金|示例:1‰'
+                'name': "代偿违约金",
+                'placeholder': '示例:1‰'
             }
 
         }
