@@ -54,7 +54,7 @@
 
         <div style="display: flex;margin-top: 15px">
             <!--性别-->
-            <div ng-if="value['materialCode']!='出借人（企业）'" style="flex: 1">
+            <div ng-if="value['materialCode']!='债权人（企业）'" style="flex: 1">
                 <span>联系人性别：</span>
                 <label class="radio-inline">
                     <input type="radio" ng-model="value['sex']" name="litigantSex{{$index}}" value="男"> 男
@@ -171,7 +171,7 @@
             <input type="text" class="inputStyle" style="width: 633px;margin-left: 15px" ng-model="value['addresses']" maxlength="250" placeholder="如有多个请用英文逗号分隔（不大于250个字符）">
         </div>
 
-        <div ng-if = "value['materialCode']=='出借人（企业）'" style="margin-top: 15px">
+        <div ng-if = "value['materialCode']=='债权人（企业）'" style="margin-top: 15px">
             <div style="flex: 1;margin-top: 15px">
                 <span>企业证件类型：</span>
                 <label class="radio-inline">

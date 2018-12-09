@@ -27,6 +27,26 @@ app.factory('ArbiListDataHelperSer', function () {
             "interestAndPenaltyClaimRate": {
                 'name': "利息及违约金的请求利率",
                 'placeholder': '示例:24%'
+            },
+            "claimGuarantyRepayMoney": {
+                'name': "请求的代偿款",
+                'placeholder': ''
+            },
+            "temporaryDate": {
+                'name': "暂计时间",
+                'placeholder': '示例:2018年08月15日'
+            },
+            "carNumber": {
+                'name': "抵押车辆车牌号",
+                'placeholder': '示例:晋A771ET'
+            },
+            "vehicleIdentificationNumber": {
+                'name': "车辆识别代号",
+                'placeholder': '示例:LSGEW53B1CS335697'
+            },
+            "carBrandType": {
+                'name': "车辆品牌型号",
+                'placeholder': '示例:别克牌SGM7306ATA'
             }
         },
 
@@ -166,7 +186,104 @@ app.factory('ArbiListDataHelperSer', function () {
             "repaymentPrincipal": {
                 'name': "已还本金",
                 'placeholder': ''
+            },
+            "PenaltyMonthRate": {
+                'name': "违约金月利率",
+                'placeholder': '示例:2%'
+            },
+            "borrowerAndMortgagerName": {
+                'name': "借款人和抵押人姓名",
+                'placeholder': '示例:吕胜'
+            },
+            "mortgageeName": {
+                'name': "抵押权人姓名",
+                'placeholder': '示例:珠海横琴瑞达融资租赁有限公司'
+            },
+            "lenderName": {
+                'name': "出借人姓名",
+                'placeholder': '示例:武文娟'
+            },
+            "carNumber": {
+                'name': "抵押车辆车牌号",
+                'placeholder': '示例:晋A771ET'
+            },
+            "carBrandType": {
+                'name': "车辆品牌型号",
+                'placeholder': '示例:别克牌SGM7306ATA'
+            },
+            "vehicleIdentificationNumber": {
+                'name': "车辆识别代号",
+                'placeholder': '示例:LSGEW53B1CS335697'
+            },
+            "transactionMoneyTotal": {
+                'name': "转账总金额",
+                'placeholder': '描述:20720.04+50000+4600=75320.04|示例:75320.04'
+            },
+            "certifier": {
+                'name': "证明人",
+                'placeholder': '示例:厦门银行股份有限公司'
+            },
+            "noticeTime": {
+                'name': "通知作出时间",
+                'placeholder': '示例:2018年07月22日'
+            },
+            "guarantyRepayPrincipal": {
+                'name': "代偿本金",
+                'placeholder': '示例:80000.00'
+            },
+            "guarantyRepayInterestAndPenalty": {
+                'name': "代偿利息及违约金",
+                'placeholder': '示例:3726.66'
+            },
+            "guarantyRepayMoneyTotal": {
+                'name': "代偿总金额",
+                'placeholder': '示例:83726.66'
+            },
+            "receiptTime": {
+                'name': "回证作出时间",
+                'placeholder': '示例:2018年07月22日'
+            },
+            "compensatoryPaymentAccountNumber": {
+                'name': "代偿付款账号",
+                'placeholder': ''
+            },
+            "compensatoryPaymentAccountName": {
+                'name': "代偿付款账号户名",
+                'placeholder': '示例:珠海横琴瑞达融资租赁有限公司'
+            },
+            "compensatoryBeneficiaryAccountNumber": {
+                'name': "代偿收款账号",
+                'placeholder': ''
+            },
+            "compensatoryBeneficiaryAccountName": {
+                'name': "代偿收款账号户名",
+                'placeholder': '示例:武文娟'
+            },
+            "receipAmount": {
+                'name': "电子回证金额",
+                'placeholder': '示例:83886.66'
+            },
+            "compensatoryTransactionDate": {
+                'name': "代偿转账日期",
+                'placeholder': '示例:2018年07月24日'
+            },
+            "compensatoryCertificateTime": {
+                'name': "代偿证明作出时间",
+                'placeholder': '示例:2018年07月24日'
+            },
+            "compensatoryCertificateCertifier": {
+                'name': "代偿证明证明人",
+                'placeholder': '示例:武文娟'
+            },
+            "guarantyRepayDate": {
+                'name': "代偿日期",
+                'placeholder': '示例:2018年07月24日'
+            },
+            "compensatorypenalty": {
+                'name': "代偿日期",
+                'placeholder': '代偿违约金|示例:1‰'
             }
+
         }
     };
 
