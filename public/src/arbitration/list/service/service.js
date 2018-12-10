@@ -517,17 +517,15 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
         ArbiListDataSer.arbiApplySelectData['claim']=ArbiListDataSer.arbiApplyData['claim'];
 
         //筛选当事人
-        for (var i=0,j=0; i<ArbiListDataSer.arbiApplyData['litigants'].length;i++) {
-            if (OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplyData['litigants'][i]['idCardNo'])) {
-                ArbiListDataSer.arbiApplySelectData['litigants'][j]=ArbiListDataSer.arbiApplyData['litigants'][i];
-                j++;
+        ArbiListDataSer.arbiApplySelectData['litigants']=targetDataCopy['litigants'];
+        for (var i=ArbiListDataSer.arbiApplySelectData['litigants'].length-1; i>=0;i--) {
+            if (!OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplySelectData['litigants'][i]['idCardNo'])) {
+                ArbiListDataSer.arbiApplySelectData['litigants'].splice(i,1);
             }
         }
 
         //赋值代理人信息
-        for (var i=0; i<ArbiListDataSer.arbiApplyData['agents'].length;i++) {
-            ArbiListDataSer.arbiApplySelectData['agents'][i]=ArbiListDataSer.arbiApplyData['agents'][i];
-        }
+        ArbiListDataSer.arbiApplySelectData['agents']=targetDataCopy['agents'];
 
         //筛选证据
         ArbiListDataSer.arbiApplySelectData['evidences']=targetDataCopy['evidences'];
@@ -538,6 +536,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
                 }
             }
         }
+        console.log(ArbiListDataSer.arbiApplySelectData);
     };
 
     var qidaifuturetech_p2p_2 = function () {
@@ -548,22 +547,20 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
             'agents': {},
             'evidences': {}
         };
-        
+
         //赋值请求信息
         ArbiListDataSer.arbiApplySelectData['claim']=ArbiListDataSer.arbiApplyData['claim'];
 
         //筛选当事人
-        for (var i=0,j=0; i<ArbiListDataSer.arbiApplyData['litigants'].length;i++) {
-            if (OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplyData['litigants'][i]['idCardNo'])) {
-                ArbiListDataSer.arbiApplySelectData['litigants'][j]=ArbiListDataSer.arbiApplyData['litigants'][i];
-                j++;
+        ArbiListDataSer.arbiApplySelectData['litigants']=targetDataCopy['litigants'];
+        for (var i=ArbiListDataSer.arbiApplySelectData['litigants'].length-1; i>=0;i--) {
+            if (!OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplySelectData['litigants'][i]['idCardNo'])) {
+                ArbiListDataSer.arbiApplySelectData['litigants'].splice(i,1);
             }
         }
 
         //赋值代理人信息
-        for (var i=0; i<ArbiListDataSer.arbiApplyData['agents'].length;i++) {
-            ArbiListDataSer.arbiApplySelectData['agents'][i]=ArbiListDataSer.arbiApplyData['agents'][i];
-        }
+        ArbiListDataSer.arbiApplySelectData['agents']=targetDataCopy['agents'];
 
         //筛选证据
         ArbiListDataSer.arbiApplySelectData['evidences']=targetDataCopy['evidences'];
@@ -574,6 +571,31 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
                 }
             }
         }
+        console.log(ArbiListDataSer.arbiApplySelectData);
+    };
+
+    var addLitigantsInfo = function () {
+        var litigantsInfo = {
+            "materialCode":"借款人",
+            "name":""/*名称*/,
+            "nature":"自然人"/*类型*/,
+            "mobiles":""/*联系号码*/,
+            "idCardType":"身份证"/*证件类型*/,
+            "idCardNo":""/*证件号码*/,
+            "emails":""/*邮箱地址|非必填*/,
+            "addresses":""/*联系地址*/,
+            "contacts":""/*联系人|非必填*/,
+            "sex":""/*性别|取值选择:['男','女']*/,
+            "files":[
+                {
+                    "fileName":"身份证正反面"/*文件类型范围:pdf/png/jpg*/,
+                    "fileKey":""/*fileKey*/
+                }
+            ],
+            "litigantType":"被申请人"/*当事人类型*/
+        }
+        ArbiListDataSer.arbiApplyData['litigants'].push(litigantsInfo);
+        console.log(ArbiListDataSer.arbiApplyData);
     };
 
 
@@ -591,6 +613,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
         addAddictionData: addAddictionData,
         createNewArbiInfo: createNewArbiInfo,
         chooseArbiFillOption: chooseArbiFillOption,
+        addLitigantsInfo: addLitigantsInfo,
     }
 });
 

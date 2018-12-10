@@ -142,6 +142,13 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
         };
 
         /**
+         * 添加litigants数据
+        */
+        arbilist.addLitigantsInfo = function () {
+            ArbiListSer.addLitigantsInfo();
+        };
+
+        /**
          * 测试选项操作
          */
         arbilist.test = function () {
