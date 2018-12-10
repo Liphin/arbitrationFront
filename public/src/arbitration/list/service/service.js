@@ -111,6 +111,14 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
      */
     var wrapArbiData = function () {
         //提交的表单数据
+        if (ArbiListDataSer.arbiApplyData['overall']['productCode']=="qidaifuturetech-p2p-1") {
+            //筛选qidaifuturetech-p2p-1的json结构
+            qidaifuturetech_p2p_1();
+        }
+        else if (ArbiListDataSer.arbiApplyData['overall']['productCode']=="qidaifuturetech-p2p-2"){
+            qidaifuturetech_p2p_2();
+        }
+
         var submitData = {
             operaterType: ArbiListDataSer.arbiApplyData['overall']['operaterType'],
             operater: ArbiListDataSer.arbiApplyData['overall']['operater'],
@@ -124,6 +132,23 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
             }),
             productCode: ArbiListDataSer.arbiApplyData['overall']['productCode']
         };
+
+        var submitSelectData = {
+            operaterType: ArbiListDataSer.arbiApplyData['overall']['operaterType'],
+            operater: ArbiListDataSer.arbiApplyData['overall']['operater'],
+            arbcaseInfo: JSON.stringify({
+                caseFlowType: ArbiListDataSer.arbiApplyData['overall']['productCode'],
+                commissionCode: ArbiListDataSer.arbiApplyData['commissionCode'],
+                claim: ArbiListDataSer.arbiApplySelectData['claim'],
+                litigants: ArbiListDataSer.arbiApplySelectData['litigants'],
+                agents: ArbiListDataSer.arbiApplySelectData['agents'],
+                evidences: ArbiListDataSer.arbiApplySelectData['evidences']
+            }),
+            productCode: ArbiListDataSer.arbiApplyData['overall']['productCode']
+        };
+
+        console.log(submitData);
+        console.log(submitSelectData);
 
         //保存到数据库的arbilist数据
         var saveData = {
@@ -139,6 +164,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
         //包装整合最终的提交数据
         return {
             submitData: submitData,
+            submitSelectData: submitSelectData,
             saveData: saveData,
             timestamp: ArbiListDataSer.overallData['timestamp'],
         };
@@ -473,6 +499,78 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
             for (var j in ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray']) {
                 if (ArbiListDataSer.arbiApplyData['agents'][i]['powerDetail'].indexOf(ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray'][j]['name']) > -1) {
                     ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray'][j]['status'] = true;
+                }
+            }
+        }
+    };
+
+    var qidaifuturetech_p2p_1 = function () {
+
+        ArbiListDataSer.arbiApplySelectData = {
+            'claim': {},
+            'litigants': {},
+            'agents': {},
+            'evidences': {}
+        };
+
+        //赋值请求信息
+        ArbiListDataSer.arbiApplySelectData['claim']=ArbiListDataSer.arbiApplyData['claim'];
+
+        //筛选当事人
+        for (var i=0,j=0; i<ArbiListDataSer.arbiApplyData['litigants'].length;i++) {
+            if (OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplyData['litigants'][i]['idCardNo'])) {
+                ArbiListDataSer.arbiApplySelectData['litigants'][j]=ArbiListDataSer.arbiApplyData['litigants'][i];
+                j++;
+            }
+        }
+
+        //赋值代理人信息
+        for (var i=0; i<ArbiListDataSer.arbiApplyData['agents'].length;i++) {
+            ArbiListDataSer.arbiApplySelectData['agents'][i]=ArbiListDataSer.arbiApplyData['agents'][i];
+        }
+
+        //筛选证据
+        ArbiListDataSer.arbiApplySelectData['evidences']=ArbiListDataSer.arbiApplyData['evidences'];
+        for (var i=0; i<ArbiListDataSer.arbiApplySelectData['evidences'].length;i++) {
+            for (var j=ArbiListDataSer.arbiApplySelectData['evidences'][i]['evidenceItems'].length-1;j>=0;j--) {
+                if (!OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplySelectData['evidences'][i]['evidenceItems'][j]['files'][0]['fileKey'])) {
+                    ArbiListDataSer.arbiApplySelectData['evidences'][i]['evidenceItems'].splice(j,1);
+                }
+            }
+        }
+    };
+
+    var qidaifuturetech_p2p_2 = function () {
+        
+        ArbiListDataSer.arbiApplySelectData = {
+            'claim': {},
+            'litigants': {},
+            'agents': {},
+            'evidences': {}
+        };
+
+        //赋值请求信息
+        ArbiListDataSer.arbiApplySelectData['claim']=ArbiListDataSer.arbiApplyData['claim'];
+
+        //筛选当事人
+        for (var i=0,j=0; i<ArbiListDataSer.arbiApplyData['litigants'].length;i++) {
+            if (OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplyData['litigants'][i]['idCardNo'])) {
+                ArbiListDataSer.arbiApplySelectData['litigants'][j]=ArbiListDataSer.arbiApplyData['litigants'][i];
+                j++;
+            }
+        }
+
+        //赋值代理人信息
+        for (var i=0; i<ArbiListDataSer.arbiApplyData['agents'].length;i++) {
+            ArbiListDataSer.arbiApplySelectData['agents'][i]=ArbiListDataSer.arbiApplyData['agents'][i];
+        }
+
+        //筛选证据
+        ArbiListDataSer.arbiApplySelectData['evidences']=ArbiListDataSer.arbiApplyData['evidences'];
+        for (var i=0; i<ArbiListDataSer.arbiApplySelectData['evidences'].length;i++) {
+            for (var j=ArbiListDataSer.arbiApplySelectData['evidences'][i]['evidenceItems'].length-1;j>=0;j--) {
+                if (!OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplySelectData['evidences'][i]['evidenceItems'][j]['files'][0]['fileKey'])) {
+                    ArbiListDataSer.arbiApplySelectData['evidences'][i]['evidenceItems'].splice(j,1);
                 }
             }
         }

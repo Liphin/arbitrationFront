@@ -150,7 +150,7 @@ app.post('/submitNewArbiData', function (req, res) {
     //上传数据到易简网
     request.post({
         url: urlPost,
-        formData: req.body['submitData'],
+        formData: req.body['submitSelectData'],
         headers: headers,
         rejectUnauthorized: false
 

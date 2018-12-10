@@ -67,11 +67,20 @@ app.factory('ArbiListDataSer', function () {
         'evidences': {}
     };
 
+    //筛选仲裁应用数据
+    var arbiApplySelectData = {
+        'claim': {},
+        'litigants': {},
+        'agents': {},
+        'evidences': {}
+    };
+
 
     return {
         listData: listData,
         overallData: overallData,
         arbiApplyData: arbiApplyData,
-        arbiApplyDataSupply: arbiApplyDataSupply
+        arbiApplyDataSupply: arbiApplyDataSupply,
+        arbiApplySelectData: arbiApplySelectData
     }
 });
