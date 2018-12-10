@@ -184,6 +184,7 @@ app.post('/submitNewArbiData', function (req, res) {
                 });
 
             } else {
+                console.log(req.body['submitSelectData']);
                 res.send({
                     'status_code': body['fault']['code'],
                     'data': body['fault']['message'],

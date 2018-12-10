@@ -146,7 +146,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
             }),
             productCode: ArbiListDataSer.arbiApplyData['overall']['productCode']
         };
-
+        
         console.log(submitData);
         console.log(submitSelectData);
 
@@ -505,14 +505,14 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
     };
 
     var qidaifuturetech_p2p_1 = function () {
-
+        var targetDataCopy = angular.copy(ArbiListDataSer.arbiApplyData);
         ArbiListDataSer.arbiApplySelectData = {
             'claim': {},
             'litigants': {},
             'agents': {},
             'evidences': {}
         };
-
+        
         //赋值请求信息
         ArbiListDataSer.arbiApplySelectData['claim']=ArbiListDataSer.arbiApplyData['claim'];
 
@@ -530,7 +530,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
         }
 
         //筛选证据
-        ArbiListDataSer.arbiApplySelectData['evidences']=ArbiListDataSer.arbiApplyData['evidences'];
+        ArbiListDataSer.arbiApplySelectData['evidences']=targetDataCopy['evidences'];
         for (var i=0; i<ArbiListDataSer.arbiApplySelectData['evidences'].length;i++) {
             for (var j=ArbiListDataSer.arbiApplySelectData['evidences'][i]['evidenceItems'].length-1;j>=0;j--) {
                 if (!OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplySelectData['evidences'][i]['evidenceItems'][j]['files'][0]['fileKey'])) {
@@ -541,14 +541,14 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
     };
 
     var qidaifuturetech_p2p_2 = function () {
-        
+        var targetDataCopy = angular.copy(ArbiListDataSer.arbiApplyData);
         ArbiListDataSer.arbiApplySelectData = {
             'claim': {},
             'litigants': {},
             'agents': {},
             'evidences': {}
         };
-
+        
         //赋值请求信息
         ArbiListDataSer.arbiApplySelectData['claim']=ArbiListDataSer.arbiApplyData['claim'];
 
@@ -566,7 +566,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
         }
 
         //筛选证据
-        ArbiListDataSer.arbiApplySelectData['evidences']=ArbiListDataSer.arbiApplyData['evidences'];
+        ArbiListDataSer.arbiApplySelectData['evidences']=targetDataCopy['evidences'];
         for (var i=0; i<ArbiListDataSer.arbiApplySelectData['evidences'].length;i++) {
             for (var j=ArbiListDataSer.arbiApplySelectData['evidences'][i]['evidenceItems'].length-1;j>=0;j--) {
                 if (!OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplySelectData['evidences'][i]['evidenceItems'][j]['files'][0]['fileKey'])) {
