@@ -343,7 +343,17 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
             return;
         }
 
-        var url = OverallDataSer.urlData['frontEndHttp']['progressArbiOpt'];
+        //查询该应用是否已配置生产
+        if(ArbiListDataSer.arbiApplyDataEtc['etcData'].indexOf(ArbiListDataSer.listData[index]['data']['productCode'])>0) {
+            console.log("提交生产环境");
+            var url = OverallDataSer.urlData['frontEndHttp']['progressArbiOpt'];
+        }
+        else {
+            console.log("提交测试环境");
+            var url = OverallDataSer.urlData['frontEndHttp']['progressArbiOptTest'];
+        }
+
+        //var url = OverallDataSer.urlData['frontEndHttp']['progressArbiOpt'];
         var data = {
             'arbcaseId': ArbiListDataSer.listData[index]['data']['arbcaseId'],
             'operaterType': ArbiListDataSer.listData[index]['data']['operaterType'],
@@ -376,7 +386,17 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
             return;
         }
 
-        var url = OverallDataSer.urlData['frontEndHttp']['withdrawArbiOpt'];
+        //查询该应用是否已配置生产
+        if(ArbiListDataSer.arbiApplyDataEtc['etcData'].indexOf(ArbiListDataSer.listData[index]['data']['productCode'])>0) {
+            console.log("提交生产环境");
+            var url = OverallDataSer.urlData['frontEndHttp']['withdrawArbiOpt'];
+        }
+        else {
+            console.log("提交测试环境");
+            var url = OverallDataSer.urlData['frontEndHttp']['withdrawArbiOptTest'];
+        }
+
+        //var url = OverallDataSer.urlData['frontEndHttp']['withdrawArbiOpt'];
         var data = {
             'arbcaseId': ArbiListDataSer.listData[index]['data']['arbcaseId'],
             'operaterType': ArbiListDataSer.listData[index]['data']['operaterType'],

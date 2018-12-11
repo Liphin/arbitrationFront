@@ -245,14 +245,22 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
      * 上传资源文件信息
      * 用于提交文件操作，并开放callback函数接口
      */
-    var uploadResource = function (obj, callback) {
+    var uploadResource = function (obj, type, callback) {
         var fd = new FormData();
         //动态装载数据
         for (var i in obj) {
             fd.append(i, obj[i]);
         }
         //提交表单数据
-        var url = OverallDataSer.urlData['frontEndHttp']['uploadResource'];
+        if (type) {
+            console.log("提交生产环境");
+            var url = OverallDataSer.urlData['frontEndHttp']['uploadResource'];
+        }
+        else {
+            console.log("提交测试环境");
+            var url = OverallDataSer.urlData['frontEndHttp']['uploadResourceTest'];
+        }
+
         $http.post(url, fd, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined},

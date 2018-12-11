@@ -43,8 +43,18 @@ app.directive('fileProxy', ['OverallGeneralSer', 'OverallDataSer', 'ArbiListData
                             'tempFileName': OverallGeneralSer.getTimeStamp(),
                             'file': element[0].files[0]
                         };
+                        //获取案件种类
+                        //查询该应用是否已配置生产
+                        var type = '';
+                        if(ArbiListDataSer.arbiApplyDataEtc['etcData'].indexOf(ArbiListDataSer.arbiApplyData['overall']['productCode'])>0) {
+                            type = true;
+                        }
+                        else {
+                            type = false;
+                        }
+
                         //上传到阿里云服务器server
-                        OverallGeneralSer.uploadResource(formData, function (responseData) {
+                        OverallGeneralSer.uploadResource(formData,type, function (responseData) {
                             console.log('response', responseData);
                             //上传数据失败
                             if (responseData == false) {
