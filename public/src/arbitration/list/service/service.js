@@ -183,8 +183,17 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
 
         //整理提交的arbi数据
         var formData = preWrapArbiData();
+
+        //查询该应用是否已配置生产
+        if(ArbiListDataSer.arbiApplyDataEtc['etcData'].indexOf(ArbiListDataSer.arbiApplyData['overall']['productCode'])>0) {
+            var url = OverallDataSer.urlData['frontEndHttp']['submitNewArbiData'];
+        }
+        else {
+            var url = OverallDataSer.urlData['frontEndHttp']['submitNewArbiDataTest'];
+        }
+
         //提交诉讼信息到server
-        var url = OverallDataSer.urlData['frontEndHttp']['submitNewArbiData'];
+
         OverallGeneralSer.httpPostData2(formData, url, function (responseData) {
             if (responseData['status_code'] == 200) {
                 //刷新重新获取arbi列表数据

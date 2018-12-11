@@ -202,6 +202,76 @@ app.post('/submitNewArbiData', function (req, res) {
     });
 });
 
+/**
+ * 测试提交新的诉讼数据
+ */
+app.post('/submitNewArbiDataTest', function (req, res) {
+
+    //上传到易简网平台
+    var urlPost = 'https://14.23.88.138:7777/api/arb/1.0/arbcase';
+    //设置头部
+    var headers = {
+        "Accept": "application/json",
+        'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c'
+    };
+    //console.log('request body', req.body);
+    // console.log('encoded request body', encodeURIComponent(req.body));
+
+    //上传数据到易简网
+    request.post({
+        url: urlPost,
+        formData: req.body['submitSelectData'],
+        headers: headers,
+        rejectUnauthorized: false
+
+    }, function (error, response, bodyJson) {
+        console.log(bodyJson);
+        if (!error && response.statusCode == 200) {
+            var body = JSON.parse(bodyJson);
+            console.log('submit response', body);
+            if (body['code'] == 1) {
+                //保存到mongo数据库
+                //list数据，存储基础展示数据
+                req.body['saveData']['arbcaseId'] = body['arbcaseId'];
+                var saveListData = {
+                    'timestamp': req.body['timestamp'],
+                    'data': req.body['saveData']
+                };
+
+                //存储detail数据，用于查询详情时使用
+                var saveDetailData = {
+                    'timestamp': req.body['timestamp'],
+                    'data': req.body['submitData']
+                };
+
+                //分别异步插入或更新arbilist和arbidetail中
+                insertUpdateArbiDb(saveDetailData, saveListData, function () {
+                    //返回arbcaseId
+                    res.send({
+                        'status_code': 200,
+                        'data': body['arbcaseId'],
+                    });
+                });
+
+            } else {
+                console.log(req.body['submitSelectData']);
+                res.send({
+                    'status_code': body['fault']['code'],
+                    'data': body['fault']['message'],
+                })
+            }
+
+        } else {
+            //发送数据到易简网出错
+            console.log('post submitNewArbiData error', error, body);
+            res.send({
+                'status_code': 400,
+                'data': 'post data error',
+            })
+        }
+    });
+});
+
 
 /**
  * 查询仲裁数据的进度

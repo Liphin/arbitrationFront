@@ -73,14 +73,19 @@ app.factory('ArbiListDataSer', function () {
         'litigants': {},
         'agents': {},
         'evidences': {}
-    };
+    }
 
+    //该应用是否配置生产环境
+    var arbiApplyDataEtc = {
+        'etcData':'',
+    };
 
     return {
         listData: listData,
         overallData: overallData,
         arbiApplyData: arbiApplyData,
         arbiApplyDataSupply: arbiApplyDataSupply,
-        arbiApplySelectData: arbiApplySelectData
+        arbiApplySelectData: arbiApplySelectData,
+        arbiApplyDataEtc: arbiApplyDataEtc,
     }
 });
