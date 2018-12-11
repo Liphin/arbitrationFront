@@ -159,6 +159,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
             updateTime: OverallGeneralSer.getCurrentDataTime(),
             operaterType: ArbiListDataSer.arbiApplyData['overall']['operaterType'],
             operater: ArbiListDataSer.arbiApplyData['overall']['operater'],
+            productCode: ArbiListDataSer.arbiApplyData['overall']['productCode'],
         };
 
         //包装整合最终的提交数据

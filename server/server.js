@@ -307,11 +307,82 @@ app.post('/progressArbiOpt', function (req, response) {
     });
 });
 
+/**
+ * 测试查询仲裁数据的进度
+ */
+app.post('/progressArbiOptTest', function (req, response) {
+    //获取指定案件的进度
+    var urlGet = 'https://14.23.88.138:7777/api/arb/1.0/arbcaseProgress/' + req.body['arbcaseId'] +
+        '?operaterType=' + encodeURIComponent(req.body['operaterType']) + '&operater=' + encodeURIComponent(req.body['operater']);
+    var options = {
+        url: urlGet,
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c',
+        },
+        rejectUnauthorized: false
+    };
+    request(options, function (err, res, bodyJson) {
+        console.log('bodyJson', bodyJson);
+        var body = JSON.parse(bodyJson);
+        if (!err) {
+            response.send({
+                'status_code': 200,
+                'data': body,
+            });
+        } else {
+            console.log(err, body);
+            res.send({
+                'status_code': 400,
+                'data': 'get data error',
+            })
+        }
+    });
+});
+
 
 /**
  * 撤销仲裁请求
  */
 app.post('/withdrawArbiOpt', function (req, res) {
+    //获取指定案件的进度
+    var urlPost = 'https://14.23.88.138:7777/api/arb/1.0/claimWithdraw/' + req.body['arbcaseId'];
+    //设置头部
+    var headers = {
+        "Accept": "application/json",
+        'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c'
+    };
+    request.post({
+        url: urlPost,
+        formData: {'operaterType': req.body['operaterType'], 'operater': req.body['operater']},
+        headers: headers,
+        rejectUnauthorized: false
+
+    }, function (error, response, bodyJson) {
+        console.log(bodyJson);
+        var body = JSON.parse(bodyJson);
+        if (!error && response.statusCode == 200) {
+            res.send({
+                'status_code': 200,
+                'data': body,
+            });
+
+        } else {
+            //发送数据到易简网出错
+            console.log('post withdrawArbiOpt error', error, body);
+            res.send({
+                'status_code': 400,
+                'data': 'post data error',
+            })
+        }
+    });
+});
+
+/**
+ * 测试撤销仲裁请求
+ */
+app.post('/withdrawArbiOptTest', function (req, res) {
     //获取指定案件的进度
     var urlPost = 'https://14.23.88.138:7777/api/arb/1.0/claimWithdraw/' + req.body['arbcaseId'];
     //设置头部
@@ -361,6 +432,67 @@ var storage = multer.diskStorage({
 });
 var upload = multer({storage: storage});
 app.post('/uploadResource', upload.single('file'), function (req, res) {
+    //转换成base64数据
+    var tempFileUrl = serverSerData.resourcePath + '/' + req.body['tempFileName'];
+    var fileData = fs.readFileSync(tempFileUrl);
+    var base64Image = new Buffer(fileData, 'binary').toString('base64');
+
+    //上传到易简网平台
+    var urlPost = 'https://14.23.88.138:7777/api/1.0/file';
+    //设置头部
+    var headers = {
+        "Accept": "application/json",
+        'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c'
+    };
+    //表单数据设置
+    var formData = {
+        'fileName': encodeURIComponent(req.body['fileName']),
+        'fileBody': base64Image
+    };
+    //上传数据到易简网
+    request.post({
+        url: urlPost,
+        formData: formData,
+        headers: headers,
+        rejectUnauthorized: false
+    }, function (error, response, bodyJson) {
+        console.log(bodyJson);
+        var body = JSON.parse(bodyJson);
+        if (!error && response.statusCode == 200) {
+            //重命名文件名
+            var newFileUrl = serverSerData.resourcePath + '/' + body['fileKey'];
+
+            //如果已经存在该文件先删除，否则将导致重命名后文件异常
+            fs.access(newFileUrl, error => {
+
+                if (!error) {
+                    console.log('remove file first', newFileUrl);
+                    fs.unlinkSync(newFileUrl);
+                }
+
+                fs.rename(tempFileUrl, newFileUrl, function (err) {
+                    if (err) {
+                        //重命名文件出错
+                        console.log('rename failure', err);
+                        res.send(false);
+
+                    } else {
+                        console.log('rename success');
+                        res.send(body)
+                    }
+                });
+            });
+
+        } else {
+            //发送数据到易简网出错
+            console.log('post data to YiJian error');
+            res.send(false);
+        }
+    });
+});
+
+//测试上传文件
+app.post('/uploadResourceTest', upload.single('file'), function (req, res) {
     //转换成base64数据
     var tempFileUrl = serverSerData.resourcePath + '/' + req.body['tempFileName'];
     var fileData = fs.readFileSync(tempFileUrl);

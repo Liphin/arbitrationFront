@@ -33,6 +33,9 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
             'getArbiJson': baseUrlData['frontEndHttp'] + 'json',
             'deleteBatchArbi': baseUrlData['frontEndHttp'] + 'deleteBatchArbi',
             'submitNewArbiDataTest': baseUrlData['frontEndHttp'] + 'submitNewArbiDataTest',
+            'uploadResourceTest': baseUrlData['frontEndHttp'] + 'uploadResourceTest',
+            'withdrawArbiOptTest': baseUrlData['frontEndHttp'] + 'withdrawArbiOptTest',
+            'progressArbiOptTest': baseUrlData['frontEndHttp'] + 'progressArbiOptTest',
         }
     };
 
