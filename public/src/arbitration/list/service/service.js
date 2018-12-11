@@ -186,9 +186,11 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
 
         //查询该应用是否已配置生产
         if(ArbiListDataSer.arbiApplyDataEtc['etcData'].indexOf(ArbiListDataSer.arbiApplyData['overall']['productCode'])>0) {
+            console.log("提交生产环境");
             var url = OverallDataSer.urlData['frontEndHttp']['submitNewArbiData'];
         }
         else {
+            console.log("提交测试环境");
             var url = OverallDataSer.urlData['frontEndHttp']['submitNewArbiDataTest'];
         }
 
