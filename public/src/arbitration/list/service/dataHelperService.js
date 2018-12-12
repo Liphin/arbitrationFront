@@ -139,10 +139,6 @@ app.factory('ArbiListDataHelperSer', function () {
                 'name': "身份证号",
                 'placeholder': ''
             },
-            "lenderName": {
-                'name': "出借人姓名",
-                'placeholder': ''
-            },
             "cashPayDate": {
                 'name': "现金支付日期",
                 'placeholder': '实例：2017年11月15日'

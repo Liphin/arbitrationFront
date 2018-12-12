@@ -306,6 +306,8 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
                 if (responseData['data'].length > 0) {
                     //打开edit面板并载入相关数据
                     ArbiListDataSer.overallData['showEdit'] = true;
+                    ArbiListDataSer.overallData['arbiType']['status'] = false;
+                    ArbiListDataSer.overallData['arbiType']['targetType'] = responseData['data'][0]['data']['productCode'];
                     ArbiListDataSer.overallData['arbcaseId'] = ArbiListDataSer.listData[index]['data']['arbcaseId']; //赋值该arbcaseId值
                     ArbiListDataSer.overallData['timestamp'] = responseData['data'][0]['timestamp']; //赋值该timestamp
 
@@ -479,6 +481,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
     var selectArbiType = function (type) {
         //设置产品类型数据
         ArbiListDataSer.arbiApplyData['overall']['productCode'] = type;
+        ArbiListDataSer.overallData['arbiType']['targetType'] = type;
 
         //获取获取对应的type类型的json文件
         if ($location.path() == OverallDataSer.redirect['arbiList']) {
@@ -514,6 +517,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
         afterArbiInfoInit();
 
         //展开面板为true
+        ArbiListDataSer.overallData['arbiType']['status'] = false;
         ArbiListDataSer.overallData['showEdit'] = true;
         ArbiListDataSer.overallData['arbcaseId'] = '未提交'; //赋值该arbcaseId为空
         ArbiListDataSer.overallData['timestamp'] = OverallGeneralSer.getTimeStamp(); //初始化timestamp
@@ -607,25 +611,49 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
     };
 
     var addLitigantsInfo = function () {
-        var litigantsInfo = {
-            "materialCode":"借款人",
-            "name":""/*名称*/,
-            "nature":"自然人"/*类型*/,
-            "mobiles":""/*联系号码*/,
-            "idCardType":"身份证"/*证件类型*/,
-            "idCardNo":""/*证件号码*/,
-            "emails":""/*邮箱地址|非必填*/,
-            "addresses":""/*联系地址*/,
-            "contacts":""/*联系人|非必填*/,
-            "sex":""/*性别|取值选择:['男','女']*/,
-            "files":[
-                {
-                    "fileName":"身份证正反面"/*文件类型范围:pdf/png/jpg*/,
-                    "fileKey":""/*fileKey*/
-                }
-            ],
-            "litigantType":"被申请人"/*当事人类型*/
+        if (ArbiListDataSer.arbiApplyData['overall']['productCode']=="qidaifuturetech-p2p-1") {
+            var litigantsInfo = {
+                "materialCode":"借款人",
+                "name":""/*名称*/,
+                "nature":"自然人"/*类型*/,
+                "mobiles":""/*联系号码*/,
+                "idCardType":"身份证"/*证件类型*/,
+                "idCardNo":""/*证件号码*/,
+                "emails":""/*邮箱地址|非必填*/,
+                "addresses":""/*联系地址*/,
+                "contacts":""/*联系人|非必填*/,
+                "sex":""/*性别|取值选择:['男','女']*/,
+                "files":[
+                    {
+                        "fileName":"身份证正反面"/*文件类型范围:pdf/png/jpg*/,
+                        "fileKey":""/*fileKey*/
+                    }
+                ],
+                "litigantType":"被申请人"/*当事人类型*/
+            }
         }
+        else if(ArbiListDataSer.arbiApplyData['overall']['productCode']=="qidaifuturetech-p2p-2") {
+            var litigantsInfo = {
+                "materialCode":"借款人",
+                "name":""/*名称*/,
+                "nature":"自然人"/*类型*/,
+                "mobiles":""/*联系号码*/,
+                "idCardType":"身份证"/*证件类型*/,
+                "idCardNo":""/*证件号码*/,
+                "emails":""/*邮箱地址|非必填*/,
+                "addresses":""/*联系地址*/,
+                "contacts":""/*联系人|非必填*/,
+                "sex":""/*性别|取值选择:['男','女']*/,
+                "files":[
+                    {
+                        "fileName":"身份证正反面"/*文件类型范围:pdf/png/jpg*/,
+                        "fileKey":""/*fileKey*/
+                    }
+                ],
+                "litigantType":"被申请人"/*当事人类型*/
+            }
+        }
+
         ArbiListDataSer.arbiApplyData['litigants'].push(litigantsInfo);
         console.log(ArbiListDataSer.arbiApplyData);
     };

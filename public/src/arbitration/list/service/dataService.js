@@ -16,7 +16,7 @@ app.factory('ArbiListDataSer', function () {
         },
         'arbiType': {
             'status': true,//案件类型展示
-            'targetType': 'qidaifuturetech-p2p-1', //目标案件类型
+            'targetType': '', //目标案件类型
             'array': [
                 {'name': '民间借贷', 'type': 'qidaifuturetech-p2p-1'},
                 {'name': '追偿权纠纷车贷', 'type': 'qidaifuturetech-p2p-2'},

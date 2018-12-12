@@ -14,15 +14,35 @@ var isProd = targetSetting['settingData']['isProd']; //是否为生产环境
 var httpDataLimit = '25mb';
 var appConfig = targetSetting['appConfig'];
 
+var isProd = true;
+
 //全局数据变量
 var overallData = {
-    'access_token': '',
+    'access':{
+        'access_token': '',
+        'refresh_token': '',
+        'scope': '',
+        'token_type': '',
+        'expires_in': '',
+    },
+    'key':{
+        'consumer_key':'',
+        'consumer_secret':'',
+        'grant_type':'',
+        'username':'',
+        'password':'',
+    }
+};
+
+var getAccesstoken = {
+    'time':'0 0 6 * * *',  //每天早上6点获取accesstoken数据信息
 };
 
 module.exports = {
     targetSetting: targetSetting,
     httpDataLimit: httpDataLimit,
     overallData: overallData,
+    getAccesstoken: getAccesstoken,
     appConfig: appConfig,
     basePath: basePath,
     projectPath: projectPath,

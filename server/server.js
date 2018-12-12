@@ -10,6 +10,7 @@ var fs = require('fs');
 var http = require('http');
 var https = require('https');
 var request = require('request');
+var util = require('util');
 var multer = require('multer');
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -26,6 +27,8 @@ var serverSer = new ServerSer();
 var miniSer = new MiniSer();
 var PORT = serverSerData.port;
 
+
+
 //设置http请求接收数据配置和最大限额等
 app.use(device.capture());
 app.use(bodyParser.json({limit: serverSerData.httpDataLimit}));
@@ -38,6 +41,9 @@ app.use(bodyParser.urlencoded({limit: serverSerData.httpDataLimit, extended: tru
 // app.use(function (req, res, next) {
 //     serHelper.setCrossOrigin(req, res, next);
 // });
+
+//数据初始化操作
+//serverSer.dataInit();
 
 /**
  * 管理员登录设置
@@ -139,10 +145,11 @@ app.post('/submitNewArbiData', function (req, res) {
 
     //上传到易简网平台
     var urlPost = 'https://14.23.88.138:7777/api/arb/1.0/arbcase';
+    var Authorization = "Bearer "+serverSerData.overallData['access']['access_token'];
     //设置头部
     var headers = {
         "Accept": "application/json",
-        'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c'
+        'Authorization': Authorization
     };
     //console.log('request body', req.body);
     // console.log('encoded request body', encodeURIComponent(req.body));
@@ -280,12 +287,13 @@ app.post('/progressArbiOpt', function (req, response) {
     //获取指定案件的进度
     var urlGet = 'https://14.23.88.138:7777/api/arb/1.0/arbcaseProgress/' + req.body['arbcaseId'] +
         '?operaterType=' + encodeURIComponent(req.body['operaterType']) + '&operater=' + encodeURIComponent(req.body['operater']);
+    var Authorization = "Bearer "+serverSerData.overallData['access']['access_token'];
     var options = {
         url: urlGet,
         method: 'GET',
         headers: {
             'Accept': 'application/json',
-            'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c',
+            'Authorization': Authorization,
         },
         rejectUnauthorized: false
     };
@@ -348,10 +356,11 @@ app.post('/progressArbiOptTest', function (req, response) {
 app.post('/withdrawArbiOpt', function (req, res) {
     //获取指定案件的进度
     var urlPost = 'https://14.23.88.138:7777/api/arb/1.0/claimWithdraw/' + req.body['arbcaseId'];
+    var Authorization = "Bearer "+serverSerData.overallData['access']['access_token'];
     //设置头部
     var headers = {
         "Accept": "application/json",
-        'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c'
+        'Authorization': Authorization
     };
     request.post({
         url: urlPost,
@@ -436,13 +445,14 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
     var tempFileUrl = serverSerData.resourcePath + '/' + req.body['tempFileName'];
     var fileData = fs.readFileSync(tempFileUrl);
     var base64Image = new Buffer(fileData, 'binary').toString('base64');
+    var Authorization = "Bearer "+serverSerData.overallData['access']['access_token'];
 
     //上传到易简网平台
     var urlPost = 'https://14.23.88.138:7777/api/1.0/file';
     //设置头部
     var headers = {
         "Accept": "application/json",
-        'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c'
+        'Authorization': Authorization
     };
     //表单数据设置
     var formData = {
