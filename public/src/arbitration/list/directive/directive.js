@@ -307,7 +307,7 @@ app.directive('toNumber', [function () {
             toNumber: '=',
         },
         link: function (scope, element, attrs) {
-            console.log(scope.toNumber);
+            //console.log(scope.toNumber);
             scope.toNumber=parseFloat(scope.toNumber);
         }
     }
