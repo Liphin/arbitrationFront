@@ -81,6 +81,76 @@ function ServerSer() {
         return status;
     };
 
+    //获取accesstoken
+    var getAccessToken = function () {
+        //获取accessToken
+        var consumer_key = serverSerData.overallData['key']['consumer_key'];
+        var consumer_secret = serverSerData.overallData['key']['consumer_secret'];
+        var grant_type = serverSerData.overallData['key']['grant_type'];
+        var username = serverSerData.overallData['key']['username'];
+        var password = serverSerData.overallData['key']['password'];
+        var urlGet = util.format(getAccessTokenUrl,grant_type,username,password);
+        var consumer = consumer_key+":"+consumer_secret;
+        var swap = new Buffer(consumer);
+        var Authorization = swap.toString('base64');
+
+        var options = {
+            url: urlGet,
+            method: 'GET',
+            Authorization: Authorization,
+            rejectUnauthorized: false
+        };
+        request(options, function (err, res, bodyJson) {
+            console.log('bodyJson',bodyJson);
+            var body = JSON.parse(bodyJson);
+            if (!err) {
+                console.log("获取accesstoken成功");
+                serverSerData.overallData['access']['access_token'] = body['access_token'];
+                serverSerData.overallData['access']['refresh_token'] = body['refresh_token'];
+                serverSerData.overallData['access']['scope'] = body['scope'];
+                serverSerData.overallData['access']['token_type'] = body['token_type'];
+                serverSerData.overallData['access']['expires_in'] = body['expires_in'];
+            } else {
+                console.log(err, body);
+            }
+        });
+    }
+
+    var refreshAccessToken = function () {
+        //刷新accesstoken
+        var consumer_key = serverSerData.overallData['key']['consumer_key'];
+        var consumer_secret = serverSerData.overallData['key']['consumer_secret'];
+        var grant_type = serverSerData.overallData['key']['grant_type'];
+        var refresh_token = serverSerData.overallData['access']['refresh_token'];
+        var urlGet = util.format(refreshAccessTokenUrl,grant_type,refresh_token);
+        var consumer = consumer_key+":"+consumer_secret;
+        var swap = new Buffer(consumer);
+        var Authorization = swap.toString('base64');
+
+        var options = {
+            url: urlGet,
+            method: 'GET',
+            Authorization: Authorization,
+            rejectUnauthorized: false
+        };
+        request(options, function (err, res, bodyJson) {
+            console.log('bodyJson',bodyJson);
+            var body = JSON.parse(bodyJson);
+            if (!err) {
+                console.log("获取accesstoken成功");
+                serverSerData.overallData['access']['access_token'] = body['access_token'];
+                serverSerData.overallData['access']['refresh_token'] = body['refresh_token'];
+                serverSerData.overallData['access']['scope'] = body['scope'];
+                serverSerData.overallData['access']['token_type'] = body['token_type'];
+                serverSerData.overallData['access']['expires_in'] = body['expires_in'];
+            } else {
+                console.log(err, body);
+                console.log("刷新accesstoken不成功，重新获取accesstoken");
+                getAccessToken();
+            }
+        });
+    }
+
 
     /**
      * 每天任务获取accessToken数据操作
@@ -89,69 +159,10 @@ function ServerSer() {
     var scheduleGetAccessToken = function () {
 
         if (checkDataNotEmpty(serverSerData.overallData['access']['refresh_token'])) {
-            //刷新accesstoken
-            var consumer_key = serverSerData.overallData['key']['consumer_key'];
-            var consumer_secret = serverSerData.overallData['key']['consumer_secret'];
-            var grant_type = serverSerData.overallData['key']['grant_type'];
-            var refresh_token = serverSerData.overallData['access']['refresh_token'];
-            var urlGet = util.format(refreshAccessTokenUrl,grant_type,refresh_token);
-            var consumer = consumer_key+":"+consumer_secret;
-            var swap = new Buffer(consumer);
-            var Authorization = swap.toString('base64');
-
-            var options = {
-                url: urlGet,
-                method: 'GET',
-                Authorization: Authorization,
-                rejectUnauthorized: false
-            };
-            request(options, function (err, res, bodyJson) {
-                console.log('bodyJson',bodyJson);
-                var body = JSON.parse(bodyJson);
-                if (!err) {
-                    console.log("获取accesstoken成功");
-                    serverSerData.overallData['access']['access_token'] = body['access_token'];
-                    serverSerData.overallData['access']['refresh_token'] = body['refresh_token'];
-                    serverSerData.overallData['access']['scope'] = body['scope'];
-                    serverSerData.overallData['access']['token_type'] = body['token_type'];
-                    serverSerData.overallData['access']['expires_in'] = body['expires_in'];
-                } else {
-                    console.log(err, body);
-                }
-            });
+            getAccessToken();
         }
         else {
-            //获取accessToken
-            var consumer_key = serverSerData.overallData['key']['consumer_key'];
-            var consumer_secret = serverSerData.overallData['key']['consumer_secret'];
-            var grant_type = serverSerData.overallData['key']['grant_type'];
-            var username = serverSerData.overallData['key']['username'];
-            var password = serverSerData.overallData['key']['password'];
-            var urlGet = util.format(getAccessTokenUrl,grant_type,username,password);
-            var consumer = consumer_key+":"+consumer_secret;
-            var swap = new Buffer(consumer);
-            var Authorization = swap.toString('base64');
-
-            var options = {
-                url: urlGet,
-                method: 'GET',
-                Authorization: Authorization,
-                rejectUnauthorized: false
-            };
-            request(options, function (err, res, bodyJson) {
-                console.log('bodyJson',bodyJson);
-                var body = JSON.parse(bodyJson);
-                if (!err) {
-                    console.log("获取accesstoken成功");
-                    serverSerData.overallData['access']['access_token'] = body['access_token'];
-                    serverSerData.overallData['access']['refresh_token'] = body['refresh_token'];
-                    serverSerData.overallData['access']['scope'] = body['scope'];
-                    serverSerData.overallData['access']['token_type'] = body['token_type'];
-                    serverSerData.overallData['access']['expires_in'] = body['expires_in'];
-                } else {
-                    console.log(err, body);
-                }
-            });
+            refreshAccessToken();
         }
     }
 
