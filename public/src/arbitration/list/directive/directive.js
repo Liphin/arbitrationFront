@@ -297,6 +297,22 @@ app.directive('fileSetting', [function () {
     }
 }]);
 
+/**
+ * 转化为number
+ */
+app.directive('toNumber', [function () {
+    return {
+        restrict: 'A',
+        scope: {
+            toNumber: '=',
+        },
+        link: function (scope, element, attrs) {
+            console.log(scope.toNumber);
+            scope.toNumber=parseFloat(scope.toNumber);
+        }
+    }
+}]);
+
 
 
 

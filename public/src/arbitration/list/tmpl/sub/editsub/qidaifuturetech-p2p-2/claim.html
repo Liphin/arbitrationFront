@@ -73,12 +73,17 @@
                     <input type="number" class="inputStyle" ng-model="value['disputeFee']" step="0.01" max="10000000000000.00" min="0.00" style="margin-left: 15px">
                 </div>
 
-                <!--当事人名称-->
                 <div style="flex: 1">
-                    <span style="">当事人名称：</span>
-                    <input style="width: 242px" class="inputStyle" type="text" ng-model="value['litigants']" maxlength="100" placeholder="如有多个请用英文逗号分隔"/>
-                    <!--<span>（如有多个请用英文逗号分隔）</span>-->
+                    <span style="">无标的：</span>
+                    <input to-number="value['payItem']" type="number" class="inputStyle" ng-model="value['payItem']" step="0.01" max="10000000000000.00" min="0.00" style="margin-left: 15px">
                 </div>
+            </div>
+
+            <!--当事人名称-->
+            <div style="margin-top: 15px;display: flex">
+                <span style="">当事人名称：</span>
+                <input style="width: 242px" class="inputStyle" type="text" ng-model="value['litigants']" maxlength="100" placeholder="如有多个请用英文逗号分隔"/>
+                <!--<span>（如有多个请用英文逗号分隔）</span>-->
             </div>
 
             <!--请求类型-->
