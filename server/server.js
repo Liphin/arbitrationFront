@@ -16,7 +16,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var device = require('express-device');
 var ServerSer = require('./serverSer');
-var MiniSer = require('./mini/MiniSer');
+//var MiniSer = require('./mini/MiniSer');
 var mongoDBSer = require('./mongo/MongoSer');
 var serverSerData = require('./serverSerData');
 
@@ -24,7 +24,7 @@ var serverSerData = require('./serverSerData');
 /*对象数据实例化*/
 var app = express();
 var serverSer = new ServerSer();
-var miniSer = new MiniSer();
+//var miniSer = new MiniSer();
 var PORT = serverSerData.port;
 
 
