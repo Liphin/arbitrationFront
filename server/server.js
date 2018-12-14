@@ -583,9 +583,6 @@ var deleteArbiListItem = function (db, toDeleteArray, i, toContinue, response) {
     db.db(mongoDBSer.dbArbitration).collection('arbilist').deleteOne(whereStr, function (err, res) {
         if (!toContinue) {
             db.close();
-            response.send({
-                'status_code': 200,
-            })
         } else {
             ++i;
             deleteArbiListItem(db, toDeleteArray, i, i < toDeleteArray.length - 1, response)
