@@ -35,6 +35,7 @@
             <!--</label>-->
         <!--</div>-->
 
+
         <div style="display: flex; margin-top: 15px">
             <!--当事人名称-->
             <div style="flex: 1">
@@ -70,6 +71,12 @@
                 <span>联系人名称：</span>
                 <input type="text" ng-model="value['contacts']" input-width-setting="litigantsContact" class="inputStyle" maxlength="250" placeholder="如有多个请用英文逗号分隔（不大于250个字符）">
             </div>
+        </div>
+
+        <!--法定代表人（企业、个体户必填）-->
+        <div ng-if="value['materialCode']=='出借人（企业）'" style="display: flex; margin-top: 15px">
+            <span>法定代表人:</span>
+            <input type="text" class="inputStyle" ng-model="value['legalRepresent']" style="width: 500px;" maxlength="50" placeholder="请输入法定代表人（不大于50个字符）">
         </div>
 
 
@@ -210,6 +217,7 @@
                        file-index="{{$index}}" edit-type="litigants"/>
                 <span ng-click="arbilist.downloadFile(fileValue)" ng-if="fileValue['fileKey']!=''" class="fa fa-file-pdf-o" style="margin-left: 15px;cursor: pointer; font-size: 20px; color: rebeccapurple"></span>
                 <span style="margin-left: 15px;"> 请上传{{arbilist.getFilePrefixName(fileValue['fileName'])}}（文件类型范围:pdf/png/jpg）</span>
+                <span ng-if="fileValue['fileKey']!=''" style="margin-left: 15px; font-weight: bold; text-decoration: underline; color: #3689aa;cursor: pointer" ng-click="fileValue['fileKey']=''">删除</span>
             </div>
         </div>
     </div>

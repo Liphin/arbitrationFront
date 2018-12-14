@@ -7,6 +7,12 @@ app.factory('ArbiListDataHelperSer', function () {
 
     //其他附加数据
     var extDataHelper = {
+        'claim': {
+          "overdueCompensatoryAmount": {
+              'name': "尚欠代偿款",
+              'placeholder': '示例:83886.66'
+          }
+        },
         'claimItems': {
             "claimMoney": {
                 'name': "请求本金",

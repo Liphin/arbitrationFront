@@ -149,6 +149,13 @@ app.controller('ArbiListCtrl', function (ArbiListDataSer, OverallDataSer, $locat
         };
 
         /**
+         * 添加Agents数据
+         */
+        arbilist.addAgentsInfo = function () {
+            ArbiListSer.addAgentsInfo();
+        };
+
+        /**
          * 测试选项操作
          */
         arbilist.test = function () {

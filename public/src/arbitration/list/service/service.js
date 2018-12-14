@@ -149,12 +149,19 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
         
         console.log(submitData);
         console.log(submitSelectData);
+        //根据具体情况限定申请请人
+        if (OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplyData['litigants'][0]['name'])) {
+            var litigantsFrom =  ArbiListDataSer.arbiApplyData['litigants'][0]['name'];
+        }
+        else {
+            var litigantsFrom =  ArbiListDataSer.arbiApplyData['litigants'][1]['name'];
+        }
 
         //保存到数据库的arbilist数据
         var saveData = {
             arbcaseId: ArbiListDataSer.overallData['arbcaseId'], //submit成功后返回条目id并回填数据
-            litigantsFrom: ArbiListDataSer.arbiApplyData['litigants'][0]['name'],
-            litigantsTo: ArbiListDataSer.arbiApplyData['litigants'][1]['name'],
+            litigantsFrom: litigantsFrom,
+            litigantsTo: ArbiListDataSer.arbiApplyData['litigants'][2]['name'],
             reason: ArbiListDataSer.arbiApplyData['claim']['reason'],
             updateTime: OverallGeneralSer.getCurrentDataTime(),
             operaterType: ArbiListDataSer.arbiApplyData['overall']['operaterType'],
@@ -177,7 +184,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
      */
     var submitNewArbiData = function () {
         //对已提交了的案件修改需到易简网上修改
-        if (ArbiListDataSer.overallData['arbcaseId'] != '未提交' && ArbiListDataSer.overallData['arbcaseId'] != '已撤销') {
+        if (ArbiListDataSer.overallData['arbcaseId'] != '未提交' && ArbiListDataSer.overallData['arbcaseId'] != '已撤销' && ArbiListDataSer.overallData['arbcaseId'] != '草稿') {
             alert("该案件信息已提交，需登录易简网进行修改。");
             return;
         }
@@ -186,7 +193,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
         var formData = preWrapArbiData();
 
         //查询该应用是否已配置生产
-        if(ArbiListDataSer.arbiApplyDataEtc['etcData'].indexOf(ArbiListDataSer.arbiApplyData['overall']['productCode'])>0) {
+        if(ArbiListDataSer.arbiApplyDataEtc['etcData'].indexOf(ArbiListDataSer.arbiApplyData['overall']['productCode'])>-1) {
             console.log("提交生产环境");
             var url = OverallDataSer.urlData['frontEndHttp']['submitNewArbiData'];
         }
@@ -219,7 +226,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
      */
     var saveArbiInfo = function () {
         //对已提交了的案件修改需到易简网上修改
-        if (ArbiListDataSer.overallData['arbcaseId'] != '未提交' && ArbiListDataSer.overallData['arbcaseId'] != '已撤销') {
+        if (ArbiListDataSer.overallData['arbcaseId'] != '未提交' && ArbiListDataSer.overallData['arbcaseId'] != '已撤销' && ArbiListDataSer.overallData['arbcaseId'] != '草稿') {
             alert("该案件信息已提交，需登录易简网进行修改。");
             return;
         }
@@ -260,6 +267,13 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
                     if (responseData['data'][i]['data']['arbcaseId'] == '') {
                         responseData['data'][i]['data']['arbcaseId'] = '未提交';
                     }
+                    if (responseData['data'][i]['data']['productCode']=="qidaifuturetech-p2p-1") {
+                        responseData['data'][i]['data']['productName']="民间借贷";
+                    }
+                    else if (responseData['data'][i]['data']['productCode']=="qidaifuturetech-p2p-2") {
+                        responseData['data'][i]['data']['productName']="追偿权纠纷车贷";
+                    }
+
                     ArbiListDataSer.listData.push(responseData['data'][i]);
                 }
                 console.log(ArbiListDataSer.listData);
@@ -289,6 +303,10 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
             }
             case 'withdraw': {
                 withdrawArbiOpt(timestamp, index);
+                break;
+            }
+            case 'copy': {
+                copyArbiOpt(timestamp, index);
                 break;
             }
         }
@@ -346,7 +364,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
         }
 
         //查询该应用是否已配置生产
-        if(ArbiListDataSer.arbiApplyDataEtc['etcData'].indexOf(ArbiListDataSer.listData[index]['data']['productCode'])>0) {
+        if(ArbiListDataSer.arbiApplyDataEtc['etcData'].indexOf(ArbiListDataSer.listData[index]['data']['productCode'])>-1) {
             console.log("提交生产环境");
             var url = OverallDataSer.urlData['frontEndHttp']['progressArbiOpt'];
         }
@@ -389,7 +407,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
         }
 
         //查询该应用是否已配置生产
-        if(ArbiListDataSer.arbiApplyDataEtc['etcData'].indexOf(ArbiListDataSer.listData[index]['data']['productCode'])>0) {
+        if(ArbiListDataSer.arbiApplyDataEtc['etcData'].indexOf(ArbiListDataSer.listData[index]['data']['productCode'])>-1) {
             console.log("提交生产环境");
             var url = OverallDataSer.urlData['frontEndHttp']['withdrawArbiOpt'];
         }
@@ -418,6 +436,44 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
 
             } else {
                 alert("很抱歉，系统出错，请联系系统管理员：" + JSON.stringify(responseData['data']))
+            }
+        }, function () {
+        });
+    };
+
+    /**
+     * 复制仲裁请求数据
+     * @param timestamp
+     * @param index
+     */
+    var copyArbiOpt = function (timestamp, index) {
+        var url = OverallDataSer.urlData['frontEndHttp']['viewArbiOpt'];
+        OverallGeneralSer.httpPostData2({'timestamp': timestamp}, url, function (responseData) {
+            if (responseData['status_code'] == 200) {
+                if (responseData['data'].length > 0) {
+                    ArbiListDataSer.overallData['arbiType']['targetType'] = responseData['data'][0]['data']['productCode'];
+                    ArbiListDataSer.overallData['arbcaseId'] = "草稿"; //赋值该arbcaseId值
+                    ArbiListDataSer.overallData['timestamp'] = OverallGeneralSer.getTimeStamp();  //赋值该timestamp
+
+                    //整体操作者和约束文案数据
+                    ArbiListDataSer.arbiApplyData['overall'] = {
+                        'operaterType': responseData['data'][0]['data']['operaterType'],
+                        'operater': responseData['data'][0]['data']['operater'],
+                        'productCode': responseData['data'][0]['data']['productCode']
+                    };
+
+                    //仲裁内容数据填充
+                    var arbcaseInfo = JSON.parse(responseData['data'][0]['data']['arbcaseInfo']);
+                    for (var i in arbcaseInfo) {
+                        ArbiListDataSer.arbiApplyData[i] = arbcaseInfo[i];
+                    }
+
+                    //对初始化后的数据进行其他辅助操作
+                    afterArbiInfoInit();
+
+                    saveArbiInfo();
+                }
+
             }
         }, function () {
         });
@@ -532,6 +588,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
         for (var i in ArbiListDataSer.arbiApplyData['agents']) {
             ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray'] = angular.copy(ArbiListDataSer.arbiApplyDataSupply['powerDetailArray']);
             //对每个代理人的每个权限查看是否已经在detail中包含，若是则转换radio input
+            //console.log(ArbiListDataSer.arbiApplyData['agents'][i]['powerDetail']);
             for (var j in ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray']) {
                 if (ArbiListDataSer.arbiApplyData['agents'][i]['powerDetail'].indexOf(ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray'][j]['name']) > -1) {
                     ArbiListDataSer.arbiApplyData['agents'][i]['powerDetailArray'][j]['status'] = true;
@@ -560,8 +617,13 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
             }
         }
 
-        //赋值代理人信息
+        //筛选代理人信息
         ArbiListDataSer.arbiApplySelectData['agents']=targetDataCopy['agents'];
+        for (var i=ArbiListDataSer.arbiApplySelectData['agents'].length-1; i>=0;i--) {
+            if (!OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplySelectData['agents'][i]['identityNo'])) {
+                ArbiListDataSer.arbiApplySelectData['agents'].splice(i,1);
+            }
+        }
 
         //筛选证据
         ArbiListDataSer.arbiApplySelectData['evidences']=targetDataCopy['evidences'];
@@ -595,8 +657,13 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
             }
         }
 
-        //赋值代理人信息
+        //筛选代理人信息
         ArbiListDataSer.arbiApplySelectData['agents']=targetDataCopy['agents'];
+        for (var i=ArbiListDataSer.arbiApplySelectData['agents'].length-1; i>=0;i--) {
+            if (!OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplySelectData['agents'][i]['identityNo'])) {
+                ArbiListDataSer.arbiApplySelectData['agents'].splice(i,1);
+            }
+        }
 
         //筛选证据
         ArbiListDataSer.arbiApplySelectData['evidences']=targetDataCopy['evidences'];
@@ -610,6 +677,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
         console.log(ArbiListDataSer.arbiApplySelectData);
     };
 
+    //新增当事人被申请人项
     var addLitigantsInfo = function () {
         if (ArbiListDataSer.arbiApplyData['overall']['productCode']=="qidaifuturetech-p2p-1") {
             var litigantsInfo = {
@@ -658,6 +726,75 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
         console.log(ArbiListDataSer.arbiApplyData);
     };
 
+    //新增代理人项
+    var addAgentsInfo = function () {
+        if (ArbiListDataSer.arbiApplyData['overall']['productCode']=="qidaifuturetech-p2p-1") {
+            var agentsInfo = {
+                "materialCode":"申请人代理人",
+                "name":""/*姓名|非必填*/,
+                "mobiles":""/*联系号码*/,
+                "identityType":"身份证"/*证件类型*/,
+                "identityNo":""/*证件号码*/,
+                "principals":""/*委托人*/,
+                "power":""/*代理权限*/,
+                "powerDetail":"代为提起仲裁请求;代为参加庭审、进行质证、辩论;代为和解、调解;代为主张、变更、放弃仲裁请求;代为签收法律文书;代为申请执行等"/*代理权限明细|非必填*/,
+                "company":""/*工作单位|非必填*/,
+                "emails":""/*邮箱地址*/,
+                "addresses":""/*联系地址*/,
+                "agentType":""/*代理人属性*/,
+                "litigantType":""/*当事人类型*/,
+                "files":[
+                    {
+                        "fileName":"律师执业证"/*文件类型范围:pdf/jpg/png*/,
+                        "fileKey":""/*fileKey*/
+                    },
+                    {
+                        "fileName":"授权委托书"/*文件类型范围:pdf/jpg/png*/,
+                        "fileKey":""/*fileKey*/
+                    },
+                    {
+                        "fileName":"所函"/*文件类型范围:jpg/pdf/png*/,
+                        "fileKey":""/*fileKey*/
+                    }
+                ]
+            }
+        }
+        else if(ArbiListDataSer.arbiApplyData['overall']['productCode']=="qidaifuturetech-p2p-2") {
+            var agentsInfo = {
+                "materialCode":"申请人代理人",
+                "name":""/*姓名|非必填*/,
+                "mobiles":""/*联系号码*/,
+                "identityType":"身份证"/*证件类型*/,
+                "identityNo":""/*证件号码*/,
+                "principals":""/*委托人*/,
+                "power":""/*代理权限*/,
+                "powerDetail":"代为提起仲裁请求;代为参加庭审、进行质证、辩论;代为和解、调解;代为主张、变更、放弃仲裁请求;代为签收法律文书;代为申请执行等"/*代理权限明细|非必填*/,
+                "company":""/*工作单位|非必填*/,
+                "emails":""/*邮箱地址*/,
+                "addresses":""/*联系地址*/,
+                "agentType":""/*代理人属性*/,
+                "litigantType":""/*当事人类型*/,
+                "files":[
+                    {
+                        "fileName":"律师执业证"/*文件类型范围:pdf/jpg/png*/,
+                        "fileKey":""/*fileKey*/
+                    },
+                    {
+                        "fileName":"授权委托书"/*文件类型范围:pdf/jpg/png*/,
+                        "fileKey":""/*fileKey*/
+                    },
+                    {
+                        "fileName":"所函"/*文件类型范围:jpg/pdf/png*/,
+                        "fileKey":""/*fileKey*/
+                    }
+                ]
+            }
+        }
+
+        ArbiListDataSer.arbiApplyData['agents'].push(agentsInfo);
+        console.log(ArbiListDataSer.arbiApplyData);
+    };
+
 
     return {
         addFile: addFile,
@@ -674,6 +811,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
         createNewArbiInfo: createNewArbiInfo,
         chooseArbiFillOption: chooseArbiFillOption,
         addLitigantsInfo: addLitigantsInfo,
+        addAgentsInfo: addAgentsInfo,
     }
 });
 

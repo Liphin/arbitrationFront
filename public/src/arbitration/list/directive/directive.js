@@ -46,7 +46,7 @@ app.directive('fileProxy', ['OverallGeneralSer', 'OverallDataSer', 'ArbiListData
                         //获取案件种类
                         //查询该应用是否已配置生产
                         var type = '';
-                        if(ArbiListDataSer.arbiApplyDataEtc['etcData'].indexOf(ArbiListDataSer.arbiApplyData['overall']['productCode'])>0) {
+                        if(ArbiListDataSer.arbiApplyDataEtc['etcData'].indexOf(ArbiListDataSer.arbiApplyData['overall']['productCode'])>-1) {
                             type = true;
                         }
                         else {
@@ -127,6 +127,11 @@ app.directive('inputWidthSetting', [function () {
                     break;
                 }
                 case 'lawyerFee': {
+                    element.css('margin-left', '15px');
+                    element.css('width', '242px');
+                    break;
+                }
+                case 'overdueCompensatoryAmount': {
                     element.css('margin-left', '15px');
                     element.css('width', '242px');
                     break;

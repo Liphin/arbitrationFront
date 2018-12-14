@@ -26,6 +26,18 @@
             </div>
         </div>
 
+        <!--外部附加数据-->
+        <div style="display: flex; flex-direction: row;flex-wrap: wrap;">
+
+            <!--附加数据填写-->
+            <div ng-repeat="(extKey, extValue) in arbilist.arbiApplyData['claim']['extData']" style="flex: 50%; margin-top: 15px">
+                <span style="margin-right: 15px">{{arbilist.extDataHelper['claim'][extKey]['name']}}：</span>
+                <!--TODO placeholder的值根据claimExtValOption变化而变化-->
+                <input type="text" class="inputStyle" input-width-setting="{{extKey}}" ng-model="arbilist.arbiApplyData['claim']['extData'][extKey]" placeholder="{{arbilist.extDataHelper['claim'][extKey]['placeholder']}}" />
+            </div>
+
+        </div>
+
         <!--事实与理由-->
         <div style="margin-top: 15px">
             <span style="vertical-align: top">事实与理由：</span>
@@ -43,6 +55,7 @@
                        parent-index="null" file-index="{{$index}}" edit-type="claim"/>
                 <span ng-click="arbilist.downloadFile(fileValue)" ng-if="fileValue['fileKey']!=''" class="fa fa-file-pdf-o" style="margin-left: 15px;cursor: pointer; font-size: 20px; color: rebeccapurple"></span>
                 <span style="margin-left: 15px;" file-setting="{{fileValue['fileName']}}"> 请上传{{arbilist.getFilePrefixName(fileValue['fileName'])}}（文件类型范围:pdf）</span>
+                <span ng-if="fileValue['fileKey']!=''" style="margin-left: 15px; font-weight: bold; text-decoration: underline; color: #3689aa;cursor: pointer" ng-click="fileValue['fileKey']=''">删除</span>
             </div>
         </div>
     </div>

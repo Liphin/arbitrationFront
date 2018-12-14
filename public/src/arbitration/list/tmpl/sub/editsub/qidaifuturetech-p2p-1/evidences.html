@@ -96,6 +96,7 @@
                                parent-index="{{$parent.$index}}" file-index="{{$index}}" edit-type="evidences"/>
                         <span ng-click="arbilist.downloadFile(fileValue)" ng-if="fileValue['fileKey']!=''" class="fa fa-file-pdf-o" style="margin-left: 15px;cursor: pointer; font-size: 20px; color: rebeccapurple"></span>
                         <span style="margin-left: 15px;" file-setting="{{fileValue['fileName']}}"> 请上传{{arbilist.getFilePrefixName(fileValue['fileName'])}}（文件类型范围:pdf）</span>
+                        <span ng-if="fileValue['fileKey']!=''" style="margin-left: 15px; font-weight: bold; text-decoration: underline; color: #3689aa;cursor: pointer" ng-click="fileValue['fileKey']=''">删除</span>
                     </div>
                 </div>
 

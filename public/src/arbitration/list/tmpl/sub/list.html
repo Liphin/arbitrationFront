@@ -84,16 +84,16 @@
                     <th style="text-align: center; width: 40px;">
                         <span style="font-size: 14px;color: #4a4a4a;font-weight: bold">选择</span>
                     </th>
-                    <th style="text-align: center; width: 78px;">
+                    <th style="text-align: center; width: 88px; ">
+                        <span style="font-size: 14px;color: #4a4a4a;font-weight: bold">案件种类</span>
+                    </th>
+                    <th style="text-align: center; width: 88px;">
                         <span style="font-size: 14px;color: #4a4a4a;font-weight: bold">案件编号</span>
                     </th>
-                    <th style="text-align: center; width: 78px; ">
+                    <th style="text-align: center; width: 108px; ">
                         <span style="font-size: 14px;color: #4a4a4a;font-weight: bold">申请人</span>
                     </th>
-                    <th style="text-align: center; width: 78px; ">
-                        <span style="font-size: 14px;color: #4a4a4a;font-weight: bold">被申请人</span>
-                    </th>
-                    <th style="text-align: center; width: 200px; ">
+                    <th style="text-align: center; width: 150px; ">
                         <span style="font-size: 14px;color: #4a4a4a;font-weight: bold">事实与理由摘要</span>
                     </th>
                     <th style="text-align: center; width: 160px; ">
@@ -110,16 +110,16 @@
                     <th style=" width: 40px;text-align: center">
                         <input style="margin-top: 12px" type="checkbox" ng-model="list['data']['toDelete']">
                     </th>
-                    <td style="padding: 15px 0 0 0;text-align: center; width: 78px;">
+                    <td style="padding: 15px 0 0 0;text-align: center; width: 88px;">
+                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{list['data']['productName']}}</span>
+                    </td>
+                    <td style="padding: 15px 0 0 0;text-align: center; width: 88px;">
                         <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{list['data']['arbcaseId']}}</span>
                     </td>
-                    <td style="padding: 15px 0 0 0;text-align: center; width: 78px;">
+                    <td style="padding: 15px 0 0 0;text-align: center; width: 108px;">
                         <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{list['data']['litigantsFrom']}}</span>
                     </td>
-                    <td style="padding: 15px 0 0 0;text-align: center; width: 78px;">
-                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{list['data']['litigantsTo']}}</span>
-                    </td>
-                    <td style="padding: 15px 0 0 0;text-align: center; width: 200px;font-size: 13px;">
+                    <td style="padding: 15px 0 0 0;text-align: center; width: 150px;font-size: 13px;">
                         <span style="width: 360px;display: inline-block;font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);overflow: hidden; white-space: nowrap; text-overflow: ellipsis">{{list['data']['reason']}}...</span>
                     </td>
                     <td style="padding: 15px 0 0 0;text-align: center; width: 160px;">
@@ -138,6 +138,7 @@
                                       ng-click="arbilist.ArbiListOpt('withdraw', list['timestamp'], $index)">撤销案件</span>
                                 <span style="padding: 9px 15px;"
                                       ng-click="arbilist.ArbiListOpt('progress', list['timestamp'], $index)">查看进度</span>
+                                <span style="padding: 9px 15px;" ng-click="arbilist.ArbiListOpt('copy', list['timestamp'], $index)">复制</span>
                                 <span style="padding: 9px 15px;" ng-click="arbilist.ArbiListOpt('view', list['timestamp'], $index)">详情/编辑</span>
                             </div>
                             <div ng-mouseenter="list['data']['menu']=true" style="cursor: pointer; border: 1px solid gainsboro; border-radius: 5px;height: 28px;width: 60px;padding: 5px;position: relative; top: -5px; right: -15px">
