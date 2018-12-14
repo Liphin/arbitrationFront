@@ -571,6 +571,9 @@ app.post('/deleteBatchArbi', function (req, response) {
     mongoDBSer.connectToMongo(function (db) {
         deleteArbiListItem(db, toDeleteArray, 0, 0 < toDeleteArray.length - 1, response);
     });
+    mongoDBSer.connectToMongo(function (db) {
+        deleteArbiDetailItem(db, toDeleteArray, 0, 0 < toDeleteArray.length - 1, response);
+    });
 });
 /**
  * 删除db中数据操作
@@ -586,6 +589,24 @@ var deleteArbiListItem = function (db, toDeleteArray, i, toContinue, response) {
         } else {
             ++i;
             deleteArbiListItem(db, toDeleteArray, i, i < toDeleteArray.length - 1, response)
+        }
+    });
+};
+
+/**
+ * 删除db中数据明细操作
+ */
+var deleteArbiDetailItem = function (db, toDeleteArray, i, toContinue, response) {
+    var whereStr = {'timestamp': toDeleteArray[i]};
+    db.db(mongoDBSer.dbArbitration).collection('arbidetail').deleteOne(whereStr, function (err, res) {
+        if (!toContinue) {
+            db.close();
+            response.send({
+                'status_code': 200,
+            })
+        } else {
+            ++i;
+            deleteArbiDetailItem(db, toDeleteArray, i, i < toDeleteArray.length - 1, response)
         }
     });
 };
