@@ -28,7 +28,7 @@ var findDocuments = function (collection, findObj, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
         //根据条件查找collection中相应数据
-        db.db(dbArbitration).collection(collection).find(findObj).toArray(function (err, docs) {
+        db.db(dbArbitration).collection(collection).find(findObj).sort({"timestamp":-1}).toArray(function (err, docs) {
             assert.equal(null, err);
             callback(docs);
             db.close();
