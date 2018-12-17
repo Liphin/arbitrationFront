@@ -284,6 +284,10 @@ app.factory('ArbiListDataHelperSer', function () {
             "compensatorypenalty": {
                 'name': "代偿违约金",
                 'placeholder': '示例:1‰'
+            },
+            "PenaltyRate": {
+                'name': "违约金利率",
+                'placeholder': '示例:2%/月，0.3%/日'
             }
 
         }
