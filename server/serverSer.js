@@ -162,9 +162,9 @@ function ServerSer() {
 
             } else {
                 //发送数据到易简网出错
-                console.log('post getAccessToken error', error, body);
-                console.log("刷新accesstoken不成功，重新获取accesstoken");
-                getAccessToken();
+                console.log('post refreshAccessToken error', error, body);
+                //console.log("刷新accesstoken不成功，重新获取accesstoken");
+                //getAccessToken();
 
             }
         });
