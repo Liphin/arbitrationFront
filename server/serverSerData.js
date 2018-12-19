@@ -26,8 +26,8 @@ var overallData = {
         'expires_in': '',
     },
     'key':{
-        'consumer_key':'2uZTjjtuH6rA50kkOw55Wwa',
-        'consumer_secret':'RQxj9VfiNdS4CrqiFax2al0ll7Ea',
+        'consumer_key':'2uZTjjtuH6rA50kkOwFENrw55Wwa',
+        'consumer_secret':'RQxj9VfiNdS4CrqiFax2aI0Il7Ea',
         'grant_type':'',
         'username':'qidai',
         'password':'123456',

@@ -84,27 +84,31 @@ function ServerSer() {
     //获取accesstoken
     var getAccessToken = function () {
         //获取accessToken
+        console.log("执行getAccessToken");
         var consumer_key = serverSerData.overallData['key']['consumer_key'];
         var consumer_secret = serverSerData.overallData['key']['consumer_secret'];
         var grant_type = "password";
         var username = serverSerData.overallData['key']['username'];
         var password = serverSerData.overallData['key']['password'];
-        var urlGet = util.format(getAccessTokenUrl,grant_type,username,password);
+        var urlPost = util.format(getAccessTokenUrl,grant_type,username,password);
         var consumer = consumer_key+":"+consumer_secret;
         var swap = new Buffer(consumer);
-        var Authorization = swap.toString('base64');
-
-        var options = {
-            url: urlGet,
-            method: 'GET',
-            Authorization: Authorization,
-            rejectUnauthorized: false
+        var Authorization = "Basic "+swap.toString('base64');
+        //设置头部
+        var headers = {
+            'Authorization': Authorization
         };
-        request(options, function (err, res, bodyJson) {
-            console.log('bodyJson',bodyJson);
-            var body = JSON.parse(bodyJson);
-            if (!err) {
-                console.log("获取accesstoken成功");
+
+        request.post({
+            url: urlPost,
+            headers: headers,
+            rejectUnauthorized: false
+
+        }, function (error, response, bodyJson) {
+            console.log(bodyJson);
+            if (!error && response.statusCode == 200) {
+                var body = JSON.parse(bodyJson);
+                console.log('获取accesstoken成功', body);
                 serverSerData.overallData['access']['access_token'] = body['access_token'];
                 serverSerData.overallData['access']['refresh_token'] = body['refresh_token'];
                 serverSerData.overallData['access']['scope'] = body['scope'];
@@ -113,44 +117,55 @@ function ServerSer() {
 
                 console.log(serverSerData.overallData['access']);
                 refreshAccessToken();
+
             } else {
-                console.log(err, body);
+                //发送数据到易简网出错
+                console.log('post getAccessToken error', error, body);
+
             }
         });
     }
 
     var refreshAccessToken = function () {
         //刷新accesstoken
+        console.log("执行refreshAccessToken");
         var consumer_key = serverSerData.overallData['key']['consumer_key'];
         var consumer_secret = serverSerData.overallData['key']['consumer_secret'];
         var grant_type = "refresh_token";
         var refresh_token = serverSerData.overallData['access']['refresh_token'];
-        var urlGet = util.format(refreshAccessTokenUrl,grant_type,refresh_token);
+        var urlPost = util.format(refreshAccessTokenUrl,grant_type,refresh_token);
         var consumer = consumer_key+":"+consumer_secret;
         var swap = new Buffer(consumer);
-        var Authorization = swap.toString('base64');
-
-        var options = {
-            url: urlGet,
-            method: 'GET',
-            Authorization: Authorization,
-            rejectUnauthorized: false
+        var Authorization = "Basic "+swap.toString('base64');
+        //设置头部
+        var headers = {
+            'Authorization': Authorization
         };
-        request(options, function (err, res, bodyJson) {
-            console.log('bodyJson',bodyJson);
-            var body = JSON.parse(bodyJson);
-            if (!err) {
-                console.log("刷新accesstoken成功");
+
+        request.post({
+            url: urlPost,
+            headers: headers,
+            rejectUnauthorized: false
+
+        }, function (error, response, bodyJson) {
+            console.log(bodyJson);
+            if (!error && response.statusCode == 200) {
+                var body = JSON.parse(bodyJson);
+                console.log('刷新accesstoken成功', body);
                 serverSerData.overallData['access']['access_token'] = body['access_token'];
                 serverSerData.overallData['access']['refresh_token'] = body['refresh_token'];
                 serverSerData.overallData['access']['scope'] = body['scope'];
                 serverSerData.overallData['access']['token_type'] = body['token_type'];
                 serverSerData.overallData['access']['expires_in'] = body['expires_in'];
+
                 console.log(serverSerData.overallData['access']);
+
             } else {
-                console.log(err, body);
+                //发送数据到易简网出错
+                console.log('post getAccessToken error', error, body);
                 console.log("刷新accesstoken不成功，重新获取accesstoken");
                 getAccessToken();
+
             }
         });
     }
@@ -161,11 +176,12 @@ function ServerSer() {
      * TODO 完善生产环境下获取access_token
      */
     var scheduleGetAccessToken = function () {
-
-        if (checkDataNotEmpty(serverSerData.overallData['access']['refresh_token'])) {
+        if (!checkDataNotEmpty(serverSerData.overallData['access']['refresh_token'])) {
+            console.log("开始获取accesstoken");
             getAccessToken();
         }
         else {
+            console.log("开始刷新accesstoken");
             refreshAccessToken();
         }
     }
@@ -174,7 +190,7 @@ function ServerSer() {
      * 服务器初始化数据操作
      */
     this.dataInit=function () {
-
+        console.log("服务器初始化");
         //如果是生产环境则进行企业数据的初始化操作
         if(serverSerData.isProd){
             //初始化企业部门和用户信息
