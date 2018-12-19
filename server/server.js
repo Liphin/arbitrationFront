@@ -43,7 +43,7 @@ app.use(bodyParser.urlencoded({limit: serverSerData.httpDataLimit, extended: tru
 // });
 
 //数据初始化操作
-//serverSer.dataInit();
+serverSer.dataInit();
 
 /**
  * 管理员登录设置
@@ -144,7 +144,7 @@ app.post('/saveArbiInfo', function (req, response) {
 app.post('/submitNewArbiData', function (req, res) {
 
     //上传到易简网平台
-    var urlPost = 'https://14.23.88.138:7777/api/arb/1.0/arbcase';
+    var urlPost = 'https://api.gzyijian.com/api/arb/1.0/arbcase';
     var Authorization = "Bearer "+serverSerData.overallData['access']['access_token'];
     //设置头部
     var headers = {
@@ -285,7 +285,7 @@ app.post('/submitNewArbiDataTest', function (req, res) {
  */
 app.post('/progressArbiOpt', function (req, response) {
     //获取指定案件的进度
-    var urlGet = 'https://14.23.88.138:7777/api/arb/1.0/arbcaseProgress/' + req.body['arbcaseId'] +
+    var urlGet = 'https://api.gzyijian.com/api/arb/1.0/arbcaseProgress/' + req.body['arbcaseId'] +
         '?operaterType=' + encodeURIComponent(req.body['operaterType']) + '&operater=' + encodeURIComponent(req.body['operater']);
     var Authorization = "Bearer "+serverSerData.overallData['access']['access_token'];
     var options = {
@@ -355,7 +355,7 @@ app.post('/progressArbiOptTest', function (req, response) {
  */
 app.post('/withdrawArbiOpt', function (req, res) {
     //获取指定案件的进度
-    var urlPost = 'https://14.23.88.138:7777/api/arb/1.0/claimWithdraw/' + req.body['arbcaseId'];
+    var urlPost = 'https://api.gzyijian.com/api/arb/1.0/claimWithdraw/' + req.body['arbcaseId'];
     var Authorization = "Bearer "+serverSerData.overallData['access']['access_token'];
     //设置头部
     var headers = {
@@ -448,7 +448,7 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
     var Authorization = "Bearer "+serverSerData.overallData['access']['access_token'];
 
     //上传到易简网平台
-    var urlPost = 'https://14.23.88.138:7777/api/1.0/file';
+    var urlPost = 'https://api.gzyijian.com/api/1.0/file';
     //设置头部
     var headers = {
         "Accept": "application/json",

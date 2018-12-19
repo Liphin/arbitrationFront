@@ -8,8 +8,8 @@ var util = require('util');
 
 function ServerSer() {
 
-    var getAccessTokenUrl = "https://14.23.88.138:7777/token?grant_type=%s&username=%s&password=%s";
-    var refreshAccessTokenUrl = "https://14.23.88.138:7777/token?grant_type=%s&refresh_token=%s";
+    var getAccessTokenUrl = "https://api.gzyijian.com/token?grant_type=%s&username=%s&password=%s";
+    var refreshAccessTokenUrl = "https://api.gzyijian.com/token?grant_type=%s&refresh_token=%s";
 
     /**
      * 返回时间戳值
@@ -86,7 +86,7 @@ function ServerSer() {
         //获取accessToken
         var consumer_key = serverSerData.overallData['key']['consumer_key'];
         var consumer_secret = serverSerData.overallData['key']['consumer_secret'];
-        var grant_type = serverSerData.overallData['key']['grant_type'];
+        var grant_type = "password";
         var username = serverSerData.overallData['key']['username'];
         var password = serverSerData.overallData['key']['password'];
         var urlGet = util.format(getAccessTokenUrl,grant_type,username,password);
@@ -110,6 +110,9 @@ function ServerSer() {
                 serverSerData.overallData['access']['scope'] = body['scope'];
                 serverSerData.overallData['access']['token_type'] = body['token_type'];
                 serverSerData.overallData['access']['expires_in'] = body['expires_in'];
+
+                console.log(serverSerData.overallData['access']);
+                refreshAccessToken();
             } else {
                 console.log(err, body);
             }
@@ -120,7 +123,7 @@ function ServerSer() {
         //刷新accesstoken
         var consumer_key = serverSerData.overallData['key']['consumer_key'];
         var consumer_secret = serverSerData.overallData['key']['consumer_secret'];
-        var grant_type = serverSerData.overallData['key']['grant_type'];
+        var grant_type = "refresh_token";
         var refresh_token = serverSerData.overallData['access']['refresh_token'];
         var urlGet = util.format(refreshAccessTokenUrl,grant_type,refresh_token);
         var consumer = consumer_key+":"+consumer_secret;
@@ -137,12 +140,13 @@ function ServerSer() {
             console.log('bodyJson',bodyJson);
             var body = JSON.parse(bodyJson);
             if (!err) {
-                console.log("获取accesstoken成功");
+                console.log("刷新accesstoken成功");
                 serverSerData.overallData['access']['access_token'] = body['access_token'];
                 serverSerData.overallData['access']['refresh_token'] = body['refresh_token'];
                 serverSerData.overallData['access']['scope'] = body['scope'];
                 serverSerData.overallData['access']['token_type'] = body['token_type'];
                 serverSerData.overallData['access']['expires_in'] = body['expires_in'];
+                console.log(serverSerData.overallData['access']);
             } else {
                 console.log(err, body);
                 console.log("刷新accesstoken不成功，重新获取accesstoken");
