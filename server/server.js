@@ -118,6 +118,31 @@ var insertUpdateArbiDb = function (arbiDetail, arbiList, callback) {
     })
 };
 
+/**
+ * 插入或更新arbitration数据库
+ */
+var insertUpdateArbiListDb = function (arbiList, callback) {
+    mongoDBSer.connectToMongo(function (db) {
+        db.db(mongoDBSer.dbArbitration).collection('arbilist').find({'timestamp': arbiList['timestamp']}).toArray(function (err, docs) {
+            if (docs.length > 0) {
+                //已有该记录插入，进行update操作
+                var whereStr = {'timestamp': arbiList['timestamp']};
+                db.db(mongoDBSer.dbArbitration).collection('arbilist').updateOne(whereStr, {$set: {'data': arbiList['data']}}, function (err, res) {
+                    callback();
+                    db.close();
+                });
+
+            } else {
+                //未有该记录插入，进行insert操作
+                db.db(mongoDBSer.dbArbitration).collection('arbilist').insertOne(arbiList, function (err, res) {
+                    callback();
+                    db.close();
+                });
+            }
+        });
+    })
+};
+
 
 /**
  * 保存arbi数据
@@ -133,6 +158,20 @@ app.post('/saveArbiInfo', function (req, response) {
         'data': param['saveData'],
     };
     insertUpdateArbiDb(arbiDetail, arbiList, function () {
+        response.send({'status_code': 200});
+    });
+});
+
+/**
+ * 保存arbi list数据
+ */
+app.post('/saveArbiListInfo', function (req, response) {
+    var param = req.body;
+    var arbiList = {
+        'timestamp': param['timestamp'],
+        'data': param['saveData'],
+    };
+    insertUpdateArbiListDb(arbiList, function () {
         response.send({'status_code': 200});
     });
 });
