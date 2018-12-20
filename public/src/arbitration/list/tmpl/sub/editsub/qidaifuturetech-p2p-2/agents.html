@@ -65,6 +65,25 @@
             <!--</select>-->
         <!--</div>-->
 
+        <!--证件号码-->
+        <div style="display: flex; margin-top: 15px">
+            <div style="flex: 1">
+                <span>证件类型：</span>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="value['identityType']" name="identityType{{$index}}" value="律师执业证"> 律师执业证
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="value['identityType']" name="identityType{{$index}}" value="身份证"> 身份证
+                </label>
+                <!--<span>（个体户请填写负责人的性别）</span>-->
+            </div>
+
+            <div style="flex: 1">
+                <span>证件号码：</span>
+                <input type="text" class="inputStyle" style="width: 242px;" ng-model="value['identityNo']" maxlength="100" placeholder="请输入证件号码（不大于50个字）">
+            </div>
+        </div>
+
 
         <div style="display: flex; margin-top: 15px">
             <!--代理人名称-->
@@ -73,10 +92,10 @@
                 <input type="text" class="inputStyle" style="width: 242px" ng-model="value['name']" maxlength="25" placeholder="请输入代理人名称（不大于25个字）">
             </div>
 
-            <!--证件号码-->
+            <!--公司名称-->
             <div style="flex: 1">
-                <span>身份证号码：</span>
-                <input type="text" class="inputStyle" style="width: 242px;" ng-model="value['identityNo']" maxlength="50" placeholder="请输入证件号码（不大于50个字）">
+                <span>代理人公司：</span>
+                <input type="text" class="inputStyle" style="width: 242px;" ng-model="value['company']" maxlength="50" placeholder="请输入公司名称（不大于50个字）">
             </div>
         </div>
 
@@ -95,12 +114,6 @@
             </div>
         </div>
 
-
-        <!--公司名称-->
-        <div style="margin-top: 15px">
-            <span>代理人公司：</span>
-            <input type="text" class="inputStyle" style="width: 242px;" ng-model="value['company']" maxlength="50" placeholder="请输入公司名称（不大于50个字）">
-        </div>
 
 
         <!--联系地址-->
