@@ -358,7 +358,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
      */
     var progressArbiOpt = function (timestamp, index) {
         //如果该案件条目尚未提交则直接返回，否则进行查询操作
-        if (ArbiListDataSer.listData[index]['data']['arbcaseId'] == '未提交' || ArbiListDataSer.listData[index]['data']['arbcaseId'] == '已撤销') {
+        if (ArbiListDataSer.listData[index]['data']['arbcaseId'] == '未提交' || ArbiListDataSer.listData[index]['data']['arbcaseId'] == '已撤销' || ArbiListDataSer.listData[index]['data']['arbcaseId'] == '草稿') {
             alert("该案件信息尚未提交或已撤销，无法查看案件进度");
             return;
         }
@@ -401,7 +401,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
      */
     var withdrawArbiOpt = function (timestamp, index) {
         //如果该案件条目尚未提交则直接返回，否则进行查询操作
-        if (ArbiListDataSer.listData[index]['data']['arbcaseId'] == '未提交' || ArbiListDataSer.listData[index]['data']['arbcaseId'] == '已撤销') {
+        if (ArbiListDataSer.listData[index]['data']['arbcaseId'] == '未提交' || ArbiListDataSer.listData[index]['data']['arbcaseId'] == '已撤销' || ArbiListDataSer.listData[index]['data']['arbcaseId'] == '草稿') {
             alert("该案件信息尚未提交或已撤销，无法撤销仲裁请求");
             return;
         }
@@ -426,8 +426,8 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
             if (responseData['status_code'] == 200) {
                 if (responseData['data']['code'] == 1) {
                     ArbiListDataSer.listData[index]['data']['arbcaseId'] = '已撤销';
-                    ArbiListDataSer.overallData['arbcaseId'] = '已撤销'; //由于会重新赋值该对象的值，所以进行修改
-                    saveArbiInfo();
+                    //ArbiListDataSer.overallData['arbcaseId'] = '已撤销'; //由于会重新赋值该对象的值，所以进行修改
+                    saveArbiListInfo(timestamp,index);
                     alert("案件撤销操作成功");
 
                 } else {
@@ -436,6 +436,45 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
 
             } else {
                 alert("很抱歉，系统出错，请联系系统管理员：" + JSON.stringify(responseData['data']))
+            }
+        }, function () {
+        });
+    };
+
+    /**
+     * 保存最新仲裁列表信息到数据库
+     */
+    var saveArbiListInfo = function (timestamp,index) {
+
+        //保存到数据库的arbilist数据
+        var saveData = {
+            arbcaseId: ArbiListDataSer.listData[index]['data']['arbcaseId'], //submit成功后返回条目id并回填数据
+            litigantsFrom: ArbiListDataSer.listData[index]['data']['litigantsFrom'],
+            litigantsTo: ArbiListDataSer.listData[index]['data']['litigantsTo'],
+            reason: ArbiListDataSer.listData[index]['data']['reason'],
+            updateTime: OverallGeneralSer.getCurrentDataTime(),
+            operaterType: ArbiListDataSer.listData[index]['data']['operaterType'],
+            operater: ArbiListDataSer.listData[index]['data']['operater'],
+            productCode: ArbiListDataSer.listData[index]['data']['productCode'],
+        };
+
+        var formData = {
+            saveData: saveData,
+            timestamp: timestamp,
+        };
+        console.log(formData);
+
+        //post请求保存数据信息
+        var url = OverallDataSer.urlData['frontEndHttp']['saveArbiListInfo'];
+        console.log(url);
+        OverallGeneralSer.httpPostData2(formData, url, function (responseData) {
+            if (responseData['status_code'] == 200) {
+                //刷新重新获取arbi列表数据
+                getArbiList();
+                alert("保存成功");
+
+            } else {
+                alert("保存失败：" + JSON.stringify(responseData['data']));
             }
         }, function () {
         });
