@@ -182,17 +182,23 @@
             <div style="flex: 1;margin-top: 15px">
                 <span>企业证件类型：</span>
                 <label class="radio-inline">
-                    <input type="radio" ng-model="value['identityType']" name="identityType{{$index}}" value="统一社会信用代码证号"> 统一社会信用代码证号
+                    <input type="radio" ng-model="value['identityType']" name="identityType{{$index}}" value="多证合一营业执照"> 多证合一营业执照
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" ng-model="value['identityType']" name="identityType{{$index}}" value="组织机构代码"> 组织机构代码
+                    <input type="radio" ng-model="value['identityType']" name="identityType{{$index}}" value="税务登记证"> 税务登记证
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="value['identityType']" name="identityType{{$index}}" value="营业执照"> 营业执照
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="value['identityType']" name="identityType{{$index}}" value="组织机构代码证"> 组织机构代码证
                 </label>
                 <!--<span>（个体户请填写负责人的性别）</span>-->
             </div>
 
             <div style="flex: 1;margin-top: 15px">
                 <span>企业证件代码：</span>
-                <input type="text" class="inputStyle" style="width: 350px;margin-left: 15px" ng-model="value['identityNo']" maxlength="100" placeholder="三证合一的填统一社会信用代码证号或者组织机构代码（不大于50个字符）">
+                <input type="text" class="inputStyle" style="width: 350px;margin-left: 15px" ng-model="value['identityNo']" maxlength="100" placeholder="证件号码（不大于100个字符）">
             </div>
         </div>
 
