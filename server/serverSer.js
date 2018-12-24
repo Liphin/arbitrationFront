@@ -197,8 +197,9 @@ function ServerSer() {
             scheduleGetAccessToken();
         }
 
-        //配置每天早上6点更新部门和用户数据信息
+        //配置每天早上6点更新accesstoken信息
         schedule.scheduleJob(serverSerData.getAccesstoken['time'], function(){
+            console.log("定时获取accesstoken");
             scheduleGetAccessToken();
         });
     }

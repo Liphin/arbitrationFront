@@ -192,7 +192,6 @@ app.post('/submitNewArbiData', function (req, res) {
     };
     //console.log('request body', req.body);
     // console.log('encoded request body', encodeURIComponent(req.body));
-
     //上传数据到易简网
     request.post({
         url: urlPost,
@@ -336,6 +335,7 @@ app.post('/progressArbiOpt', function (req, response) {
         },
         rejectUnauthorized: false
     };
+    console.log('progressArbiOpt',options);
     request(options, function (err, res, bodyJson) {
         console.log('bodyJson', bodyJson);
         var body = JSON.parse(bodyJson);
