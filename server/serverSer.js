@@ -148,7 +148,7 @@ function ServerSer() {
             rejectUnauthorized: false
 
         }, function (error, response, bodyJson) {
-            console.log(bodyJson);
+            console.log(response.statusCode,bodyJson);
             if (!error && response.statusCode == 200) {
                 var body = JSON.parse(bodyJson);
                 console.log('刷新accesstoken成功', body);
@@ -176,14 +176,15 @@ function ServerSer() {
      * TODO 完善生产环境下获取access_token
      */
     var scheduleGetAccessToken = function () {
-        if (!checkDataNotEmpty(serverSerData.overallData['access']['refresh_token'])) {
-            console.log("开始获取accesstoken");
-            getAccessToken();
-        }
-        else {
-            console.log("开始刷新accesstoken");
-            refreshAccessToken();
-        }
+        // if (!checkDataNotEmpty(serverSerData.overallData['access']['refresh_token'])) {
+        //     console.log("开始获取accesstoken");
+        //     getAccessToken();
+        // }
+        // else {
+        //     console.log("开始刷新accesstoken");
+        //     refreshAccessToken();
+        // }
+        getAccessToken();
     }
 
     /**
