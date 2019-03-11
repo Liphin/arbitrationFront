@@ -637,6 +637,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
     };
 
     var qidaifuturetech_p2p_1 = function () {
+        console.log("test")
         var targetDataCopy = angular.copy(ArbiListDataSer.arbiApplyData);
         ArbiListDataSer.arbiApplySelectData = {
             'claim': {},

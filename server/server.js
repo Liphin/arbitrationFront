@@ -257,9 +257,9 @@ app.post('/submitNewArbiDataTest', function (req, res) {
     //设置头部
     var headers = {
         "Accept": "application/json",
-        'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c'
+        'Authorization': 'Bearer b127dff1-f82a-3d90-a53a-47147ba43206'
     };
-    //console.log('request body', req.body);
+    console.log('request body', req.body['submitSelectData']);
     // console.log('encoded request body', encodeURIComponent(req.body));
 
     //上传数据到易简网
@@ -270,7 +270,9 @@ app.post('/submitNewArbiDataTest', function (req, res) {
         rejectUnauthorized: false
 
     }, function (error, response, bodyJson) {
-        console.log(bodyJson);
+        //console.log(error);
+        //console.log(response.statusCode);
+        //console.log(bodyJson);
         if (!error && response.statusCode == 200) {
             var body = JSON.parse(bodyJson);
             console.log('submit response', body);
@@ -299,7 +301,7 @@ app.post('/submitNewArbiDataTest', function (req, res) {
                 });
 
             } else {
-                console.log(req.body['submitSelectData']);
+                //console.log(req.body['submitSelectData']);
                 res.send({
                     'status_code': body['fault']['code'],
                     'data': body['fault']['message'],
@@ -552,7 +554,7 @@ app.post('/uploadResourceTest', upload.single('file'), function (req, res) {
     //设置头部
     var headers = {
         "Accept": "application/json",
-        'Authorization': 'Bearer 987b2847-3a78-3a49-970b-264fbaa3ec7c'
+        'Authorization': 'Bearer b127dff1-f82a-3d90-a53a-47147ba43206'
     };
     //表单数据设置
     var formData = {

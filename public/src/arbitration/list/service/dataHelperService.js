@@ -39,7 +39,7 @@ app.factory('ArbiListDataHelperSer', function () {
                 'placeholder': ''
             },
             "temporaryDate": {
-                'name': "暂计时间",
+                'name': "暂计日期",
                 'placeholder': '示例:2018年08月15日'
             },
             "carNumber": {
@@ -53,7 +53,12 @@ app.factory('ArbiListDataHelperSer', function () {
             "carBrandType": {
                 'name': "车辆品牌型号",
                 'placeholder': '示例:别克牌SGM7306ATA'
-            }
+            },
+            "interestAndPenaltyAmount": {
+                'name': "利息及违约金暂计数",
+                'placeholder': ''
+            },
+
         },
 
         'evidences': {
@@ -327,6 +332,18 @@ app.factory('ArbiListDataHelperSer', function () {
             },
             "consigneeName": {
                 'name': "受托人姓名",
+                'placeholder': ''
+            },
+            "loanMonths": {
+                'name': "借款期数",
+                'placeholder': ''
+            },
+            "repaymentInterest": {
+                'name': "已还利息",
+                'placeholder': ''
+            },
+            "interestEndDate": {
+                'name': "利息交至日期",
                 'placeholder': ''
             },
 
