@@ -645,8 +645,13 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
             'evidences': {}
         };
         
-        //赋值请求信息
+        //筛选请求信息
         ArbiListDataSer.arbiApplySelectData['claim']=ArbiListDataSer.arbiApplyData['claim'];
+        for (var i=ArbiListDataSer.arbiApplySelectData['claim']['claimItems'].length-1; i>=0;i--) {
+            if (!OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplySelectData['claim']['claimItems'][i]['claimContent'])) {
+                ArbiListDataSer.arbiApplySelectData['claim']['claimItems'].splice(i,1);
+            }
+        }
 
         //筛选当事人
         ArbiListDataSer.arbiApplySelectData['litigants']=targetDataCopy['litigants'];

@@ -77,7 +77,7 @@ app.factory('ArbiListDataSer', function () {
 
     //该应用是否配置生产环境
     var arbiApplyDataEtc = {
-        'etcData':'qidaifuturetech-p2p-1,qidaifuturetech-p2p-2',
+        'etcData':'qidaifuturetech-p2p-2',
     };
 
     return {

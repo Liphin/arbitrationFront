@@ -78,7 +78,7 @@ app.factory('ArbiListDataHelperSer', function () {
                 'placeholder': '示例:160000.00'
             },
             "loanTerm": {
-                'name': "借款期限",
+                'name': "借款期限|债务履行期限",
                 'placeholder': '示例:2017年11月15日至2018年11月14日'
             },
             "conventionalInterestYearRate": {
@@ -288,7 +288,47 @@ app.factory('ArbiListDataHelperSer', function () {
             "PenaltyRate": {
                 'name': "违约金利率",
                 'placeholder': '示例:2%/月，0.3%/日'
-            }
+            },
+            "principal": {
+                'name': "主债权金额",
+                'placeholder': '示例:3726.66'
+            },
+            "guaranteeTerm": {
+                'name': "担保期限",
+                'placeholder': '示例:2017年11月15日至2018年11月14日'
+            },
+            "guaranteeSignDate": {
+                'name': "保证合同签订日期",
+                'placeholder': '示例:2018年07月24日'
+            },
+            "guaranteeContractNumber": {
+                'name': "保证合同编号",
+                'placeholder': ''
+            },
+            "guarantorServedMobile": {
+                'name': "担保人送达手机",
+                'placeholder': ''
+            },
+            "guarantorServedMail": {
+                'name': "担保人送达邮箱(非必填)",
+                'placeholder': ''
+            },
+            "guarantorName": {
+                'name': "担保人姓名",
+                'placeholder': ''
+            },
+            "consignorName": {
+                'name': "委托人姓名",
+                'placeholder': ''
+            },
+            "consigneeName": {
+                'name': "受托人姓名",
+                'placeholder': ''
+            },
+            "consigneeName": {
+                'name': "受托人姓名",
+                'placeholder': ''
+            },
 
         }
     };
