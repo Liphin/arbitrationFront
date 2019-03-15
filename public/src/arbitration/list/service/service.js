@@ -3,7 +3,7 @@
  */
 var app = angular.module('Angular.arbilist');
 
-app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGeneralSer, $location) {
+app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGeneralSer, $location,$rootScope) {
 
     /**
      * 页面数据初始化
@@ -113,10 +113,16 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
         //提交的表单数据
         if (ArbiListDataSer.arbiApplyData['overall']['productCode']=="qidaifuturetech-p2p-1") {
             //筛选qidaifuturetech-p2p-1的json结构
+            ArbiListDataSer.overallData['litigantsType'] = 2;
             qidaifuturetech_p2p_1();
         }
         else if (ArbiListDataSer.arbiApplyData['overall']['productCode']=="qidaifuturetech-p2p-2"){
+            ArbiListDataSer.overallData['litigantsType'] = 2;
             qidaifuturetech_p2p_2();
+        }
+        else if (ArbiListDataSer.arbiApplyData['overall']['productCode']=="qidaifuturetech-p2p-3"){
+            ArbiListDataSer.overallData['litigantsType'] = 1;
+            qidaifuturetech_p2p_3();
         }
 
         var submitData = {
@@ -149,19 +155,28 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
         
         console.log(submitData);
         console.log(submitSelectData);
+
         //根据具体情况限定申请请人
-        if (OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplyData['litigants'][0]['name'])) {
-            var litigantsFrom =  ArbiListDataSer.arbiApplyData['litigants'][0]['name'];
+        if (ArbiListDataSer.overallData['litigantsType'] == 2) {
+            if (OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplyData['litigants'][0]['name'])) {
+                var litigantsFrom =  ArbiListDataSer.arbiApplyData['litigants'][0]['name'];
+            }
+            else {
+                var litigantsFrom =  ArbiListDataSer.arbiApplyData['litigants'][1]['name'];
+            }
+            var litigantsTo = ArbiListDataSer.arbiApplyData['litigants'][2]['name'];
         }
         else {
-            var litigantsFrom =  ArbiListDataSer.arbiApplyData['litigants'][1]['name'];
+            var litigantsFrom =  ArbiListDataSer.arbiApplyData['litigants'][0]['name'];
+            var litigantsTo =  ArbiListDataSer.arbiApplyData['litigants'][1]['name'];
         }
+
 
         //保存到数据库的arbilist数据
         var saveData = {
             arbcaseId: ArbiListDataSer.overallData['arbcaseId'], //submit成功后返回条目id并回填数据
             litigantsFrom: litigantsFrom,
-            litigantsTo: ArbiListDataSer.arbiApplyData['litigants'][2]['name'],
+            litigantsTo: litigantsTo,
             reason: ArbiListDataSer.arbiApplyData['claim']['reason'],
             updateTime: OverallGeneralSer.getCurrentDataTime(),
             operaterType: ArbiListDataSer.arbiApplyData['overall']['operaterType'],
@@ -272,6 +287,9 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
                     }
                     else if (responseData['data'][i]['data']['productCode']=="qidaifuturetech-p2p-2") {
                         responseData['data'][i]['data']['productName']="追偿权纠纷车贷";
+                    }
+                    else if (responseData['data'][i]['data']['productCode']=="qidaifuturetech-p2p-3") {
+                        responseData['data'][i]['data']['productName']="房贷+车贷";
                     }
 
                     ArbiListDataSer.listData.push(responseData['data'][i]);
@@ -610,6 +628,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
         }
         //对仲裁数据初始化后执行的操作
         afterArbiInfoInit();
+        console.log(ArbiListDataSer.arbiApplyData['evidences']);
 
         //展开面板为true
         ArbiListDataSer.overallData['arbiType']['status'] = false;
@@ -634,6 +653,7 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
                 }
             }
         }
+
     };
 
     var qidaifuturetech_p2p_1 = function () {
@@ -683,6 +703,47 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
     };
 
     var qidaifuturetech_p2p_2 = function () {
+        var targetDataCopy = angular.copy(ArbiListDataSer.arbiApplyData);
+        ArbiListDataSer.arbiApplySelectData = {
+            'claim': {},
+            'litigants': {},
+            'agents': {},
+            'evidences': {}
+        };
+
+        //赋值请求信息
+        ArbiListDataSer.arbiApplySelectData['claim']=ArbiListDataSer.arbiApplyData['claim'];
+
+        //筛选当事人
+        ArbiListDataSer.arbiApplySelectData['litigants']=targetDataCopy['litigants'];
+        for (var i=ArbiListDataSer.arbiApplySelectData['litigants'].length-1; i>=0;i--) {
+            if (!OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplySelectData['litigants'][i]['idCardNo'])) {
+                ArbiListDataSer.arbiApplySelectData['litigants'].splice(i,1);
+            }
+        }
+
+        //筛选代理人信息
+        ArbiListDataSer.arbiApplySelectData['agents']=targetDataCopy['agents'];
+        for (var i=ArbiListDataSer.arbiApplySelectData['agents'].length-1; i>=0;i--) {
+            if (!OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplySelectData['agents'][i]['identityNo'])) {
+                ArbiListDataSer.arbiApplySelectData['agents'].splice(i,1);
+            }
+        }
+
+        //筛选证据
+        ArbiListDataSer.arbiApplySelectData['evidences']=targetDataCopy['evidences'];
+        for (var i=0; i<ArbiListDataSer.arbiApplySelectData['evidences'].length;i++) {
+            for (var j=ArbiListDataSer.arbiApplySelectData['evidences'][i]['evidenceItems'].length-1;j>=0;j--) {
+                if (!OverallGeneralSer.checkDataNotEmpty(ArbiListDataSer.arbiApplySelectData['evidences'][i]['evidenceItems'][j]['files'][0]['fileKey'])) {
+                    ArbiListDataSer.arbiApplySelectData['evidences'][i]['evidenceItems'].splice(j,1);
+                }
+            }
+        }
+        console.log(ArbiListDataSer.arbiApplySelectData);
+    };
+
+    var qidaifuturetech_p2p_3 = function () {
+        console.log("test")
         var targetDataCopy = angular.copy(ArbiListDataSer.arbiApplyData);
         ArbiListDataSer.arbiApplySelectData = {
             'claim': {},

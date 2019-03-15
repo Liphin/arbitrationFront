@@ -20,8 +20,10 @@ app.factory('ArbiListDataSer', function () {
             'array': [
                 {'name': '民间借贷', 'type': 'qidaifuturetech-p2p-1'},
                 {'name': '追偿权纠纷车贷', 'type': 'qidaifuturetech-p2p-2'},
+                {'name': '房贷+代偿', 'type': 'qidaifuturetech-p2p-3'},
             ]
-        }
+        },
+        'litigantsType': 2,//1-只有两个当事人，2-有2个以上的当事人
     };
 
     //列表展示数据
@@ -57,7 +59,7 @@ app.factory('ArbiListDataSer', function () {
     var arbiApplyData = {
         'overall': {
             'operaterType': '申请人', //操作者类型， 申请人、第三方
-            'operater': '', //操作者名称
+            'operater': '申请人', //操作者名称
             'productCode': '' //qidaifuturetech-p2p-1， qidaifuturetech-p2p-2等。根据arbiType来获取
         },
         'commissionCode': '',

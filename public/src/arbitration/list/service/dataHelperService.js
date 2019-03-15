@@ -31,7 +31,7 @@ app.factory('ArbiListDataHelperSer', function () {
                 'placeholder': ''
             },
             "interestAndPenaltyClaimRate": {
-                'name': "利息及违约金的请求利率",
+                'name': "利息及违约金的请求年利率",
                 'placeholder': '示例:24%'
             },
             "claimGuarantyRepayMoney": {
@@ -58,6 +58,10 @@ app.factory('ArbiListDataHelperSer', function () {
                 'name': "利息及违约金暂计数",
                 'placeholder': ''
             },
+            "realEstateRegistrationCertificateNumber": {
+                'name': "不动产登记证明号码",
+                'placeholder': '示例:桂（2017）南宁市不动产证明第0208814号'
+            },
 
         },
 
@@ -83,7 +87,7 @@ app.factory('ArbiListDataHelperSer', function () {
                 'placeholder': '示例:160000.00'
             },
             "loanTerm": {
-                'name': "借款期限|债务履行期限",
+                'name': "借款或债务履行期限",
                 'placeholder': '示例:2017年11月15日至2018年11月14日'
             },
             "conventionalInterestYearRate": {
@@ -109,10 +113,6 @@ app.factory('ArbiListDataHelperSer', function () {
             "propertyAddress": {
                 'name': "抵押房产地址",
                 'placeholder': ''
-            },
-            "realEstateRegistrationCertificateNumber": {
-                'name': "不动产登记证明号码",
-                'placeholder': '示例:桂（2017）南宁市不动产证明第0208814号'
             },
             "supplementalAgreementSignDate": {
                 'name': "补充合同签订日期",
@@ -345,6 +345,70 @@ app.factory('ArbiListDataHelperSer', function () {
             "interestEndDate": {
                 'name': "利息交至日期",
                 'placeholder': ''
+            },
+            "propertyOwnershipCertificateNumber": {
+                'name': "产权证号",
+                'placeholder': ''
+            },
+            "propertyPrice": {
+                'name': "抵押物作价",
+                'placeholder': ''
+            },
+            "guaranteePrincipalAmount": {
+                'name': "抵押担保的主债权金额",
+                'placeholder': ''
+            },
+            "guaranteeFee": {
+                'name': "担保费",
+                'placeholder': ''
+            },
+            "guarantyInterestRate": {
+                'name': "代偿利息月利率",
+                'placeholder': '示例:2%'
+            },
+            "repaymentDate": {
+                'name': "每月还款日",
+                'placeholder': '示例:14'
+            },
+            "overdueInterestRate": {
+                'name': "逾期利息日利率",
+                'placeholder': ''
+            },
+            "supplementalAgreementNumber": {
+                'name': "补充协议编号",
+                'placeholder': ''
+            },
+            "guarantor": {
+                'name': "保证人",
+                'placeholder': ''
+            },
+            "counterguaranteeGuarantor": {
+                'name': "反担保保证人",
+                'placeholder': ''
+            },
+            "counterguaranteeGuarantorServedMobile": {
+                'name': "反担保保证人送达手机",
+                'placeholder': ''
+            },
+            "counterguaranteeGuarantorServedMail": {
+                'name': "反担保保证人送达邮箱",
+                'placeholder': '非必填'
+            },
+            "counterguaranteeGuarantorServedAddress": {
+                'name': "反担保保证人送达地址",
+                'placeholder': ''
+            },
+            "recipient": {
+                'name': "收件人",
+                'placeholder': ''
+            },
+            "sender": {
+                'name': "寄件人",
+                'placeholder': ''
+            },
+            "realEstateRegistrationCertificateNumber": {
+                'name': "不动产登记证明号码",
+                'placeholder': '示例:桂（2017）南宁市不动产证明第0208814号'
             },
 
         }
