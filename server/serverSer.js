@@ -116,7 +116,7 @@ function ServerSer() {
                 serverSerData.overallData['access']['expires_in'] = body['expires_in'];
 
                 console.log(serverSerData.overallData['access']);
-                refreshAccessToken();
+                //refreshAccessToken();
 
             } else {
                 //发送数据到易简网出错
