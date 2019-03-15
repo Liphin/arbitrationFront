@@ -94,6 +94,7 @@ function ServerSer() {
         var consumer = consumer_key+":"+consumer_secret;
         var swap = new Buffer(consumer);
         var Authorization = "Basic "+swap.toString('base64');
+        var timestamp = getTimestamp();
         //设置头部
         var headers = {
             'Authorization': Authorization
@@ -114,9 +115,10 @@ function ServerSer() {
                 serverSerData.overallData['access']['scope'] = body['scope'];
                 serverSerData.overallData['access']['token_type'] = body['token_type'];
                 serverSerData.overallData['access']['expires_in'] = body['expires_in'];
+                serverSerData.overallData['access']['timestamp'] = timestamp;
 
                 console.log(serverSerData.overallData['access']);
-                //refreshAccessToken();
+                refreshAccessToken();
 
             } else {
                 //发送数据到易简网出错
@@ -137,6 +139,7 @@ function ServerSer() {
         var consumer = consumer_key+":"+consumer_secret;
         var swap = new Buffer(consumer);
         var Authorization = "Basic "+swap.toString('base64');
+        var timestamp = getTimestamp();
         //设置头部
         var headers = {
             'Authorization': Authorization
@@ -157,6 +160,7 @@ function ServerSer() {
                 serverSerData.overallData['access']['scope'] = body['scope'];
                 serverSerData.overallData['access']['token_type'] = body['token_type'];
                 serverSerData.overallData['access']['expires_in'] = body['expires_in'];
+                serverSerData.overallData['access']['timestamp'] = timestamp;
 
                 console.log(serverSerData.overallData['access']);
 
@@ -170,21 +174,52 @@ function ServerSer() {
         });
     }
 
+    /**
+     * 获取时间戳函数
+     * @returns {string}
+     */
+    var getTimestamp = function () {
+        return parseInt(new Date().getTime()/1000).toString();
+    };
+
+
+    /**
+     * 睡眠
+     * @returns {}
+     */
+    var sleep = function(numberMillis) {
+        var now = new Date();
+        var exitTime = now.getTime() + numberMillis;
+        while (true) {
+            now = new Date();
+            if (now.getTime() > exitTime)
+                return;
+        }
+    }
+
 
     /**
      * 每天任务获取accessToken数据操作
      * TODO 完善生产环境下获取access_token
      */
     var scheduleGetAccessToken = function () {
-        // if (!checkDataNotEmpty(serverSerData.overallData['access']['refresh_token'])) {
-        //     console.log("开始获取accesstoken");
-        //     getAccessToken();
-        // }
-        // else {
-        //     console.log("开始刷新accesstoken");
-        //     refreshAccessToken();
-        // }
-        getAccessToken();
+        if (!checkDataNotEmpty(serverSerData.overallData['access']['refresh_token'])) {
+            console.log("开始获取accesstoken");
+            getAccessToken();
+        }
+        else {
+            var ref_timestamp = getTimestamp();
+            var sum_timestamp = serverSerData.overallData['access']['expires_in'] + serverSerData.overallData['access']['timestamp'];
+            console.log(ref_timestamp,sum_timestamp);
+            if (ref_timestamp<sum_timestamp) {
+                console.log("开始刷新accesstoken");
+                refreshAccessToken();
+            }
+            else {
+                sleep(5000);
+                getAccessToken();
+            }
+        }
     }
 
     /**
