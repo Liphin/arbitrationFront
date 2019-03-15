@@ -81,6 +81,30 @@
                               placeholder="请输入证明内容（最长2000个字）"></textarea>
                 </div>
 
+                <div ng-if="itemValue['materialCode']=='《反担保保证合同》'" style="margin-top: 15px; display: flex">
+                    <!--反担保保证合同编号-->
+                    <div style="flex: 1">
+                        <span>反担保保证合同编号：</span>
+                        <input class="inputStyle" style="margin-left: 15px; width: 242px" type="text" ng-model="itemValue['loanContractNumber']" maxlength="100" placeholder="">
+                    </div>
+                </div>
+
+                <div ng-if="itemValue['materialCode']=='《不动产登记证明》《不动产权证书》'" style="margin-top: 15px; display: flex">
+                    <!--抵押权人-->
+                    <div style="flex: 1">
+                        <span>抵押权人：</span>
+                        <input class="inputStyle" style="margin-left: 15px; width: 242px" type="text" ng-model="itemValue['mortgagee']" maxlength="100" placeholder="">
+                    </div>
+                </div>
+
+                <div ng-if="itemValue['materialCode']=='已代偿通知书快递送达情况'" style="margin-top: 15px; display: flex">
+                    <!--送达时间-->
+                    <div style="flex: 1">
+                        <span>送达时间：</span>
+                        <input class="inputStyle" style="margin-left: 15px; width: 242px" type="text" ng-model="itemValue['arrivedTime']" maxlength="100" placeholder="">
+                    </div>
+                </div>
+
 
                 <!--附件上传-->
                 <div style="margin-top: 15px">
