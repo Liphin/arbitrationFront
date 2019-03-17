@@ -209,7 +209,7 @@ function ServerSer() {
         }
         else {
             var ref_timestamp = getTimestamp();
-            var sum_timestamp = serverSerData.overallData['access']['expires_in'] + serverSerData.overallData['access']['timestamp'];
+            var sum_timestamp = (parseInt(serverSerData.overallData['access']['expires_in']) + parseInt(serverSerData.overallData['access']['timestamp'])).toString();
             console.log(ref_timestamp,sum_timestamp);
             if (ref_timestamp<sum_timestamp) {
                 console.log("开始刷新accesstoken");
