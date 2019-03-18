@@ -842,13 +842,13 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
                 "identityType":""/*证件类型*/,
                 "identityNo":""/*证件号码*/,
                 "principals":""/*委托人*/,
-                "power":""/*代理权限*/,
+                "power":"特殊权限"/*代理权限*/,
                 "powerDetail":"代为提起仲裁请求;代为参加庭审、进行质证、辩论;代为和解、调解;代为主张、变更、放弃仲裁请求;代为签收法律文书;代为申请执行等"/*代理权限明细|非必填*/,
-                "company":""/*工作单位|非必填*/,
-                "emails":""/*邮箱地址*/,
-                "addresses":""/*联系地址*/,
-                "agentType":""/*代理人属性*/,
-                "litigantType":""/*当事人类型*/,
+                "company":"广东期待律师事务所"/*工作单位|非必填*/,
+                "emails":"149049594@qq.com"/*邮箱地址*/,
+                "addresses":"广州市番禺区市桥街道富华东路518号桥力大厦3楼"/*联系地址*/,
+                "agentType":"律师代理"/*代理人属性*/,
+                "litigantType":"申请人"/*当事人类型*/,
                 "files":[
                     {
                         "fileName":"律师执业证"/*文件类型范围:pdf/jpg/png*/,
@@ -873,13 +873,44 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
                 "identityType":""/*证件类型*/,
                 "identityNo":""/*证件号码*/,
                 "principals":""/*委托人*/,
-                "power":""/*代理权限*/,
+                "power":"特殊权限"/*代理权限*/,
                 "powerDetail":"代为提起仲裁请求;代为参加庭审、进行质证、辩论;代为和解、调解;代为主张、变更、放弃仲裁请求;代为签收法律文书;代为申请执行等"/*代理权限明细|非必填*/,
-                "company":""/*工作单位|非必填*/,
-                "emails":""/*邮箱地址*/,
-                "addresses":""/*联系地址*/,
-                "agentType":""/*代理人属性*/,
-                "litigantType":""/*当事人类型*/,
+                "company":"广东期待律师事务所"/*工作单位|非必填*/,
+                "emails":"149049594@qq.com"/*邮箱地址*/,
+                "addresses":"广州市番禺区市桥街道富华东路518号桥力大厦3楼"/*联系地址*/,
+                "agentType":"律师代理"/*代理人属性*/,
+                "litigantType":"申请人"/*当事人类型*/,
+                "files":[
+                    {
+                        "fileName":"律师执业证"/*文件类型范围:pdf/jpg/png*/,
+                        "fileKey":""/*fileKey*/
+                    },
+                    {
+                        "fileName":"授权委托书"/*文件类型范围:pdf/jpg/png*/,
+                        "fileKey":""/*fileKey*/
+                    },
+                    {
+                        "fileName":"所函"/*文件类型范围:jpg/pdf/png*/,
+                        "fileKey":""/*fileKey*/
+                    }
+                ]
+            }
+        }
+        else if(ArbiListDataSer.arbiApplyData['overall']['productCode']=="qidaifuturetech-p2p-3") {
+            var agentsInfo = {
+                "materialCode":"申请人代理人",
+                "name":""/*姓名|非必填*/,
+                "mobiles":""/*联系号码*/,
+                "identityType":""/*证件类型*/,
+                "identityNo":""/*证件号码*/,
+                "principals":""/*委托人*/,
+                "power":"特殊权限"/*代理权限*/,
+                "powerDetail":"代为提起仲裁请求;代为参加庭审、进行质证、辩论;代为和解、调解;代为主张、变更、放弃仲裁请求;代为签收法律文书;代为申请执行等"/*代理权限明细|非必填*/,
+                "company":"广东期待律师事务所"/*工作单位|非必填*/,
+                "emails":"149049594@qq.com"/*邮箱地址*/,
+                "addresses":"广州市番禺区市桥街道富华东路518号桥力大厦3楼"/*联系地址*/,
+                "agentType":"律师代理"/*代理人属性*/,
+                "litigantType":"申请人"/*当事人类型*/,
                 "files":[
                     {
                         "fileName":"律师执业证"/*文件类型范围:pdf/jpg/png*/,
