@@ -410,6 +410,10 @@ app.factory('ArbiListDataHelperSer', function () {
                 'name': "不动产登记证明号码",
                 'placeholder': '示例:桂（2017）南宁市不动产证明第0208814号'
             },
+            "arrivedTime": {
+                'name': "送达时间",
+                'placeholder': ''
+            },
 
         }
     };
