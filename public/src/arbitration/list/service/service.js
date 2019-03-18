@@ -927,8 +927,16 @@ app.factory('ArbiListSer', function (ArbiListDataSer, OverallDataSer, OverallGen
                 ]
             }
         }
-
+        var len = ArbiListDataSer.arbiApplyData['agents'].length;
+        console.log(len);
         ArbiListDataSer.arbiApplyData['agents'].push(agentsInfo);
+        ArbiListDataSer.arbiApplyData['agents'][len]['powerDetailArray'] = angular.copy(ArbiListDataSer.arbiApplyDataSupply['powerDetailArray']);
+
+        for (var j in ArbiListDataSer.arbiApplyData['agents'][len]['powerDetailArray']) {
+            if (ArbiListDataSer.arbiApplyData['agents'][len]['powerDetail'].indexOf(ArbiListDataSer.arbiApplyData['agents'][len]['powerDetailArray'][j]['name']) > -1) {
+                ArbiListDataSer.arbiApplyData['agents'][len]['powerDetailArray'][j]['status'] = true;
+            }
+        }
         console.log(ArbiListDataSer.arbiApplyData);
     };
 
