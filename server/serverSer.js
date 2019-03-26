@@ -233,8 +233,12 @@ function ServerSer() {
             scheduleGetAccessToken();
         }
 
+        var rule = new schedule.RecurrenceRule();
+        var times = [1,13];
+        rule.hour  = times;
+
         //配置每天早上6点更新accesstoken信息
-        schedule.scheduleJob(serverSerData.getAccesstoken['time'], function(){
+        schedule.scheduleJob(rule, function(){
             console.log("定时获取accesstoken");
             scheduleGetAccessToken();
         });
