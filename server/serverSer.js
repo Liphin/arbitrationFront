@@ -187,15 +187,15 @@ function ServerSer() {
      * 睡眠
      * @returns {}
      */
-    var sleep = function(numberMillis) {
-        var now = new Date();
-        var exitTime = now.getTime() + numberMillis;
-        while (true) {
-            now = new Date();
-            if (now.getTime() > exitTime)
-                return;
-        }
-    }
+    // var sleep = function(numberMillis) {
+    //     var now = new Date();
+    //     var exitTime = now.getTime() + numberMillis;
+    //     while (true) {
+    //         now = new Date();
+    //         if (now.getTime() > exitTime)
+    //             return;
+    //     }
+    // }
 
 
     /**
@@ -211,14 +211,15 @@ function ServerSer() {
             var ref_timestamp = getTimestamp();
             var sum_timestamp = (parseInt(serverSerData.overallData['access']['expires_in']) + parseInt(serverSerData.overallData['access']['timestamp'])).toString();
             console.log(ref_timestamp,sum_timestamp);
-            if (ref_timestamp<sum_timestamp) {
-                console.log("开始刷新accesstoken");
-                refreshAccessToken();
-            }
-            else {
-                sleep(5000);
-                getAccessToken();
-            }
+            // if (ref_timestamp<sum_timestamp) {
+            //     console.log("开始刷新accesstoken");
+            //     refreshAccessToken();
+            // }
+            // else {
+            //     sleep(5000);
+            //     getAccessToken();
+            // }
+            refreshAccessToken();
         }
     }
 
@@ -233,12 +234,12 @@ function ServerSer() {
             scheduleGetAccessToken();
         }
 
-        var rule = new schedule.RecurrenceRule();
-        var times = [1,13];
-        rule.hour  = times;
+        // var rule = new schedule.RecurrenceRule();
+        // var times = [1,13];
+        // rule.hour  = times;
 
         //配置每天早上6点更新accesstoken信息
-        schedule.scheduleJob(rule, function(){
+        schedule.scheduleJob(serverSerData.getAccesstoken['time'], function(){
             console.log("定时获取accesstoken");
             scheduleGetAccessToken();
         });

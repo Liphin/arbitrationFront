@@ -36,7 +36,8 @@ var overallData = {
 };
 
 var getAccesstoken = {
-    'time':'0 0 6 * * *',  //每天早上6点获取accesstoken数据信息
+    // 'time':'0 0 6 * * *',  //每天早上6点获取accesstoken数据信息
+    'time':'0 6,18 * * *',  //每天早上6点和晚上6点获取accesstoken数据信息
 };
 
 module.exports = {
