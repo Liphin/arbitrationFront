@@ -21,8 +21,8 @@ var serverConfig = {
 
 //应用配置
 var appConfig = {
-    appid: 'wx8c0feed4f5d17636',
-    secret: 'da618efecb2ca815dd7779d2b93e43fc',
+    appid: '',
+    secret: '',
 };
 
 module.exports = {
